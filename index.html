@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Textbox and Radio Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </head>
 <body>
     <form>
@@ -15,6 +16,7 @@
         <br>
         <input type="submit" name="submit1" value="Select Option" onclick="selectOption(event)">
         <input type="submit" name="submit2" value="Add and Display" onclick="addAndDisplay(event)">
+        <input type="button" value="Generate PDF" onclick="generatePDF()">
     </form>
 
     <p id="result"></p>
@@ -54,6 +56,13 @@
                 var result = parseInt(value1) + parseInt(value2);
                 resultElement.textContent = 'Result: ' + result;
             }
+        }
+
+        function generatePDF() {
+            var result = document.getElementById('result').textContent;
+            var doc = new jsPDF();
+            doc.text(result, 10, 10);
+            doc.save('output.pdf');
         }
     </script>
 </body>
