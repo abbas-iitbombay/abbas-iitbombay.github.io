@@ -2,7 +2,8 @@
 $options = array(
     'option1' => array(2, 3),
     'option2' => array(5, 7),
-    'option3' => array(10, 15)
+    'option3' => array(10, 15),
+    'option4' => array(10, 35),
 );
 
 $selectedOption = isset($_POST['option']) ? $_POST['option'] : '';
