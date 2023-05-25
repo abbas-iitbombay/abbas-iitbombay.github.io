@@ -3,6 +3,7 @@
 <head>
     <title>Textbox and Radio Example</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 </head>
 <body>
     <form>
@@ -55,11 +56,25 @@
         }
 
         function generatePDF() {
-            var result = document.getElementById('result').textContent;
-            var doc = new jsPDF();
-            doc.text(result, 10, 10);
-            doc.save('output.pdf');
-        }
+    var result = document.getElementById('result').textContent;
+
+    // Create an HTML element to hold the result text
+    var resultElement = document.createElement('p');
+    resultElement.textContent = result;
+
+    // Create an empty PDF document
+    var opt = {
+        margin: 10,
+        filename: 'output.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    // Convert the HTML element to PDF using html2pdf library
+    html2pdf().set(opt).from(resultElement).save();
+}
+
     </script>
 </body>
 </html>
