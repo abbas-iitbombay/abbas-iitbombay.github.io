@@ -14,17 +14,15 @@
         Value 1: <input type="text" name="value1"><br>
         Value 2: <input type="text" name="value2"><br>
         <br>
-        <input type="submit" name="submit1" value="Select Option" onclick="selectOption(event)">
-        <input type="submit" name="submit2" value="Add and Display" onclick="addAndDisplay(event)">
+        <input type="button" value="Select Option" onclick="selectOption()">
+        <input type="button" value="Add and Display" onclick="addAndDisplay()">
         <input type="button" value="Generate PDF" onclick="generatePDF()">
     </form>
 
     <p id="result"></p>
 
     <script>
-        function selectOption(event) {
-            event.preventDefault();
-
+        function selectOption() {
             var selectedOption = document.querySelector('input[name="option"]:checked');
             var value1 = document.querySelector('input[name="value1"]');
             var value2 = document.querySelector('input[name="value2"]');
@@ -45,9 +43,7 @@
             }
         }
 
-        function addAndDisplay(event) {
-            event.preventDefault();
-
+        function addAndDisplay() {
             var value1 = document.querySelector('input[name="value1"]').value;
             var value2 = document.querySelector('input[name="value2"]').value;
             var resultElement = document.getElementById('result');
