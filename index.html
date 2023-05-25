@@ -56,25 +56,24 @@
         }
 
         function generatePDF() {
-    var result = document.getElementById('result').textContent;
+            var result = document.getElementById('result').textContent;
 
-    // Create an HTML element to hold the result text
-    var resultElement = document.createElement('p');
-    resultElement.textContent = result;
+            // Create an HTML element to hold the result text
+            var resultElement = document.createElement('p');
+            resultElement.textContent = result;
 
-    // Create an empty PDF document
-    var opt = {
-        margin: 25.4,
-        filename: 'output.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    };
+            // Create an empty PDF document
+            var opt = {
+                margin: 25.4,
+                filename: 'output.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
 
-    // Convert the HTML element to PDF using html2pdf library
-    html2pdf().set(opt).from(resultElement).save();
-}
-
+            // Convert the HTML element to PDF using html2pdf library
+            html2pdf().set(opt).from(resultElement).save();
+        }
     </script>
 </body>
 </html>
