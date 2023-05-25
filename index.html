@@ -1,106 +1,47 @@
- <!DOCTYPE html>
- <html>
- 	<head>
- 		<title>Dr. Mohd Abbas</title>
- 		<link rel="stylesheet" href="style.css">
- 		<meta name="viewport" content="width-display-width,initial-scale=1">
- 		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Roboto+Mono&display=swap" rel="stylesheet">
- 	</head>
- 	<body>
- 		<div class="container">
-	 		<div class="intro">
-	 			<img class="prof-pic" src="images/photo.jpg" />
-				<left>
-	 			<h1 id="my-name">Dr. Mohd Abbas Haider Abdy Sayyed</h1>
-				</left>
-				<table>
-					<td>
-					<p style="text-align: left">Research Associate <br>Centre for Urban Science and Engineering 
-						<br>Indian Institute of Technology Bombay <br>Powai, Mumbai - 400 076 </p>
-	 				</td>
-					<td>
-						<p style="text-align: right"><a href="www.google.co.in">google</a> </p>
-					</td>
-				</table>
-				<p style="text-align: left">Profile Statement</p>
-					
-	 		</div>
-	 		<hr/>
-	 		<div class="about-grid">
-		 		<div class="i-am">
-		 			<h3>I am </h3>
-		 			<ul class="about-list">
-		 				<li class="about-list-item">An Engineer</li>
-		 				<li class="about-list-item">An Environmentalist</li>
-		 				<li class="about-list-item">A Web Developer</li>
-		 			</ul>
-		 		</div>
-		 	
-		 		<div class="i-like">
-		 			<h3>I like to</h3>
-		 			<ul class="about-list">
-		 				<li class="about-list-item">Do Research</li>
-		 				<li class="about-list-item">Write Articles</li>
-		 				<li class="about-list-item">Teach the budding Engineers</li>
-		 			</ul>
-		 		</div>
-		 	</div>
-		 	<hr/>
-	 		<div>
-	 			<h3 class="project-heading">My projects</h3>
-	 			<div class="projects-grid">
-	 				<div class="project-image-wrapper">
-		 				<img class="project-image" src="images/project-1.jpg" />
-		 				<h4>Project 1</h4>
-		 			</div>
-		 			<div class="project-image-wrapper">
-		 				<img class="project-image" src="images/project-2.jpg" />
-		 				<h4>Project 2</h4>
-		 			</div>
-		 			<div class="project-image-wrapper">
-		 				<img class="project-image" src="images/project-3.jpg" />
-		 				<h4>Project 3</h4>
-		 			</div>
-		 			<div class="project-image-wrapper">
-		 				<img class="project-image" src="images/project-4.jpg" />
-		 				<h4>Project 4</h4>
-		 			</div>
+ <?php
+$options = array(
+    'option1' => array(2, 3),
+    'option2' => array(5, 7),
+    'option3' => array(10, 15)
+);
 
-		 		</div>
-	 		</div>
-	 		<hr/>
-	 		<div class="links-and-contacts">
-		 		<div class="links">
-		 			<h3>links</h3>
-		 			<ul class="links-list">
-		 				<li>
-		 					<a href="https://abbas-iitbombay.github.io/">GitHub</a>
-		 				</li>
-		 				<li>
-		 					<a href="https://scholar.google.com/citations?user=DyPBAtwAAAAJ&hl=en">Google Scholar</a>
-		 				</li>
-		 				<li>
-		 					<a href="https://www.linkedin.com/in/dr-mohammad-abbas/">Linkedin</a>
-		 				</li>
-		 			</ul>
-		 		</div>
+$selectedOption = isset($_POST['option']) ? $_POST['option'] : '';
+$value1 = isset($_POST['value1']) ? $_POST['value1'] : '';
+$value2 = isset($_POST['value2']) ? $_POST['value2'] : '';
 
-		 		<div>
-		 			<form action="#">
-		 				<label for='email'>
-		 					<h4>Email</h4>
-		 					<input id="email" placeholder="Enter your email" />
-		 				</label>
-		 				<label for ='message'>
-		 					<h4>Message</h4>
-		 					<textarea id="message">Your Mesage</textarea>
-		 				</label>
-		 				<div class="submit-button-wrapper">
-		 				<input id="submit-button" type="submit" value="send message">
-		 			</form>
-		 		</div>
-		 	</div>
-	 	</div>
-	 	<script src="script.js"></script>
- 	</body>
- </html>
+$result = '';
+if (!empty($selectedOption) && isset($options[$selectedOption])) {
+    if (isset($_POST['submit1'])) {
+        $values = $options[$selectedOption];
+        $value1 = $values[0];
+        $value2 = $values[1];
+    } elseif (isset($_POST['submit2'])) {
+        $result = $value1 + $value2;
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHP Textbox and Radio Example</title>
+</head>
+<body>
+    <form method="post" action="">
+        <input type="radio" name="option" value="option1" <?php if ($selectedOption === 'option1') echo 'checked'; ?>> Option 1
+        <input type="radio" name="option" value="option2" <?php if ($selectedOption === 'option2') echo 'checked'; ?>> Option 2
+        <input type="radio" name="option" value="option3" <?php if ($selectedOption === 'option3') echo 'checked'; ?>> Option 3
+        <br><br>
+        Value 1: <input type="text" name="value1" value="<?php echo $value1; ?>"><br>
+        Value 2: <input type="text" name="value2" value="<?php echo $value2; ?>"><br>
+        <br>
+        <input type="submit" name="submit1" value="Select Option">
+        <input type="submit" name="submit2" value="Add and Display">
+    </form>
+
+    <?php if (!empty($result)) { ?>
+        <p>Result: <?php echo $result; ?></p>
+    <?php } ?>
+</body>
+</html>
+
