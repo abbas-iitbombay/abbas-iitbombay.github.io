@@ -17,7 +17,7 @@
         <br>
         <input type="button" value="Select Option" onclick="selectOption()">
         <input type="button" value="Add and Display" onclick="addAndDisplay()">
-        <input type="button" value="Generate 1PDF" onclick="generatePDF()">
+        <input type="button" value="Generate 2PDF" onclick="generatePDF()">
     </form>
 
     <p id="result"></p>
@@ -64,7 +64,7 @@
 
     // Create an empty PDF document
     var opt = {
-        margin: 10,
+        margin: 25.4,
         filename: 'output.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
