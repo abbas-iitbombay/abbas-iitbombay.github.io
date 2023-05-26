@@ -1,3 +1,81 @@
-<form>
-  <label>this is next page</label>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Textbox and Radio Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <form>
+        <input type="radio" name="option" value="option1"> Option 1
+        <input type="radio" name="option" value="option2"> Option 2
+        <input type="radio" name="option" value="option3"> Option 3
+        <input type="radio" name="option" value="option4"> Option 4
+        <br><br>
+        Value 1: <input type="text" name="value1"><br>
+        Value 2: <input type="text" name="value2"><br>
+        <br>
+        <input type="button" value="Select Option" onclick="selectOption()">
+        <input type="button" value="Add and Display" onclick="addAndDisplay()">
+        <input type="button" value="Generate 2PDF" onclick="generatePDF()">
+    </form>
+    <form action="nextpage.html">
+        <input type="submit">
+    </form>
+    <p id="result"></p>
+
+    <script>
+        function selectOption() {
+            var selectedOption = document.querySelector('input[name="option"]:checked');
+            var value1 = document.querySelector('input[name="value1"]');
+            var value2 = document.querySelector('input[name="value2"]');
+
+            if (selectedOption) {
+                var optionValues = {
+                    'option1': [2, 3],
+                    'option2': [5, 7],
+                    'option3': [10, 15],
+                    'option4': [10, 35]
+                };
+
+                var values = optionValues[selectedOption.value];
+                if (values) {
+                    value1.value = values[0];
+                    value2.value = values[1];
+                }
+            }
+        }
+
+        function addAndDisplay() {
+            var value1 = document.querySelector('input[name="value1"]').value;
+            var value2 = document.querySelector('input[name="value2"]').value;
+            var resultElement = document.getElementById('result');
+
+            if (value1 !== '' && value2 !== '') {
+                var result = parseInt(value1) + parseInt(value2);
+                resultElement.textContent = 'Result1: ' + result;
+            }
+        }
+
+        function generatePDF() {
+            var result = document.getElementById('result').textContent;
+
+            // Create an HTML element to hold the result text
+            var resultElement = document.createElement('p');
+            resultElement.textContent = result;
+
+            // Create an empty PDF document
+            var opt = {
+                margin: 25.4,
+                filename: 'output.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Convert the HTML element to PDF using html2pdf library
+            html2pdf().set(opt).from(resultElement).save();
+        }
+    </script>
+</body>
+</html>
