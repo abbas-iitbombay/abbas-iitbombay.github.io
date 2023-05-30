@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PHP Page in Middle Section</title>
+  <title>Decision Support Tool</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <style>
     body {
       margin: 0;
@@ -10,26 +11,37 @@
     }
     
     #header {
-      height: 100px;
-      background-color: #eaeaea;
+      height: 60px;
+      font-family: sans-serif;
+      align-items: center;
+      align-content: center;
+      text-align: center;
+      font-weight: bold;
+      background-color: #f7f5c3;
       position: fixed;
+      border-bottom: 1px black solid;
       top: 0;
       left: 0;
       right: 0;
     }
     
     #footer {
-      height: 100px;
-      background-color: #eaeaea;
+      padding: 10px;
+      background-color: #2F4F4F;
+      font-family: sans-serif;
+      color: white;
+      font-weight: bold;
       position: fixed;
+      text-align: center;
+      vertical-align: middle;
       bottom: 0;
       left: 0;
       right: 0;
     }
     
     #content {
-      padding-top: 100px; /* Adjust padding top to accommodate header height */
-      padding-bottom: 100px; /* Adjust padding bottom to accommodate footer height */
+      padding-top: 60px; /* Adjust padding top to accommodate header height */
+      padding-bottom: 60px; /* Adjust padding bottom to accommodate footer height */
     }
     
     #middle {
@@ -38,12 +50,13 @@
     }
     
     #left {
-      flex: 0.5;
+      flex: 0.3;
       background-color: #f9f9f9;
+      height: 680px;
     }
     
     #right {
-      flex: 1.5;
+      flex: 0;
       background-color: #f9f9f9;
     }
     
@@ -54,6 +67,26 @@
       height: 100%;
       width: 100%;
     }
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh; /* Adjust this value based on your layout */
+    }
+    .button 
+    {
+      font-size: 14px; 
+      font-family: sans-serif;
+      font-weight: bold;
+      padding: 4px 20px;
+      border-radius: 7px;
+      height: 45px;
+    }
+    .active {
+      background-color: brown;
+      color: white;
+    }
+
   </style>
   <script>
     function adjustIFrameHeight() {
@@ -65,20 +98,66 @@
     }
     
     window.addEventListener('resize', adjustIFrameHeight);
+    
+    function changeTab(tabId) {
+      var tabContents = document.getElementsByClassName('tab-content');
+  
+      for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+      }
+  
+      var selectedTab = document.getElementById(tabId);
+      if (selectedTab) {
+        selectedTab.style.display = 'block';
+      }
+      
+      var tabButtons = document.getElementsByClassName('tab-button');
+      for (var i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].classList.remove('active');
+      }
+      
+      var activeButton = document.getElementById(tabId + "-button");
+      if (activeButton) {
+        activeButton.classList.add('active');
+      }
+    }
+    
+    // Set default display to 'tab1' when the page loads
+
   </script>
 </head>
 <body>
-  <div id="header">
+  <div id="header" class="container">
     <!-- Header content goes here -->
+    
+    <label style="font-size: 30px;">
+      Decision Support Tool for Selection of Appropriate Wastewater Treatment Technology
+    </label>  
   </div>
-  
+
   <div id="content">
     <div id="middle">
-      <div id="left">
+      <div id="left" style="border-right: 1px black solid;">
         <!-- Content for the left section goes here -->
+        <center>
+          <img src='images/IITB.png' style="padding-top: 20px; width: 100px;">
+          <br><br>
+          <img src='images/CUSE_Txt_JPG-01.jpg' style="width: 100px;">
+          <br><br>
+          <img src='images/IC-EcoWS_Logo.jpg' style="width: 100px;">    
+          <br><br>
+       
+          <br>
+          <button id="tab7-button" class="tab-button button" onclick="changeTab('tab7')" style="width:80%;"><b>Life Cycle Costing Tool</b></button>
+          <br><br>
+          <button id="tab7-button" class="tab-button button" onclick="changeTab('tab8')" style="width:80%;"><b>Technology Selection Tool</b></button>
+          <br><br>
+          <a href="http://117.252.14.242/RMOD_DST/Default.aspx"><button type="submit" class="tab-button button" style="width:80%"><b>About Project</b></button></a>
+          </center>
+
       </div>
       
-      <iframe id="phpFrame" src="nextpage.html" frameborder="0"></iframe>
+      <iframe id="phpFrame" src="trial2.php" frameborder="0"></iframe>
       
       <div id="right">
         <!-- Content for the right section goes here -->
@@ -88,6 +167,9 @@
   
   <div id="footer">
     <!-- Footer content goes here -->
+    <label>
+      &#169 Indian Institute of Technology Bombay, Powai, Mumbai - 400 076
+    </label>
   </div>
 
   <script>
