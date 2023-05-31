@@ -19,9 +19,15 @@
         <input type="button" value="Add and Display" onclick="addAndDisplay()">
         <input type="button" value="Generate 2PDF" onclick="generatePDF()">
     </form>
-    <form action="nextpage.html">
-        <input type="submit">
+
+    <!-- New form for the number of cells -->
+    <form>
+        Number of Cells: <input type="number" id="numCells" min="1"><br>
+        <input type="button" value="Generate Textboxes" onclick="generateTextboxes()">
     </form>
+
+    <div id="textboxContainer"></div> <!-- Container to hold the generated textboxes -->
+
     <p id="result"></p>
 
     <script>
@@ -47,15 +53,22 @@
         }
 
         function addAndDisplay() {
-            var value1 = document.querySelector('input[name="value1"]').value;
-            var value2 = document.querySelector('input[name="value2"]').value;
-            var resultElement = document.getElementById('result');
+    var value1 = document.querySelector('input[name="value1"]').value;
+    var value2 = document.querySelector('input[name="value2"]').value;
+    var cellValues = document.querySelectorAll('input[name="cellValue"]');
+    var resultElement = document.getElementById('result');
 
-            if (value1 !== '' && value2 !== '') {
-                var result = parseInt(value1) + parseInt(value2);
-                resultElement.textContent = 'Result1: ' + result;
-            }
+    var sum = parseInt(value1) + parseInt(value2);
+
+    for (var i = 0; i < cellValues.length; i++) {
+        var cellValue = parseInt(cellValues[i].value);
+        if (!isNaN(cellValue)) {
+            sum += cellValue;
         }
+    }
+
+    resultElement.textContent = 'Result: ' + sum;
+}
 
         function generatePDF() {
             var result = document.getElementById('result').textContent;
@@ -75,6 +88,19 @@
 
             // Convert the HTML element to PDF using html2pdf library
             html2pdf().set(opt).from(resultElement).save();
+        }
+
+        function generateTextboxes() {
+            var numCells = document.getElementById('numCells').value;
+            var textboxContainer = document.getElementById('textboxContainer');
+            textboxContainer.innerHTML = ''; // Clear previous content
+
+            for (var i = 0; i < numCells; i++) {
+                var textbox = document.createElement('input');
+                textbox.type = 'text';
+                textbox.name = 'cellValue';
+                textboxContainer.appendChild(textbox);
+            }
         }
     </script>
 </body>
