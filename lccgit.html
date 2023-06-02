@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Textbox and Radio Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <style>
+        .td_text{
+            font-family: sans-serif;
+            font-size: 12px; 
+            text-align: right; 
+            padding-right: 10px;
+        }
+        .inp_box{
+            font-size:12px; 
+            border-radius: 7px; 
+            border-width:thin;  
+            width: 200px; 
+            height: 27px; 
+            text-align: left; 
+            vertical-align: middle; 
+            padding-left: 10px; 
+            padding-top:0px;'
+        }
+        .btn-style{
+            width: 215px; 
+            background-color: dodgerblue;
+            color: white;
+            font-weight: bold;
+            border: none; 
+            height: 30px; 
+            border-radius: 7px; 
+            text-align: center; 
+            vertical-align: middle; 
+            padding-top: 2px;
+        }
+    </style>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            // Get the input elements and the life of project value
+            const optionrc1 = document.getElementById('optionrc1');
+            const optionrc2 = document.getElementById('optionrc2');
+            const percent_repl = document.getElementById('percent_repl');
+            const part1 = document.getElementById('part1');
+            const part2 = document.getElementById('part2');
+            const part3 = document.getElementById('part3');
+            const part4 = document.getElementById('part4');
+            const part5 = document.getElementById('part5');
+            const rate1 = document.getElementById('rate1');
+            const rate2 = document.getElementById('rate2');
+            const rate3 = document.getElementById('rate3');
+            const rate4 = document.getElementById('rate4');
+            const rate5 = document.getElementById('rate5');
+            const rep_yr1 = document.getElementById('rep_yr1');
+            const rep_yr2 = document.getElementById('rep_yr2');
+            const rep_yr3 = document.getElementById('rep_yr3');
+            const rep_yr4 = document.getElementById('rep_yr4');
+            const rep_yr5 = document.getElementById('rep_yr5');
+
+            const lopInput = document.getElementsByName('lop')[0];
+
+            // Disable box21 and box22 by default
+            part1.disabled =true;
+            part2.disabled =true;
+            part3.disabled =true;
+            part4.disabled =true;
+            part5.disabled =true;
+            rate1.disabled =true;
+            rate2.disabled =true;
+            rate3.disabled =true;
+            rate4.disabled =true;
+            rate5.disabled =true;
+            rep_yr1.disabled =true;
+            rep_yr2.disabled =true;
+            rep_yr3.disabled =true;
+            rep_yr4.disabled =true;
+            rep_yr5.disabled =true;
+
+            // Add event listeners to the radio buttons
+            optionrc1.addEventListener('change', () => {
+                if (optionrc1.checked) {
+                    percent_repl.disabled =false;
+                    part1.disabled =true;
+                    part2.disabled =true;
+                    part3.disabled =true;
+                    part4.disabled =true;
+                    part5.disabled =true;
+                    rate1.disabled =true;
+                    rate2.disabled =true;
+                    rate3.disabled =true;
+                    rate4.disabled =true;
+                    rate5.disabled =true;
+                    rep_yr1.disabled =true;
+                    rep_yr2.disabled =true;
+                    rep_yr3.disabled =true;
+                    rep_yr4.disabled =true;
+                    rep_yr5.disabled =true;
+                    var hidoptval = document.querySelector('input[id="hidopt"]');
+                    hidoptval.value = '1';
+                }
+            });
+
+            optionrc2.addEventListener('change', () => {
+                if (optionrc2.checked) {
+                    percent_repl.disabled =true;
+                    part1.disabled =false;
+                    part2.disabled =false;
+                    part3.disabled =false;
+                    part4.disabled =false;
+                    part5.disabled =false;
+                    rate1.disabled =false;
+                    rate2.disabled =false;
+                    rate3.disabled =false;
+                    rate4.disabled =false;
+                    rate5.disabled =false;
+                    rep_yr1.disabled =false;
+                    rep_yr2.disabled =false;
+                    rep_yr3.disabled =false;
+                    rep_yr4.disabled =false;
+                    rep_yr5.disabled =false;
+                    var hidoptval = document.querySelector('input[id="hidopt"]');
+                    hidoptval.value = '2';
+                }
+            });
+
+            // Update the maximum values for box1, box21, and box22
+            function updateMaxValues() {
+                const lop = parseInt(lopInput.value);
+                rep_yr1.max=lop-0.5;
+                rep_yr2.max=lop-0.5;
+                rep_yr3.max=lop-0.5;
+                rep_yr4.max=lop-0.5;
+                rep_yr5.max=lop-0.5;
+            }
+
+            // Add event listener to the lop input field
+            lopInput.addEventListener('input', updateMaxValues);
+
+            // Initialize the max values
+            updateMaxValues();
+        });
+    </script>
+</head>
+<body>
+    <form>
+        <table>
+            <tr>
+                <td class='td_text' style="width: 200px;">
+                    <label><b>Life of Project (years): </b></label>
+                </td>
+                <td style='height: 40px'>
+                    <input type='number' class='inp_box' name='lop' id='lop' min='1' value='30'>
+                </td>
+            </tr>
+            <tr>
+                <td class='td_text' style="width: 200px;">
+                    <label><b>Rate of interest (%): </b></label>
+                </td>
+                <td style='height: 40px'>
+                    <input type='number' class='inp_box' name='form1_interest' id='form1_interest' step='0.01' min='0' value='9.2'>
+                </td>
+            </tr>
+            <tr>
+                <td class='td_text' style="width: 200px;">
+                    <label><b>Land Price (INR/sq.m.): </b></label>
+                    </td>
+                <td style='height: 40px'>
+                    <input type='number' class='inp_box' name='form1_land_price' id='form1_land_price' step='0.01' min='0' value='0'>
+                </td>
+            </tr>
+            <tr>
+                <td class='td_text' style="width: 200px;">
+                    <label><b>Energy Price (INR/kW-hr): </b></label>
+                </td>
+                <td style='height: 40px'>
+                <input type='number' class='inp_box' name='form1_energy_price' id='form1_energy_price' step='0.01' min='0' value='0'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="option" style='width: 200px; height: 30px; border-radius: 8px; text-align: left;font-weight:bold;font-size: 14px; padding-left:20px;' name="technology">
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                        <option value="option4">Option 4</option>
+                        <option value="" disabled style="background-color:brown; color:white; ">Mechanized Treatments</option>
+                        <option value="ASP">Activated Sludge Process</option>
+                        <option value="RBC">Rotating Biological Contactors</option>
+                        <option value="MBR">Membrane Bio-Reactor</option>
+                        <option value="MBBR">Moving Bed Bio-Reactor</option>
+                        <option value="SBR">Sequencing Batch Reactor</option>
+                        <option value="Ext_aeration">Extended Aeration</option>
+
+                        <option value="" disabled style="background-color:brown; color:white; ">Natural Treatments</option>
+                        <option value="CW_SFV">Constructed Wetlands (Surface flow vertical)</option>
+                        <option value="CW_SSFH">Constructed Wetlands (Subsurface flow horizontal)</option>
+                        <option value="CW_DPW">Constructed Wetlands (Deep bed wetlands)</option>
+                        <option value="WS_ponds">Waste Stabilization ponds</option>
+                        <option value="D_ponds">Duckweed ponds</option>
+                        <option value="others" style="background-color:brown; color:white; ">Other Treatment Technology</option>
+                    </select>
+                </td style='height: 40px'>
+                <td>
+                    <input type="button" value="Select Option" onclick="selectOption()" class="btn-style" >
+                </td>
+            </tr>
+            <tr>
+                <td class='td_text'>
+                    <label><b>Technology: </b></label>
+                </td>
+                <td style='height: 40px'>
+                    <input type='text' class='inp_box' name='value1' >
+                </td>
+            </tr>
+            <tr>
+                <td class='td_text'>
+                    <label><b>Land Area Required (sq.m.):</b></label>
+                </td>
+                <td style='height: 40px'>
+                    <input type='number' class='inp_box' name='value2' min='0' step="0.1">
+                </td>
+            </tr>
+            <tr>
+                <td class='td_text'>
+                    <label><b>Civil Works (INR/MLD/Year):</b></label>
+                </td>
+                <td style='height: 40px'>
+                    <input type='number' class='inp_box' name='value3' min='0' step="0.1">
+                </td>
+            </tr>
+            <tr>
+                <td class='td_text'>
+                    <label><b>Replacement Costs:</b></label>
+                </td>
+            </tr>
+            <tr>
+                <td class='td_text'>
+                    <label for='optionrc1'>Percent of Construction cost 
+                    <input type='radio' id='optionrc1' name='optionrc' value='optionrc1' checked></label>
+                </td>
+                <td>
+                    <input class='inp_box' type='number' step='0.01' name='percent_repl' id='percent_repl' min = '0' value='30' >
+                </td>
+            </tr>
+            <tr>
+                <td class='td_text' style='border-bottom: 1px solid black;'>
+                    <label for='optionrc2'> Part-wise Replacement 
+                    <input type='radio' id='optionrc2' name='optionrc' value='optionrc2'></label>
+                </td>
+                <td style='border-bottom: 1px solid black;'>
+                    <table>
+                        <tr>
+                            <td class='td_text' style = 'text-align: center; font-weight: bold;'>
+                                <label>Name of the part</label>
+                            </td>
+                            <td class='td_text' style = 'text-align: center; font-weight: bold;'>
+                                <label>Rate (INR) </label>
+                            </td>
+                            <td class='td_text' style = 'text-align: center; font-weight: bold;'>
+                                <label>Replace after ?? years</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class='inp_box' type='text' id='part1' name='part1' value='Part 1'>
+                            </td>
+                            <td>
+                                <input class='inp_box' type='number' id='rate1' name='rate1' step='0.01' min = '0' value='0'>
+                            </td>
+                            <td>
+                                <input class='inp_box' type='number' id='rep_yr1' name='rep_yr1' step='0.5'  min='0.5' value ='0.5'>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class='inp_box' type='text' id='part2'  name='part2' value='Part 2'>
+                            </td>
+                            <td>
+                                <input class='inp_box' type='number' id='rate2' name='rate2' step='0.01'  min = '0' value='0'>
+                            </td>
+                            <td>
+                                <input class='inp_box' type='number' id='rep_yr2' name='rep_yr2' step='0.5' min='0.5' value ='0.5'>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class='inp_box' type='text' id='part3' name='part3' value='Part 3' >
+                            </td>
+                            <td>
+                                <input class='inp_box' type='number' id='rate3' name='rate3' step='0.01'  min = '0' value='0'>
+                            </td>
+                            <td>
+                                <input class='inp_box' type='number' id='rep_yr3' name='rep_yr3' step='0.5' min='0.5' value ='0.5'>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class='inp_box' type='text' id='part4' name='part4' value='Part 4' >
+                            </td>
+                            <td>
+                                <input class='inp_box' type='number' id='rate4' name='rate4' step='0.01' min = '0' value='0'>
+                            </td>
+                            <td>
+                                <input class='inp_box' type='number' id='rep_yr4' name='rep_yr4' step='0.5' min='0.5' value ='0.5'>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class='inp_box' type='text' id='part5' name='part5' value='Part 5'>
+                            </td>
+                            <td>
+                                <input class='inp_box' type='number' id='rate5' name='rate5' step='0.01'  min = '0' value='0'>
+                            </td>
+                            <td>
+                                <input class='inp_box' type='number' id='rep_yr5' name='rep_yr5' step='0.5' min='0.5' value ='0.5'>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class='td_text'>
+                    <label><b>Energy Consumed (kWh):</b></label>
+                </td>
+                <td style='height: 40px'>
+                    <input type='number' class='inp_box' name='value4' min='0' step="0.1">
+                </td>
+            </tr>
+            <tr>
+                <td class='td_text'>
+                    <label><b>Labour/Manpower (INR/MLD/Year):</b></label>
+                </td>
+                <td style='height: 40px'>
+                    <input type='number' class='inp_box' name='value5' min='0' step="0.1">
+                </td>
+            </tr>
+            <tr>
+                <td class='td_text'>
+                    <label><b>Chemicals (INR/MLD/Year):</b></label>
+                </td>
+                <td style='height: 40px'>
+                    <input type='number' class='inp_box' name='value6' min='0' step="0.1">
+                </td>
+            </tr>
+            <tr>
+                <td class='td_text'>
+                    <label><b>Routine Maintenance (INR/MLD/Year):</b></label>
+                </td>
+                <td style='height: 40px'>
+                    <input type='number' class='inp_box' name='value7' min='0' step="0.1">
+                </td>
+            </tr>
+            <tr>
+                <td class='td_text'>
+                    <label><b>Revenue Genearation (INR/MLD/Year):</b></label>
+                </td>
+                <td style='height: 40px'>
+                    <input type='number' class='inp_box' name='value8' min='0' step="0.1">
+                </td>
+            </tr>
+        </table>
+    </form>
+    
+    <input type="button" value="Generate 2PDF" onclick="generatePDF()" style="display: none;">
+    <input type="hidden" id="hidopt" value="1">
+
+    <p id="result"></p>
+
+    <script>
+        function selectOption() {
+            var selectedOption = document.getElementById("option").value;
+            var value1 = document.querySelector('input[name="value1"]');
+            var value2 = document.querySelector('input[name="value2"]');
+            var value3 = document.querySelector('input[name="value3"]');
+            var value4 = document.querySelector('input[name="value4"]');
+            var value5 = document.querySelector('input[name="value5"]');
+            var value6 = document.querySelector('input[name="value6"]');
+            var value7 = document.querySelector('input[name="value7"]');
+            var value8 = document.querySelector('input[name="value8"]');
+
+            if (selectedOption) {
+                var optionValues = {
+                    //Tech Short Name: ['Technology', land required, civilworks, ]
+                    'option1': [2, 3, 45, 56, 1, 2, 3, 4],
+                    'option2': [5, 7, 45, 99, 1, 2, 3, 4],
+                    'option3': [10, 15, 456, 58, 1, 2, 3, 4],
+                    'option4': [10, 35, 556, 125, 1, 2, 3, 4],
+                    'ASP': ['Activated Sludge Process', 12, 250, 44, 1, 2, 3, 4]
+                };
+
+                var values = optionValues[selectedOption];
+                if (values) {
+                    value1.value = values[0];
+                    value2.value = values[1];
+                    value3.value = values[2];
+                    value4.value = values[3];
+                    value5.value = values[4];
+                    value6.value = values[5];
+                    value7.value = values[6];
+                    value8.value = values[7];
+                }
+            }
+            // Show the "Add and Display" and "Generate 2PDF" buttons
+            //var addButton = document.querySelector('input[value="Add and Display"]');
+            var pdfButton = document.querySelector('input[value="Generate 2PDF"]');
+            //addButton.style.display = 'inline-block';
+            pdfButton.style.display = 'inline-block';
+        }
+
+        function addAndDisplay() {
+            var value1 = document.querySelector('input[name="value1"]').value;
+            var value2 = document.querySelector('input[name="value2"]').value;
+            var cellValues = document.querySelectorAll('input[name="cellValue"]');
+            var resultElement = document.getElementById('result');
+            var result2Element = document.getElementById('result2');
+            var result3Element = document.getElementById('result3');
+
+            var sum = parseInt(value1) + parseInt(value2);
+            var result2 = parseFloat(value1) / parseFloat(value2);
+            var result3 = parseFloat(value1) * parseFloat(value2);
+
+            for (var i = 0; i < cellValues.length; i++) {
+                var cellValue = parseInt(cellValues[i].value);
+                if (!isNaN(cellValue)) {
+                    sum += cellValue;
+                }
+            }
+
+            resultElement.textContent = 'Result: ' + sum;
+            result2Element.textContent = 'Result 2: ' + result2;
+            result3Element.textContent = 'Result 3: ' + result3;
+        }
+
+
+        function generatePDF() {
+            var value1 = document.querySelector('input[name="value1"]').value;
+            var lop=document.querySelector('input[name="lop"]').value;
+            var interest =document.querySelector('input[name="form1_interest"]').value;
+            var land_price =document.querySelector('input[name="form1_land_price"]').value;
+            var energy_price =document.querySelector('input[name="form1_energy_price"]').value;
+
+            var value2 = document.querySelector('input[name="value2"]').value;
+            var value3 = document.querySelector('input[name="value3"]').value;
+
+            var hidopt = document.getElementById("hidopt").value;
+
+            var percent_repl =document.querySelector('input[name="percent_repl"]').value;
+            var part1 =document.querySelector('input[name="part1"]').value;
+            var part2 =document.querySelector('input[name="part2"]').value;
+            var part3 =document.querySelector('input[name="part3"]').value;
+            var part4 =document.querySelector('input[name="part4"]').value;
+            var part5 =document.querySelector('input[name="part5"]').value;
+            var rate1 =document.querySelector('input[name="rate1"]').value;
+            var rate2 =document.querySelector('input[name="rate2"]').value;
+            var rate3 =document.querySelector('input[name="rate3"]').value;
+            var rate4 =document.querySelector('input[name="rate4"]').value;
+            var rate5 =document.querySelector('input[name="rate5"]').value;
+            var rep_yr1 =document.querySelector('input[name="rep_yr1"]').value;
+            var rep_yr2 =document.querySelector('input[name="rep_yr2"]').value;
+            var rep_yr3 =document.querySelector('input[name="rep_yr3"]').value;
+            var rep_yr4 =document.querySelector('input[name="rep_yr4"]').value;
+            var rep_yr5 =document.querySelector('input[name="rep_yr5"]').value;
+
+            var value4 = document.querySelector('input[name="value4"]').value;
+            var value5 = document.querySelector('input[name="value5"]').value;
+            var value6 = document.querySelector('input[name="value6"]').value;
+            var value7 = document.querySelector('input[name="value7"]').value;
+            var value8 = document.querySelector('input[name="value8"]').value;
+
+            var cellValues = document.querySelectorAll('input[name="cellValue"]');
+            var resultElement = document.getElementById('result');
+
+            var sum = parseInt(value1) + parseInt(value2);
+
+            for (var i = 0; i < cellValues.length; i++) {
+                var cellValue = parseInt(cellValues[i].value);
+                if (!isNaN(cellValue)) {
+                    sum += cellValue;
+                }
+            }
+
+            // Create an empty PDF document
+            var opt = {
+                margin: 20,
+                filename: 'output.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Create a container element for the PDF content
+            var container = document.createElement('div');
+
+            // Create elements to display the header
+            var headerElement = document.createElement('header');
+            var spaces = Array(55).join('\u00A0');
+            headerElement.textContent = 'Decision Support Tool | Report: Life Cycle Costing' + spaces + 'IIT Bombay';
+            container.appendChild(headerElement);
+
+            // Create a line element below the header
+            var lineElement = document.createElement('hr');
+            container.appendChild(lineElement);
+
+            var resultTextElement = document.createElement('p');
+            resultTextElement.textContent = 'Life Cycle Costing tool is a submodule developed as a part of "Decision Support Tool for Appropriate Technology selection" under a "ICecoWS" project sponsored by Department of Science & Technology.';
+            container.appendChild(resultTextElement);
+
+            var resultTextElement = document.createElement('p');
+            resultTextElement.textContent = 'INPUTS';
+            resultTextElement.style.fontWeight = 'bold';
+            container.appendChild(resultTextElement);
+
+            var lineElement = document.createElement('hr');
+            container.appendChild(lineElement);
+
+            //-------------------------------------------------------------------------------------------------------
+            var tableElement = document.createElement('table');
+
+            var value1Row = document.createElement('tr');
+
+            //---------------------------------------------------------tech-
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Technology:';
+            value1LabelCell.style.width='250px';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = value1;
+            value1Row.appendChild(value1Cell);
+
+            // Append the value1 row to the table
+            tableElement.appendChild(value1Row);
+            //---------------------------------------------------------lop-
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Life of project (Years):';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = lop;
+            value1Row.appendChild(value1Cell);
+
+            // Append the value1 row to the table
+            tableElement.appendChild(value1Row);
+            //---------------------------------------------------------interest-
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Rate of interest (%):';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = interest;
+            value1Row.appendChild(value1Cell);
+
+            // Append the value1 row to the table
+            tableElement.appendChild(value1Row);
+            //---------------------------------------------------------landprice-
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Land Price (INR/sq.m):';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = land_price;
+            value1Row.appendChild(value1Cell);
+
+            // Append the value1 row to the table
+            tableElement.appendChild(value1Row);
+            //---------------------------------------------------------energyprice-
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Energy Price (INR/kW-hr): ';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = energy_price;
+            value1Row.appendChild(value1Cell);
+            tableElement.appendChild(value1Row);
+            //---------------------------------------------------------landarea-
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Land Area Required (sq.m.): ';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = value2;
+            value1Row.appendChild(value1Cell);
+            tableElement.appendChild(value1Row);
+            //---------------------------------------------------------civilworks-
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Civil Works (INR/MLD/Year): ';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = value3;
+            value1Row.appendChild(value1Cell);
+            tableElement.appendChild(value1Row);
+            //---------------------------------------------------------replacement strategy-
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Replacament Strategy:';
+            value1LabelCell.style.fontWeight='bold';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = '';
+            value1Row.appendChild(value1Cell);
+            tableElement.appendChild(value1Row);
+            if(hidopt==='1'){
+            //---------------------------------------------------------% replacement-
+                var value1Row = document.createElement('tr');
+
+                var value1LabelCell = document.createElement('td');
+                value1LabelCell.textContent = 'Percentage of Cost of Civilworks:';
+                value1Row.appendChild(value1LabelCell);
+
+                var value1Cell = document.createElement('td');
+                value1Cell.textContent = percent_repl;
+                value1Row.appendChild(value1Cell);
+                tableElement.appendChild(value1Row);
+            } else if(hidopt==='2'){
+            //---------------------------------------------------------% replacement-
+                var value1Row = document.createElement('tr');
+
+                var value1LabelCell = document.createElement('td');
+                value1LabelCell.textContent = 'Part-wise Replacament:';
+                value1Row.appendChild(value1LabelCell);
+
+                var value1Cell = document.createElement('td');
+                value1Cell.textContent = 'Part';
+                value1Cell.style.width='150px';
+                value1Row.appendChild(value1Cell);
+
+                var value2Cell = document.createElement('td');
+                value2Cell.textContent = 'Rate (INR)';
+                value2Cell.style.width='125px';
+                value1Row.appendChild(value2Cell);
+
+                var value3Cell = document.createElement('td');
+                value3Cell.textContent = 'Replace after';
+                value1Row.appendChild(value3Cell);
+
+                tableElement.appendChild(value1Row);
+                //-----------------------part1
+                var value1Row = document.createElement('tr');
+
+                var value1LabelCell = document.createElement('td');
+                value1LabelCell.textContent = '';
+                value1Row.appendChild(value1LabelCell);
+
+                var value1Cell = document.createElement('td');
+                value1Cell.textContent = part1;
+                value1Row.appendChild(value1Cell);
+
+                var value2Cell = document.createElement('td');
+                value2Cell.textContent = rate1;
+                value1Row.appendChild(value2Cell);
+
+                var value3Cell = document.createElement('td');
+                value3Cell.textContent = rep_yr1;
+                value1Row.appendChild(value3Cell);
+
+                tableElement.appendChild(value1Row);
+                //-----------------------part2
+                var value1Row = document.createElement('tr');
+
+                var value1LabelCell = document.createElement('td');
+                value1LabelCell.textContent = '';
+                value1Row.appendChild(value1LabelCell);
+
+                var value1Cell = document.createElement('td');
+                value1Cell.textContent = part2;
+                value1Row.appendChild(value1Cell);
+
+                var value2Cell = document.createElement('td');
+                value2Cell.textContent = rate2;
+                value1Row.appendChild(value2Cell);
+
+                var value3Cell = document.createElement('td');
+                value3Cell.textContent = rep_yr2;
+                value1Row.appendChild(value3Cell);
+
+                tableElement.appendChild(value1Row);
+                //-----------------------part3
+                var value1Row = document.createElement('tr');
+
+                var value1LabelCell = document.createElement('td');
+                value1LabelCell.textContent = '';
+                value1Row.appendChild(value1LabelCell);
+
+                var value1Cell = document.createElement('td');
+                value1Cell.textContent = part3;
+                value1Row.appendChild(value1Cell);
+
+                var value2Cell = document.createElement('td');
+                value2Cell.textContent = rate3;
+                value1Row.appendChild(value2Cell);
+
+                var value3Cell = document.createElement('td');
+                value3Cell.textContent = rep_yr3;
+                value1Row.appendChild(value3Cell);
+
+                tableElement.appendChild(value1Row);
+                //-----------------------part4
+                var value1Row = document.createElement('tr');
+
+                var value1LabelCell = document.createElement('td');
+                value1LabelCell.textContent = '';
+                value1Row.appendChild(value1LabelCell);
+
+                var value1Cell = document.createElement('td');
+                value1Cell.textContent = part4;
+                value1Row.appendChild(value1Cell);
+
+                var value2Cell = document.createElement('td');
+                value2Cell.textContent = rate4;
+                value1Row.appendChild(value2Cell);
+
+                var value3Cell = document.createElement('td');
+                value3Cell.textContent = rep_yr4;
+                value1Row.appendChild(value3Cell);
+
+                tableElement.appendChild(value1Row);
+                //-----------------------part5
+                var value1Row = document.createElement('tr');
+
+                var value1LabelCell = document.createElement('td');
+                value1LabelCell.textContent = '';
+                value1Row.appendChild(value1LabelCell);
+
+                var value1Cell = document.createElement('td');
+                value1Cell.textContent = part5;
+                value1Row.appendChild(value1Cell);
+
+                var value2Cell = document.createElement('td');
+                value2Cell.textContent = rate5;
+                value1Row.appendChild(value2Cell);
+
+                var value3Cell = document.createElement('td');
+                value3Cell.textContent = rep_yr5;
+                value1Row.appendChild(value3Cell);
+
+                tableElement.appendChild(value1Row);
+            }
+            //---------------------------------------------------------Energycons-
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Energy Consumed (kWh): ';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = value4;
+            value1Row.appendChild(value1Cell);
+            tableElement.appendChild(value1Row);
+            //---------------------------------------------------------labour-
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Labour/Manpower (INR/MLD/Year): ';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = value5;
+            value1Row.appendChild(value1Cell);
+            tableElement.appendChild(value1Row);
+            //---------------------------------------------------------chemicals-
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Chemicals (INR/MLD/Year): ';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = value6;
+            value1Row.appendChild(value1Cell);
+            tableElement.appendChild(value1Row);
+            //---------------------------------------------------------routinemain-
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Routine Maintenance (INR/MLD/Year): ';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = value7;
+            value1Row.appendChild(value1Cell);
+            tableElement.appendChild(value1Row);
+            //---------------------------------------------------------routinemain-
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Revenue Genearation (INR/MLD/Year): ';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = value8;
+            value1Row.appendChild(value1Cell);
+            tableElement.appendChild(value1Row);
+
+            // Append the table to the container
+            container.appendChild(tableElement);
+
+            var lineElement = document.createElement('hr');
+            container.appendChild(lineElement);
+
+            var resultTextElement = document.createElement('p');
+            resultTextElement.textContent = 'OUTPUTS';
+            resultTextElement.style.fontWeight = 'bold';
+            container.appendChild(resultTextElement);
+
+            
+
+
+            //----------------------------------------------------
+            // Create an element to display the result
+            var resultTextElement = document.createElement('p');
+            resultTextElement.textContent = 'Result: ' + sum +'\n'+ 'rers';
+            container.appendChild(resultTextElement);
+
+            // Convert the container element to PDF using html2pdf library
+            html2pdf().set(opt).from(container).toPdf().get('pdf').then(function(pdf) {
+                // Display the PDF in the browser
+                var pdfData = pdf.output('blob');
+                var pdfURL = URL.createObjectURL(pdfData);
+                window.open(pdfURL);
+            });
+        }
+
+
+    </script>
+</body>
+</html>
