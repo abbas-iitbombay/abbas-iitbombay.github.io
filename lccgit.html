@@ -179,12 +179,8 @@
             <tr>
                 <td>
                     <select id="option" style='width: 200px; height: 30px; border-radius: 8px; text-align: left;font-weight:bold;font-size: 14px; padding-left:20px;' name="technology">
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                        <option value="option4">Option 4</option>
                         <option value="" disabled style="background-color:brown; color:white; ">Mechanized Treatments</option>
-                        <option value="ASP">Activated Sludge Process</option>
+                        <option value="ASP" selected>Activated Sludge Process</option>
                         <option value="RBC">Rotating Biological Contactors</option>
                         <option value="MBR">Membrane Bio-Reactor</option>
                         <option value="MBBR">Moving Bed Bio-Reactor</option>
@@ -361,10 +357,8 @@
         </table>
     </form>
     
-    <input type="button" value="Generate 2PDF" onclick="generatePDF()" style="display: none;">
+    <input type="button" value="Generate Life Cycle Costing Report" onclick="generatePDF()" class="btn-style" style="width: 430px; display: none;">
     <input type="hidden" id="hidopt" value="1">
-
-    <p id="result"></p>
 
     <script>
         function selectOption() {
@@ -381,11 +375,17 @@
             if (selectedOption) {
                 var optionValues = {
                     //Tech Short Name: ['Technology', land required, civilworks, ]
-                    'option1': [2, 3, 45, 56, 1, 2, 3, 4],
-                    'option2': [5, 7, 45, 99, 1, 2, 3, 4],
-                    'option3': [10, 15, 456, 58, 1, 2, 3, 4],
-                    'option4': [10, 35, 556, 125, 1, 2, 3, 4],
-                    'ASP': ['Activated Sludge Process', 12, 250, 44, 1, 2, 3, 4]
+                    'ASP': ['Activated Sludge Process', 12, 250, 44, 1, 2, 3, 4],
+                    'RBC': ['Rotating Biological Contactors', 16, 1250, 44, 1, 2, 3, 4],
+                    'MBR': ['Membrane Bio-Reactor', 100, 250, 44, 1, 2, 3, 4],
+                    'MBBR': ['Moving Bed Bio-Reactor', 12, 250, 44, 1, 2, 3, 4],
+                    'SBR': ['Sequencing Batch Reactor', 12, 250, 44, 1, 2, 3, 4],
+                    'Ext_aeration': ['Extended Aeration', 12, 250, 44, 1, 2, 3, 4],
+                    'CW_SFV': ['Constructed Wetlands (Surface flow vertical)', 12, 250, 44, 1, 2, 3, 4],
+                    'CW_SSFH': ['Constructed Wetlands (Subsurface flow horizontal)', 12, 250, 44, 1, 2, 3, 4],
+                    'CW_DPW': ['Constructed Wetlands (Deep bed wetlands)', 12, 250, 44, 1, 2, 3, 4],
+                    'WS_ponds': ['Waste Stabilization ponds', 12, 250, 44, 1, 2, 3, 4],
+                    'D_ponds': ['Duckweed ponds', 12, 250, 44, 1, 2, 3, 4]
                 };
 
                 var values = optionValues[selectedOption];
@@ -400,37 +400,10 @@
                     value8.value = values[7];
                 }
             }
-            // Show the "Add and Display" and "Generate 2PDF" buttons
-            //var addButton = document.querySelector('input[value="Add and Display"]');
-            var pdfButton = document.querySelector('input[value="Generate 2PDF"]');
-            //addButton.style.display = 'inline-block';
+            // Show the "Generate 2PDF" buttons
+            var pdfButton = document.querySelector('input[value="Generate Life Cycle Costing Report"]');
             pdfButton.style.display = 'inline-block';
         }
-
-        function addAndDisplay() {
-            var value1 = document.querySelector('input[name="value1"]').value;
-            var value2 = document.querySelector('input[name="value2"]').value;
-            var cellValues = document.querySelectorAll('input[name="cellValue"]');
-            var resultElement = document.getElementById('result');
-            var result2Element = document.getElementById('result2');
-            var result3Element = document.getElementById('result3');
-
-            var sum = parseInt(value1) + parseInt(value2);
-            var result2 = parseFloat(value1) / parseFloat(value2);
-            var result3 = parseFloat(value1) * parseFloat(value2);
-
-            for (var i = 0; i < cellValues.length; i++) {
-                var cellValue = parseInt(cellValues[i].value);
-                if (!isNaN(cellValue)) {
-                    sum += cellValue;
-                }
-            }
-
-            resultElement.textContent = 'Result: ' + sum;
-            result2Element.textContent = 'Result 2: ' + result2;
-            result3Element.textContent = 'Result 3: ' + result3;
-        }
-
 
         function generatePDF() {
             var value1 = document.querySelector('input[name="value1"]').value;
@@ -470,14 +443,78 @@
             var cellValues = document.querySelectorAll('input[name="cellValue"]');
             var resultElement = document.getElementById('result');
 
-            var sum = parseInt(value1) + parseInt(value2);
+            var landcost = parseFloat(land_price) * parseFloat(value2);
 
-            for (var i = 0; i < cellValues.length; i++) {
-                var cellValue = parseInt(cellValues[i].value);
-                if (!isNaN(cellValue)) {
-                    sum += cellValue;
-                }
+            var factor1 = '1.000';
+
+            var rep_cost = value3 * percent_repl/100;
+            var ro_rep_cost = parseFloat(rep_cost).toFixed(3);
+            var midyear = lop/2;
+            var factor2 = 1/(1+interest/100)**(lop/2);
+            var ro_factor2 = parseFloat(factor2).toFixed(3);
+            var pw_rep_cost = parseFloat(rep_cost * factor2).toFixed(2);
+
+            var sum_part1=0;
+            var jmax1 = Math.ceil(parseFloat(lop/rep_yr1-1));
+            var j=1;var nj=0;
+            while(j<=jmax1){
+                nj=j * rep_yr1;
+                sum_part1 = sum_part1 + rate1*1/(1+interest/100)**(nj);
+                j++;
             }
+            var sum_part2=0;
+            var jmax2 = Math.ceil(parseFloat(lop/rep_yr2-1));
+            var j=1;var nj=0;
+            while(j<=jmax2){
+                nj=j * rep_yr2;
+                sum_part2 = sum_part2 + rate2*1/(1+interest/100)**(nj);
+                j++;
+            }
+            var sum_part3=0;
+            var jmax3 = Math.ceil(parseFloat(lop/rep_yr3-1));
+            var j=1;var nj=0;
+            while(j<=jmax3){
+                nj=j * rep_yr3;
+                sum_part3 = sum_part3 + rate3*1/(1+interest/100)**(nj);
+                j++;
+            }
+            var sum_part4=0;
+            var jmax4 = Math.ceil(parseFloat(lop/rep_yr4-1));
+            var j=1;var nj=0;
+            while(j<=jmax4){
+                nj=j * rep_yr4;
+                sum_part4 = sum_part4 + rate4*1/(1+interest/100)**(nj);
+                j++;
+            }
+            var sum_part5=0;
+            var jmax5 = Math.ceil(parseFloat(lop/rep_yr5-1));
+            var j=1;var nj=0;
+            while(j<=jmax5){
+                nj=j * rep_yr5;
+                sum_part5 = sum_part5 + rate5*1/(1+interest/100)**(nj);
+                j++;
+            }
+            var pw_sumparts = parseFloat(sum_part1+sum_part2+  sum_part3+sum_part4+sum_part5).toFixed(2);
+
+            var factor3 = ((1+interest/100)**lop-1)/(interest/100*(1+interest/100)**lop);
+            var ro_factor3 = parseFloat(factor3).toFixed(3);
+
+            var energycost= energy_price * value4;
+            var pw_energycost = parseFloat(factor3 * energycost).toFixed(2);
+            var pw_labour = parseFloat(factor3 * value5).toFixed(2);
+            var pw_chemicals = parseFloat(factor3 * value6).toFixed(2);
+            var pw_routinemain = parseFloat(factor3 * value7).toFixed(2);
+            var pw_revenue = parseFloat(factor3 * value8).toFixed(2);
+
+            
+            if(hidopt==='1'){
+                var pw_totalcost= parseFloat(landcost) + parseFloat(value3) + parseFloat(pw_rep_cost) + parseFloat(pw_energycost) + parseFloat(pw_labour) + parseFloat(pw_chemicals) + parseFloat(pw_routinemain);
+            } else if(hidopt==='2'){
+                var pw_totalcost= parseFloat(landcost) + parseFloat(value3) + parseFloat(pw_sumparts) + parseFloat(pw_energycost) + parseFloat(pw_labour) + parseFloat(pw_chemicals) + parseFloat(pw_routinemain);
+            }
+            ro_pw_totalcost = parseFloat(pw_totalcost).toFixed(2);
+
+            var net_present_worth = parseFloat(ro_pw_totalcost) - parseFloat(pw_revenue);
 
             // Create an empty PDF document
             var opt = {
@@ -493,8 +530,10 @@
 
             // Create elements to display the header
             var headerElement = document.createElement('header');
-            var spaces = Array(55).join('\u00A0');
+            var spaces = Array(50).join('\u00A0');
             headerElement.textContent = 'Decision Support Tool | Report: Life Cycle Costing' + spaces + 'IIT Bombay';
+            headerElement.style.color='blue';
+            headerElement.style.fontWeight='bold';
             container.appendChild(headerElement);
 
             // Create a line element below the header
@@ -503,6 +542,7 @@
 
             var resultTextElement = document.createElement('p');
             resultTextElement.textContent = 'Life Cycle Costing tool is a submodule developed as a part of "Decision Support Tool for Appropriate Technology selection" under a "ICecoWS" project sponsored by Department of Science & Technology.';
+            resultTextElement.style.textAlign='justify';
             container.appendChild(resultTextElement);
 
             var resultTextElement = document.createElement('p');
@@ -602,6 +642,11 @@
             value1Cell.textContent = value3;
             value1Row.appendChild(value1Cell);
             tableElement.appendChild(value1Row);
+
+            container.appendChild(tableElement);
+            var tableElement = document.createElement('table');
+
+ //           var value1Row = document.createElement('tr');
             //---------------------------------------------------------replacement strategy-
             var value1Row = document.createElement('tr');
 
@@ -812,18 +857,466 @@
             var lineElement = document.createElement('hr');
             container.appendChild(lineElement);
 
+
+            //-------------------------------------------------------------------------------------------------------------------------------
+
+            var pageBreakElement = document.createElement('div');
+            pageBreakElement.style.pageBreakAfter = 'always';
+            container.appendChild(pageBreakElement);
+
+            // Create elements to display the header
+            var headerElement = document.createElement('header');
+            var spaces = Array(50).join('\u00A0');
+            headerElement.textContent = 'Decision Support Tool | Report: Life Cycle Costing' + spaces + 'IIT Bombay';
+            headerElement.style.color='blue';
+            headerElement.style.fontWeight='bold';
+            container.appendChild(headerElement);
+
+            // Create a line element below the header
+            var lineElement = document.createElement('hr');
+            container.appendChild(lineElement);
+
             var resultTextElement = document.createElement('p');
             resultTextElement.textContent = 'OUTPUTS';
             resultTextElement.style.fontWeight = 'bold';
             container.appendChild(resultTextElement);
 
+            var resultTextElement = document.createElement('p');
+            resultTextElement.textContent = 'CAPITAL COST:';
+            resultTextElement.style.fontWeight = 'bold';
+            container.appendChild(resultTextElement);
+
+            var lineElement = document.createElement('hr');
+            container.appendChild(lineElement);
+
             
+            var tableElement = document.createElement('table');
+            //-------------------------------------------------------
+            var value1Row = document.createElement('tr');
+            
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Description';
+            value1LabelCell.style.fontWeight='bold';
+            value1LabelCell.style.width = '175px';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = 'Symbol';
+            value1Cell.style.width = '80px';
+            value1Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value1Cell);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = 'Rate';
+            value2Cell.style.width = '80px';
+            value2Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value2Cell);
+
+            var value3Cell = document.createElement('td');
+            value3Cell.textContent = 'Ni';
+            value3Cell.style.width = '60px';
+            value3Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value3Cell);
+
+            var value4Cell = document.createElement('td');
+            value4Cell.textContent = 'Factor';
+            value4Cell.style.width = '100px';
+            value4Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value4Cell);
+
+            var value5Cell = document.createElement('td');
+            value5Cell.textContent = 'Present Worth';
+            value5Cell.style.width = '140px';
+            value5Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value5Cell);
+            
+            tableElement.appendChild(value1Row);
+            //--------------------------------
+            //------------------------------------------------landcost-------
+            var value1Row = document.createElement('tr');
+            
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Land Acquisition Cost';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = 'C1';
+            value1Row.appendChild(value1Cell);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = landcost;
+            value1Row.appendChild(value2Cell);
+
+            var value3Cell = document.createElement('td');
+            value3Cell.textContent = '0';
+            value1Row.appendChild(value3Cell);
+
+            var value4Cell = document.createElement('td');
+            value4Cell.textContent = factor1;
+            value1Row.appendChild(value4Cell);
+
+            var value5Cell = document.createElement('td');
+            value5Cell.textContent = landcost;
+            value1Row.appendChild(value5Cell);
+
+            // Append the value1 row to the table
+            tableElement.appendChild(value1Row);
+            //------------------------------------------------
+            var value1Row = document.createElement('tr');
+            
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Civil Works';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = 'C2';
+            value1Row.appendChild(value1Cell);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = value3;
+            value1Row.appendChild(value2Cell);
+
+            var value3Cell = document.createElement('td');
+            value3Cell.textContent = '0';
+            value1Row.appendChild(value3Cell);
+
+            var value4Cell = document.createElement('td');
+            value4Cell.textContent = factor1;
+            value1Row.appendChild(value4Cell);
+
+            var value5Cell = document.createElement('td');
+            value5Cell.textContent = value3;
+            value1Row.appendChild(value5Cell);
+
+            // Append the value1 row to the table
+            tableElement.appendChild(value1Row);
+            //------------------------------------------------
+            if(hidopt==='1'){
+                var value1Row = document.createElement('tr');
+                        
+                var value1LabelCell = document.createElement('td');
+                value1LabelCell.textContent = 'Replacement Cost';
+                value1Row.appendChild(value1LabelCell);
+    
+                var value1Cell = document.createElement('td');
+                value1Cell.textContent = 'C3';
+                value1Row.appendChild(value1Cell);
+    
+                var value2Cell = document.createElement('td');
+                value2Cell.textContent = rep_cost;
+                value1Row.appendChild(value2Cell);
+    
+                var value3Cell = document.createElement('td');
+                value3Cell.textContent = midyear;
+                value1Row.appendChild(value3Cell);
+    
+                var value4Cell = document.createElement('td');
+                value4Cell.textContent = ro_factor2;
+                value1Row.appendChild(value4Cell);
+    
+                var value5Cell = document.createElement('td');
+                value5Cell.textContent = pw_rep_cost;
+                value1Row.appendChild(value5Cell);
+    
+                // Append the value1 row to the table
+                tableElement.appendChild(value1Row);
+            } else if(hidopt==='2'){
+                var value1Row = document.createElement('tr');
+                        
+                var value1LabelCell = document.createElement('td');
+                value1LabelCell.textContent = 'Replacement Cost';
+                value1Row.appendChild(value1LabelCell);
+    
+                var value1Cell = document.createElement('td');
+                value1Cell.textContent = 'C3';
+                value1Row.appendChild(value1Cell);
+    
+                var value2Cell = document.createElement('td');
+                value2Cell.textContent = 'variable';
+                value1Row.appendChild(value2Cell);
+    
+                var value3Cell = document.createElement('td');
+                value3Cell.textContent = 'variable';
+                value1Row.appendChild(value3Cell);
+    
+                var value4Cell = document.createElement('td');
+                value4Cell.textContent = 'variable';
+                value1Row.appendChild(value4Cell);
+    
+                var value5Cell = document.createElement('td');
+                value5Cell.textContent = pw_sumparts;
+                value1Row.appendChild(value5Cell);
+    
+                // Append the value1 row to the table
+                tableElement.appendChild(value1Row);
+            }
+
+            container.appendChild(tableElement);
+
+            var lineElement = document.createElement('hr');
+            container.appendChild(lineElement);
+            
+            var resultTextElement = document.createElement('p');
+            resultTextElement.textContent = 'OPERATION AND MAINTENANCE COST:';
+            resultTextElement.style.fontWeight = 'bold';
+            container.appendChild(resultTextElement);
+
+            var lineElement = document.createElement('hr');
+            container.appendChild(lineElement);
+
+            
+            var tableElement = document.createElement('table');
+            //---------------------------------------------------------
+            var value1Row = document.createElement('tr');
+            
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Description';
+            value1LabelCell.style.fontWeight='bold';
+            value1LabelCell.style.width = '175px';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = 'Symbol';
+            value1Cell.style.width = '80px';
+            value1Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value1Cell);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = 'Rate';
+            value2Cell.style.width = '80px';
+            value2Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value2Cell);
+
+            var value3Cell = document.createElement('td');
+            value3Cell.textContent = 'Ni';
+            value3Cell.style.width = '60px';
+            value3Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value3Cell);
+
+            var value4Cell = document.createElement('td');
+            value4Cell.textContent = 'Factor';
+            value4Cell.style.width = '100px';
+            value4Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value4Cell);
+
+            var value5Cell = document.createElement('td');
+            value5Cell.textContent = 'Present Worth';
+            value5Cell.style.width = '140px';
+            value5Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value5Cell);
+            
+            tableElement.appendChild(value1Row);
+            //----------------------------------------------------energycost-----
+            var value1Row = document.createElement('tr');
+            
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Energy Cost';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = 'O1';
+            value1Row.appendChild(value1Cell);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = energycost;
+            value1Row.appendChild(value2Cell);
+
+            var value3Cell = document.createElement('td');
+            value3Cell.textContent = lop;
+            value1Row.appendChild(value3Cell);
+
+            var value4Cell = document.createElement('td');
+            value4Cell.textContent = ro_factor3;
+            value1Row.appendChild(value4Cell);
+
+            var value5Cell = document.createElement('td');
+            value5Cell.textContent = pw_energycost;
+            value1Row.appendChild(value5Cell);
+            
+            tableElement.appendChild(value1Row);
+            //----------------------------------------------------labour-----
+            var value1Row = document.createElement('tr');
+            
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Labour/Manpower';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = 'O2';
+            value1Row.appendChild(value1Cell);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = value5;
+            value1Row.appendChild(value2Cell);
+
+            var value3Cell = document.createElement('td');
+            value3Cell.textContent = lop;
+            value1Row.appendChild(value3Cell);
+
+            var value4Cell = document.createElement('td');
+            value4Cell.textContent = ro_factor3;
+            value1Row.appendChild(value4Cell);
+
+            var value5Cell = document.createElement('td');
+            value5Cell.textContent = pw_labour;
+            value1Row.appendChild(value5Cell);
+            
+            tableElement.appendChild(value1Row);
+            //----------------------------------------------------chemicals-----
+            var value1Row = document.createElement('tr');
+            
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Consumables/Chemicals';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = 'O3';
+            value1Row.appendChild(value1Cell);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = value6;
+            value1Row.appendChild(value2Cell);
+
+            var value3Cell = document.createElement('td');
+            value3Cell.textContent = lop;
+            value1Row.appendChild(value3Cell);
+
+            var value4Cell = document.createElement('td');
+            value4Cell.textContent = ro_factor3;
+            value1Row.appendChild(value4Cell);
+
+            var value5Cell = document.createElement('td');
+            value5Cell.textContent = pw_chemicals;
+            value1Row.appendChild(value5Cell);
+            
+            tableElement.appendChild(value1Row);
+            //----------------------------------------------------O&M-----
+            var value1Row = document.createElement('tr');
+            
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Routine Maintenance';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = 'O4';
+            value1Row.appendChild(value1Cell);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = value7;
+            value1Row.appendChild(value2Cell);
+
+            var value3Cell = document.createElement('td');
+            value3Cell.textContent = lop;
+            value1Row.appendChild(value3Cell);
+
+            var value4Cell = document.createElement('td');
+            value4Cell.textContent = ro_factor3;
+            value1Row.appendChild(value4Cell);
+
+            var value5Cell = document.createElement('td');
+            value5Cell.textContent = pw_routinemain;
+            value1Row.appendChild(value5Cell);
+            
+            tableElement.appendChild(value1Row);
+
+            container.appendChild(tableElement);
+
+            var lineElement = document.createElement('hr');
+            container.appendChild(lineElement);
+
+            var resultTextElement = document.createElement('p');
+            resultTextElement.textContent = 'Present Worth Cost per MLD of sewage for ' + value1 + ': INR ' + ro_pw_totalcost;
+            
+            container.appendChild(resultTextElement);
 
 
-            //----------------------------------------------------
+            var resultTextElement = document.createElement('p');
+            resultTextElement.textContent = 'REVENUE GENERATION:';
+            resultTextElement.style.fontWeight = 'bold';
+            container.appendChild(resultTextElement);
+
+            var lineElement = document.createElement('hr');
+            container.appendChild(lineElement);
+
+            var tableElement = document.createElement('table');
+            //---------------------------------------------------------
+            var value1Row = document.createElement('tr');
+            
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Description';
+            value1LabelCell.style.fontWeight='bold';
+            value1LabelCell.style.width = '175px';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = 'Symbol';
+            value1Cell.style.width = '80px';
+            value1Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value1Cell);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = 'Rate';
+            value2Cell.style.width = '80px';
+            value2Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value2Cell);
+
+            var value3Cell = document.createElement('td');
+            value3Cell.textContent = 'Ni';
+            value3Cell.style.width = '60px';
+            value3Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value3Cell);
+
+            var value4Cell = document.createElement('td');
+            value4Cell.textContent = 'Factor';
+            value4Cell.style.width = '100px';
+            value4Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value4Cell);
+
+            var value5Cell = document.createElement('td');
+            value5Cell.textContent = 'Present Worth';
+            value5Cell.style.width = '140px';
+            value5Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value5Cell);
+            
+            tableElement.appendChild(value1Row);
+            //---------------------------------------------------------
+            var value1Row = document.createElement('tr');
+            
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Revenue (INR/MLD)';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = 'O5';
+            value1Row.appendChild(value1Cell);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = value8;
+            value1Row.appendChild(value2Cell);
+
+            var value3Cell = document.createElement('td');
+            value3Cell.textContent = lop;
+            value1Row.appendChild(value3Cell);
+
+            var value4Cell = document.createElement('td');
+            value4Cell.textContent = ro_factor3;
+            value1Row.appendChild(value4Cell);
+
+            var value5Cell = document.createElement('td');
+            value5Cell.textContent = pw_revenue;
+            value1Row.appendChild(value5Cell);
+            
+            tableElement.appendChild(value1Row);
+
+            container.appendChild(tableElement);
+
+            var lineElement = document.createElement('hr');
+            container.appendChild(lineElement);
+
+             //----------------------------------------------------
             // Create an element to display the result
             var resultTextElement = document.createElement('p');
-            resultTextElement.textContent = 'Result: ' + sum +'\n'+ 'rers';
+            resultTextElement.textContent = 'Net Present Worth Cost per MLD of sewage for ' + value1 + ': INR ' + net_present_worth;
             container.appendChild(resultTextElement);
 
             // Convert the container element to PDF using html2pdf library
@@ -834,8 +1327,6 @@
                 window.open(pdfURL);
             });
         }
-
-
     </script>
 </body>
 </html>
