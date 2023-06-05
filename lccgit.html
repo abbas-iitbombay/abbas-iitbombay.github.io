@@ -516,6 +516,8 @@
 
             var net_present_worth = parseFloat(ro_pw_totalcost) - parseFloat(pw_revenue);
 
+            var ro_net_present_worth = parseFloat(net_present_worth).toFixed(2);
+
             // Create an empty PDF document
             var opt = {
                 margin: 20,
@@ -561,7 +563,7 @@
             //---------------------------------------------------------tech-
             var value1LabelCell = document.createElement('td');
             value1LabelCell.textContent = 'Technology:';
-            value1LabelCell.style.width='250px';
+            value1LabelCell.style.width='300px';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
@@ -644,6 +646,10 @@
             tableElement.appendChild(value1Row);
 
             container.appendChild(tableElement);
+
+            var lineElement = document.createElement('hr');
+            container.appendChild(lineElement);
+
             var tableElement = document.createElement('table');
 
  //           var value1Row = document.createElement('tr');
@@ -652,6 +658,7 @@
 
             var value1LabelCell = document.createElement('td');
             value1LabelCell.textContent = 'Replacament Strategy:';
+            value1LabelCell.style.width='300px';
             value1LabelCell.style.fontWeight='bold';
             value1Row.appendChild(value1LabelCell);
 
@@ -681,16 +688,19 @@
 
                 var value1Cell = document.createElement('td');
                 value1Cell.textContent = 'Part';
-                value1Cell.style.width='150px';
+                value1Cell.style.width='125px';
+                value1Cell.style.borderBottom = '1px solid black';
                 value1Row.appendChild(value1Cell);
 
                 var value2Cell = document.createElement('td');
                 value2Cell.textContent = 'Rate (INR)';
-                value2Cell.style.width='125px';
+                value2Cell.style.width='100px';
+                value2Cell.style.borderBottom = '1px solid black';
                 value1Row.appendChild(value2Cell);
 
                 var value3Cell = document.createElement('td');
                 value3Cell.textContent = 'Replace after';
+                value3Cell.style.borderBottom = '1px solid black';
                 value1Row.appendChild(value3Cell);
 
                 tableElement.appendChild(value1Row);
@@ -710,7 +720,7 @@
                 value1Row.appendChild(value2Cell);
 
                 var value3Cell = document.createElement('td');
-                value3Cell.textContent = rep_yr1;
+                value3Cell.textContent = rep_yr1+ ' yrs';
                 value1Row.appendChild(value3Cell);
 
                 tableElement.appendChild(value1Row);
@@ -730,7 +740,7 @@
                 value1Row.appendChild(value2Cell);
 
                 var value3Cell = document.createElement('td');
-                value3Cell.textContent = rep_yr2;
+                value3Cell.textContent = rep_yr2+ ' yrs';
                 value1Row.appendChild(value3Cell);
 
                 tableElement.appendChild(value1Row);
@@ -750,7 +760,7 @@
                 value1Row.appendChild(value2Cell);
 
                 var value3Cell = document.createElement('td');
-                value3Cell.textContent = rep_yr3;
+                value3Cell.textContent = rep_yr3 + ' yrs';
                 value1Row.appendChild(value3Cell);
 
                 tableElement.appendChild(value1Row);
@@ -770,7 +780,7 @@
                 value1Row.appendChild(value2Cell);
 
                 var value3Cell = document.createElement('td');
-                value3Cell.textContent = rep_yr4;
+                value3Cell.textContent = rep_yr4+ ' yrs';
                 value1Row.appendChild(value3Cell);
 
                 tableElement.appendChild(value1Row);
@@ -790,16 +800,23 @@
                 value1Row.appendChild(value2Cell);
 
                 var value3Cell = document.createElement('td');
-                value3Cell.textContent = rep_yr5;
+                value3Cell.textContent = rep_yr5+ ' yrs';
                 value1Row.appendChild(value3Cell);
 
                 tableElement.appendChild(value1Row);
             }
+            container.appendChild(tableElement);
+
+            var lineElement = document.createElement('hr');
+            container.appendChild(lineElement);
+
+            var tableElement = document.createElement('table');
             //---------------------------------------------------------Energycons-
             var value1Row = document.createElement('tr');
 
             var value1LabelCell = document.createElement('td');
             value1LabelCell.textContent = 'Energy Consumed (kWh): ';
+            value1LabelCell.style.width='300px';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
@@ -898,36 +915,42 @@
             value1LabelCell.textContent = 'Description';
             value1LabelCell.style.fontWeight='bold';
             value1LabelCell.style.width = '175px';
+            value1LabelCell.style.borderBottom='1px solid black';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
             value1Cell.textContent = 'Symbol';
             value1Cell.style.width = '80px';
             value1Cell.style.fontWeight = 'bold';
+            value1Cell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value1Cell);
 
             var value2Cell = document.createElement('td');
             value2Cell.textContent = 'Rate';
             value2Cell.style.width = '80px';
             value2Cell.style.fontWeight = 'bold';
+            value2Cell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value2Cell);
 
             var value3Cell = document.createElement('td');
             value3Cell.textContent = 'Ni';
             value3Cell.style.width = '60px';
             value3Cell.style.fontWeight = 'bold';
+            value3Cell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value3Cell);
 
             var value4Cell = document.createElement('td');
             value4Cell.textContent = 'Factor';
             value4Cell.style.width = '100px';
             value4Cell.style.fontWeight = 'bold';
+            value4Cell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value4Cell);
 
             var value5Cell = document.createElement('td');
             value5Cell.textContent = 'Present Worth';
             value5Cell.style.width = '140px';
             value5Cell.style.fontWeight = 'bold';
+            value5Cell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value5Cell);
             
             tableElement.appendChild(value1Row);
@@ -1073,36 +1096,42 @@
             value1LabelCell.textContent = 'Description';
             value1LabelCell.style.fontWeight='bold';
             value1LabelCell.style.width = '175px';
+            value1LabelCell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
             value1Cell.textContent = 'Symbol';
             value1Cell.style.width = '80px';
             value1Cell.style.fontWeight = 'bold';
+            value1Cell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value1Cell);
 
             var value2Cell = document.createElement('td');
             value2Cell.textContent = 'Rate';
             value2Cell.style.width = '80px';
             value2Cell.style.fontWeight = 'bold';
+            value2Cell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value2Cell);
 
             var value3Cell = document.createElement('td');
             value3Cell.textContent = 'Ni';
             value3Cell.style.width = '60px';
             value3Cell.style.fontWeight = 'bold';
+            value3Cell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value3Cell);
 
             var value4Cell = document.createElement('td');
             value4Cell.textContent = 'Factor';
             value4Cell.style.width = '100px';
             value4Cell.style.fontWeight = 'bold';
+            value4Cell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value4Cell);
 
             var value5Cell = document.createElement('td');
             value5Cell.textContent = 'Present Worth';
             value5Cell.style.width = '140px';
             value5Cell.style.fontWeight = 'bold';
+            value5Cell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value5Cell);
             
             tableElement.appendChild(value1Row);
@@ -1246,36 +1275,42 @@
             value1LabelCell.textContent = 'Description';
             value1LabelCell.style.fontWeight='bold';
             value1LabelCell.style.width = '175px';
+            value1LabelCell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
             value1Cell.textContent = 'Symbol';
             value1Cell.style.width = '80px';
             value1Cell.style.fontWeight = 'bold';
+            value1Cell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value1Cell);
 
             var value2Cell = document.createElement('td');
             value2Cell.textContent = 'Rate';
             value2Cell.style.width = '80px';
             value2Cell.style.fontWeight = 'bold';
+            value2Cell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value2Cell);
 
             var value3Cell = document.createElement('td');
             value3Cell.textContent = 'Ni';
             value3Cell.style.width = '60px';
             value3Cell.style.fontWeight = 'bold';
+            value3Cell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value3Cell);
 
             var value4Cell = document.createElement('td');
             value4Cell.textContent = 'Factor';
             value4Cell.style.width = '100px';
             value4Cell.style.fontWeight = 'bold';
+            value4Cell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value4Cell);
 
             var value5Cell = document.createElement('td');
             value5Cell.textContent = 'Present Worth';
             value5Cell.style.width = '140px';
             value5Cell.style.fontWeight = 'bold';
+            value5Cell.style.borderBottom = '1px solid black';
             value1Row.appendChild(value5Cell);
             
             tableElement.appendChild(value1Row);
@@ -1316,7 +1351,7 @@
              //----------------------------------------------------
             // Create an element to display the result
             var resultTextElement = document.createElement('p');
-            resultTextElement.textContent = 'Net Present Worth Cost per MLD of sewage for ' + value1 + ': INR ' + net_present_worth;
+            resultTextElement.textContent = 'Net Present Worth Cost per MLD of sewage for ' + value1 + ': INR ' + ro_net_present_worth;
             container.appendChild(resultTextElement);
 
             // Convert the container element to PDF using html2pdf library
