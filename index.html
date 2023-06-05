@@ -78,9 +78,12 @@
       font-size: 14px; 
       font-family: sans-serif;
       font-weight: bold;
-      padding: 4px 20px;
+      padding-top: 4px;
+      padding-bottom: 4px;
       border-radius: 7px;
       height: 45px;
+      color: black;
+      background-color: lightyellow;
     }
     .active {
       background-color: brown;
@@ -89,6 +92,7 @@
 
   </style>
   <script>
+    window.addEventListener('resize', adjustIFrameHeight);
     function adjustIFrameHeight() {
       var iframe = document.getElementById('phpFrame');
       var headerHeight = document.getElementById('header').offsetHeight;
@@ -96,33 +100,7 @@
       var contentHeight = window.innerHeight - (headerHeight + footerHeight);
       iframe.style.height = contentHeight + 'px';
     }
-    
-    window.addEventListener('resize', adjustIFrameHeight);
-    
-    function changeTab(tabId) {
-      var tabContents = document.getElementsByClassName('tab-content');
-  
-      for (var i = 0; i < tabContents.length; i++) {
-        tabContents[i].style.display = 'none';
-      }
-  
-      var selectedTab = document.getElementById(tabId);
-      if (selectedTab) {
-        selectedTab.style.display = 'block';
-      }
-      
-      var tabButtons = document.getElementsByClassName('tab-button');
-      for (var i = 0; i < tabButtons.length; i++) {
-        tabButtons[i].classList.remove('active');
-      }
-      
-      var activeButton = document.getElementById(tabId + "-button");
-      if (activeButton) {
-        activeButton.classList.add('active');
-      }
-    }
-    
-    // Set default display to 'tab1' when the page loads
+
 
   </script>
 </head>
@@ -146,18 +124,18 @@
           <br><br>
           <img src='images/IC-EcoWS_Logo.jpg' style="width: 100px;">    
           <br><br>
-       
-          <br>
-          <button id="tab7-button" class="tab-button button" onclick="changeTab('tab7')" style="width:80%;"><b>Life Cycle Costing Tool</b></button>
+          <a href="http:\\abbas-iitbombay.github.io"><button id="buttonhome" class="tab-button button" style="width:80%;"><b>Home</b></button></a>
           <br><br>
-          <button id="tab7-button" class="tab-button button" onclick="changeTab('tab8')" style="width:80%;"><b>Technology Selection Tool</b></button>
+          <button id="button1" class="tab-button button" onclick="changeContent(1)" style="width:80%;"><b>Life Cycle Costing Tool</b></button>
+          <br><br>
+          <button id="button2" class="tab-button button" onclick="changeContent(2)" style="width:80%;"><b>Technology Selection Tool</b></button>
           <br><br>
           <a href="http://117.252.14.242/RMOD_DST/Default.aspx"><button type="submit" class="tab-button button" style="width:80%"><b>About Project</b></button></a>
           </center>
 
       </div>
       
-      <iframe id="phpFrame" src="trial2.html" frameborder="0"></iframe>
+      <iframe id="phpFrame" src="trial2.php" frameborder="0"></iframe>
       
       <div id="right">
         <!-- Content for the right section goes here -->
@@ -174,6 +152,30 @@
 
   <script>
     adjustIFrameHeight();
+    const button1 = document.getElementById('button1');
+    const button2 = document.getElementById('button2');
+    const iframe = document.getElementById('phpFrame');
+
+    button1.addEventListener('click', function() {
+      // Change the iframe source to the desired content for button 1
+      iframe.src = 'lccgit.html';
+      button1.classList.add('active');
+      button2.classList.remove('active');
+    });
+
+    button2.addEventListener('click', function() {
+      // Change the iframe source to the desired content for button 2
+      iframe.src = 'tree1.html';
+      button1.classList.remove('active');
+      button2.classList.add('active');
+    });
+
+    // Listen for the popstate event (navigating back)
+    window.onpopstate = function(event) {
+      // Reset button styles to default when navigating back
+      button1.classList.remove('active');
+      button2.classList.remove('active');
+    };
   </script>
 </body>
 </html>
