@@ -1,1 +1,885 @@
-needs full review
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Textbox Example</title>
+    <style>
+        .inhide {
+            display: none;
+        }
+
+        .inhide:target {
+            display: block;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        th {
+            background-color: lightgray;
+        }
+
+        td input {
+            width: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+    	<h3><b>Select Indicators</b></h3>
+    	<table>
+    		<tr style="vertical-align: top; height: 150px;">
+    			<td  style="width: 300px;">
+				    <div>
+				    	<label>1. Economic Indicators</label><br>
+				        <input type="checkbox" name="indicate[]" value="Capex">Capital Cost<br/>
+				        <input type="checkbox" name="indicate[]" value="Opex">Operational Cost<br/>
+				        <input type="checkbox" name="indicate[]" value="Revenue">Revenue Cost<br/>
+				        <input type="checkbox" name="indicate[]" value="LCC">Life Cycle Cost<br/>
+				        <input type="hidden" name="num_textboxes" value="0" />
+				    </div>
+				    
+				    <div>
+				        <div id="textboxes-container"></div>
+				        <input type="button" name="add_button" value="+" onclick="addTextbox()" />
+				    </div>
+				</td>
+				<td style="width: 300px;">
+				    <div>
+				    	<label>2. Environmental Indicators</label><br>
+				        <input type="checkbox" name="indicate[]" value="GWP">Global Warming Potential<br/>
+				        <input type="checkbox" name="indicate[]" value="EuP">Eutrophication Potential<br/>
+				        <input type="checkbox" name="indicate[]" value="EcoSer">Ecosystem Services<br/>
+				        <input type="hidden" name="num_textboxes1" value="0" />
+				    </div>
+				    
+				    <div>
+				        <div id="textboxes-container1"></div>
+				        <input type="button" name="add_button1" value="+" onclick="addTextbox1()" />
+				    </div>
+	    		</td>
+	    		<td style="width: 300px;">
+				    <div>
+				    	<label>3. Circularity Potential Indicators</label><br>
+				        <input type="checkbox" name="indicate[]" value="WasRec">Wastewater recycling<br/>
+				        <input type="checkbox" name="indicate[]" value="EnePot">Energy<br/>
+				        <input type="checkbox" name="indicate[]" value="ProPot">Products (fertilizers, sludge etc)<br/>
+				        <input type="hidden" name="num_textboxes2" value="0" />
+				    </div>
+				    
+				    <div>
+				        <div id="textboxes-container2"></div>
+				        <input type="button" name="add_button1" value="+" onclick="addTextbox2()" />
+				    </div>
+				</td>
+			</tr>
+		</table>
+		<table>
+			<tr style="vertical-align: top; height: 200px;">
+				<td style="width: 200px;">
+				    <div>
+				    	<label>4. Social Indicators</label><br>
+				        <input type="checkbox" name="indicate[]" value="SocUnskill">Unskilled manpower<br/>
+				        <input type="checkbox" name="indicate[]" value="SocAccept">Acceptability<br/>
+				        <input type="checkbox" name="indicate[]" value="SocPart">Participation<br/>
+				        <input type="hidden" name="num_textboxes3" value="0" />
+				    </div>
+				    
+				    <div>
+				        <div id="textboxes-container3"></div>
+				        <input type="button" name="add_button1" value="+" onclick="addTextbox3()" />
+				    </div>
+	    		</td>
+	    		<td style="width: 225px;">
+				    <div>
+				    	<label>5. Resilience Indicators</label><br>
+				        <input type="checkbox" name="indicate[]" value="R_reli">Reliability<br/>
+				        <input type="checkbox" name="indicate[]" value="R_dura">Durability<br/>
+				        <input type="checkbox" name="indicate[]" value="R_flex">Flexibility<br/>
+				        <input type="checkbox" name="indicate[]" value="R_repl">Replicability<br/>
+				        <input type="hidden" name="num_textboxes4" value="0" />
+				    </div>
+				    
+				    <div>
+				        <div id="textboxes-container4"></div>
+				        <input type="button" name="add_button1" value="+" onclick="addTextbox4()" />
+				    </div>
+				</td>
+				<td style="width: 264px;">
+				    <div>
+				    	<label>6. Technical Indicators</label><br>
+				        <input type="checkbox" name="indicate[]" value="BOD">Biochemical Oxygen Demand<br/>
+				        <input type="checkbox" name="indicate[]" value="COD">Chemical Oxygen Demand<br/>
+				        <input type="checkbox" name="indicate[]" value="Nitro">Total Kjeldahl Nitrogen<br/>
+				        <input type="checkbox" name="indicate[]" value="Phosph">Phosphorus<br/>
+				        <input type="checkbox" name="indicate[]" value="Em_cont">Emerging Contaminants<br/>
+				        <input type="checkbox" name="indicate[]" value="Lan_suit">Land Suitability<br/>
+				        <input type="hidden" name="num_textboxes5" value="0" />
+				    </div>
+				    
+				    <div>
+				        <div id="textboxes-container5"></div>
+				        <input type="button" name="add_button1" value="+" onclick="addTextbox5()" />
+				    </div>
+				</td>
+				<td style="width: 200px;">
+				    <div>
+				    	<label>Additional Indicators</label><br>
+				    	<input type="hidden" name="num_textboxes6" value="0" />
+				    </div>
+				    
+				    <div>
+				        <div id="textboxes-container6"></div>
+				        <input type="button" name="add_button1" value="+" onclick="addTextbox6()" />
+				    </div>
+				</td>
+			</tr>
+		</table>
+		<h3><b>Select Criteria</b></h3>
+		<div>
+			<table>
+			    <tr>
+			        <td>
+			            <input type='radio' id='opt_criteria1' name='opt_crit' value='opt_criteria1' checked>
+			            <label for='opt_criteria1'>No Criteria</label>
+			        </td>
+			    </tr>
+			    <tr>
+			        <td>
+			            <input type='radio' id='opt_criteria2' name='opt_crit' value='opt_criteria2'>
+			            <label for='opt_criteria2'>Criteria</label>
+			        </td>
+			        <td>
+			            <table>
+			                <tr>
+			                    <td>
+			                        <label>Setting</label><br>
+			                        <select id="settingSelect" disabled>
+			                            <option value="A1">Setting 1</option>
+			                            <option value="A2">Setting 2</option>
+			                            <option value="A3">Setting 3</option>
+			                        </select>
+			                    </td>
+			                    <td>
+			                        <label>Land</label><br>
+			                        <select id="landSelect" disabled>
+			                            <option value="B1">Land 1</option>
+			                            <option value="B2">Land 2</option>
+			                            <option value="B3">Land 3</option>
+			                        </select>
+			                    </td>
+			                    <td>
+			                        <label>Enduse</label><br>
+			                        <select id="enduseSelect" disabled>
+			                            <option value="C1">Enduse 1</option>
+			                            <option value="C2">Enduse 2</option>
+			                            <option value="C3">Enduse 3</option>
+			                        </select>
+			                    </td>
+			                </tr>
+			            </table>
+			        </td>
+			    </tr>
+			</table>
+<input type="submit" id="selectopt" name="">
+</div>
+<div>
+    <pre id="output"></pre>
+</div>
+
+		<h3><b>Select Technologies</b></h3>
+		<table>
+			<tr style="vertical-align: top">
+				<td style="width: 455px;">
+				    <div>
+				    	<label>Mechanized Treatment</label><br>
+				        <input type="checkbox" name="tech[]" value="ASP">Activated Sludge Process<br/>
+				        <input type="checkbox" name="tech[]" value="RBC">Rotating Biological Contactors<br/>
+				        <input type="checkbox" name="tech[]" value="MBR">Membrane Bio-Reactor<br/>
+				        <input type="checkbox" name="tech[]" value="MBBR">Moving Bed Bio-Reactor<br/>
+				        <input type="checkbox" name="tech[]" value="SBR">Sequencing Batch Reactor<br/>
+				        <input type="checkbox" name="tech[]" value="Ext_aeration">Extended Aeration<br/>
+				    </div>
+				</td>
+				<td style="width: 456px;">
+				    <div>
+				    	<label>Natural Treatment</label><br>
+				        <input type="checkbox" name="tech[]" value="CW_SFV">Constructed Wetlands (Surface flow vertical)<br/>
+				        <input type="checkbox" name="tech[]" value="CW_SSFH">Constructed Wetlands (Subsurface flow horizontal)<br/>
+				        <input type="checkbox" name="tech[]" value="CW_DPW">Constructed Wetlands (Deep bed wetlands)<br/>
+				        <input type="checkbox" name="tech[]" value="WS_ponds">Waste Stabilization ponds<br/>
+				        <input type="checkbox" name="tech[]" value="D_ponds">Duckweed ponds<br/>
+				        <input type="hidden" name="num_technologies" value="0" />
+				    </div>
+				    <div>
+				    	<div id="technology-container"></div>
+				        <input type="button" name="add_tech_button" value="+" onclick="addTechnology()" />
+				    </div>
+				</td>
+			</tr>
+		</table>
+	    <br>
+	    <div>
+	        <input type="submit" name="submit_xx" value="Submit"/>
+	    </div>
+	    
+	    <div>
+	    	<pre id="grid-container"></pre>
+	    </div>
+	    <div>
+            <input type="submit" id="submitNeoButton" name="submit_neo" value="Submit_neo" />
+        </div>
+        <pre id="newmat"></pre>
+    </form>
+
+    <script>
+    	function addTextbox() {
+        	var gridContainer = document.getElementById('grid-container');
+		    gridContainer.innerHTML = ''; // Clear previous grid
+		    document.getElementById('submitNeoButton').style.display = 'none'; 
+		    var form = document.querySelector('form');
+		    var numTextboxes = form.elements['num_textboxes'].value;
+		    var textboxesContainer = document.getElementById('textboxes-container');
+		    var newTextbox = document.createElement('input');
+		    newTextbox.type = 'text';
+		    newTextbox.name = 'textbox[]';
+		    newTextbox.value = '1.' + (parseInt(numTextboxes) + 1) +' ';
+		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
+		    newTextbox.style.width = '150px';
+		    newTextbox.style.textAlign = 'left';
+		    textboxesContainer.appendChild(newTextbox);
+		    form.elements['num_textboxes'].value = parseInt(numTextboxes) + 1;
+		}
+		function addTextbox1() {
+        	var gridContainer = document.getElementById('grid-container');
+		    gridContainer.innerHTML = ''; // Clear previous grid
+		    document.getElementById('submitNeoButton').style.display = 'none'; 
+		    var form = document.querySelector('form');
+		    var numTextboxes = form.elements['num_textboxes1'].value;
+		    var textboxesContainer = document.getElementById('textboxes-container1');
+		    var newTextbox = document.createElement('input');
+		    newTextbox.type = 'text';
+		    newTextbox.name = 'textbox[]';
+		    newTextbox.value = '2.' + (parseInt(numTextboxes) + 1) + ' ';
+		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
+		    newTextbox.style.width = '150px';
+		    newTextbox.style.textAlign = 'left';
+		    textboxesContainer.appendChild(newTextbox);
+		    form.elements['num_textboxes1'].value = parseInt(numTextboxes) + 1;
+		}
+		function addTextbox2() {
+        	var gridContainer = document.getElementById('grid-container');
+		    gridContainer.innerHTML = ''; // Clear previous grid
+		    document.getElementById('submitNeoButton').style.display = 'none'; 
+		    var form = document.querySelector('form');
+		    var numTextboxes = form.elements['num_textboxes2'].value;
+		    var textboxesContainer = document.getElementById('textboxes-container2');
+		    var newTextbox = document.createElement('input');
+		    newTextbox.type = 'text';
+		    newTextbox.name = 'textbox[]';
+		    newTextbox.value = '3.' + (parseInt(numTextboxes) + 1) + ' ';
+		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
+		    newTextbox.style.width = '150px';
+		    newTextbox.style.textAlign = 'left';
+		    textboxesContainer.appendChild(newTextbox);
+		    form.elements['num_textboxes2'].value = parseInt(numTextboxes) + 1;
+		}
+		function addTextbox3() {
+        	var gridContainer = document.getElementById('grid-container');
+		    gridContainer.innerHTML = ''; // Clear previous grid
+		    document.getElementById('submitNeoButton').style.display = 'none'; 
+		    var form = document.querySelector('form');
+		    var numTextboxes = form.elements['num_textboxes3'].value;
+		    var textboxesContainer = document.getElementById('textboxes-container3');
+		    var newTextbox = document.createElement('input');
+		    newTextbox.type = 'text';
+		    newTextbox.name = 'textbox[]';
+		    newTextbox.value = '4.' + (parseInt(numTextboxes) + 1) + ' ';
+		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
+		    newTextbox.style.width = '150px';
+		    newTextbox.style.textAlign = 'left';
+		    textboxesContainer.appendChild(newTextbox);
+		    form.elements['num_textboxes3'].value = parseInt(numTextboxes) + 1;
+		}
+		function addTextbox4() {
+        	var gridContainer = document.getElementById('grid-container');
+		    gridContainer.innerHTML = ''; // Clear previous grid
+		    document.getElementById('submitNeoButton').style.display = 'none'; 
+		    var form = document.querySelector('form');
+		    var numTextboxes = form.elements['num_textboxes4'].value;
+		    var textboxesContainer = document.getElementById('textboxes-container4');
+		    var newTextbox = document.createElement('input');
+		    newTextbox.type = 'text';
+		    newTextbox.name = 'textbox[]';
+		    newTextbox.value = '5.' + (parseInt(numTextboxes) + 1) + ' ';
+		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
+		    newTextbox.style.width = '150px';
+		    newTextbox.style.textAlign = 'left';
+		    textboxesContainer.appendChild(newTextbox);
+		    form.elements['num_textboxes4'].value = parseInt(numTextboxes) + 1;
+		}
+		function addTextbox5() {
+        	var gridContainer = document.getElementById('grid-container');
+		    gridContainer.innerHTML = ''; // Clear previous grid
+		    document.getElementById('submitNeoButton').style.display = 'none'; 
+		    var form = document.querySelector('form');
+		    var numTextboxes = form.elements['num_textboxes5'].value;
+		    var textboxesContainer = document.getElementById('textboxes-container5');
+		    var newTextbox = document.createElement('input');
+		    newTextbox.type = 'text';
+		    newTextbox.name = 'textbox[]';
+		    newTextbox.value = '6.' + (parseInt(numTextboxes) + 1) + ' ';
+		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
+		    newTextbox.style.width = '150px';
+		    newTextbox.style.textAlign = 'left';
+		    textboxesContainer.appendChild(newTextbox);
+		    form.elements['num_textboxes5'].value = parseInt(numTextboxes) + 1;
+		}
+		function addTextbox6() {
+        	var gridContainer = document.getElementById('grid-container');
+		    gridContainer.innerHTML = ''; // Clear previous grid
+		    document.getElementById('submitNeoButton').style.display = 'none'; 
+		    var form = document.querySelector('form');
+		    var numTextboxes = form.elements['num_textboxes6'].value;
+		    var textboxesContainer = document.getElementById('textboxes-container6');
+		    var newTextbox = document.createElement('input');
+		    newTextbox.type = 'text';
+		    newTextbox.name = 'textbox[]';
+		    newTextbox.value = '7.' + (parseInt(numTextboxes) + 1) + ' ';
+		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
+		    newTextbox.style.width = '150px';
+		    newTextbox.style.textAlign = 'left';
+		    textboxesContainer.appendChild(newTextbox);
+		    form.elements['num_textboxes6'].value = parseInt(numTextboxes) + 1;
+		}
+		function addTechnology() {
+			var gridContainer = document.getElementById('grid-container');
+		    gridContainer.innerHTML = ''; // Clear previous grid
+		    document.getElementById('submitNeoButton').style.display = 'none'; 
+		    var form = document.querySelector('form');
+		    var numTechboxes = form.elements['num_technologies'].value;
+		    var techboxesContainer = document.getElementById('technology-container');
+		    var newTextbox = document.createElement('input');
+		    newTextbox.type = 'text';
+		    newTextbox.name = 'techbox[]';
+		    newTextbox.value = 'Technology ' + (parseInt(numTechboxes) + 1);
+		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
+		    newTextbox.style.width = '200px';
+		    newTextbox.style.textAlign = 'left';
+		    techboxesContainer.appendChild(newTextbox);
+		    form.elements['num_technologies'].value = parseInt(numTechboxes) + 1;
+		}
+
+        document.querySelector('form').addEventListener('submit', function(event) {
+    		event.preventDefault();
+
+    		var gridContainer = document.getElementById('grid-container');
+		    gridContainer.innerHTML = ''; // Clear previous grid
+		    
+
+		    var textboxValues = Array.from(document.querySelectorAll('input[name="textbox[]"]')).map(function(textbox) {
+		        return textbox.value;
+		    });
+
+		    var selectedIndicators = Array.from(document.querySelectorAll('input[name="indicate[]"]:checked')).map(function(indicator) {
+		        return indicator.value;
+		    });
+
+		    var techboxValues = Array.from(document.querySelectorAll('input[name="techbox[]"]')).map(function(techbox) {
+		        return techbox.value;
+		    });
+
+		    var selectedTechs = Array.from(document.querySelectorAll('input[name="tech[]"]:checked')).map(function(tech) {
+		        return tech.value;
+		    });
+		
+		    var matrixValues = {
+		        ASP: [],
+		        RBC: [],
+		        MBR: [],
+		        MBBR: [],
+		        SBR: [],
+		        Ext_aeration: [],
+		        CW_SFV: [],
+		        CW_SSFH: [],
+		        CW_DPW: [],
+		        WS_ponds: [],
+		        D_ponds: []
+		    };
+
+		    for (var j = 0; j < selectedIndicators.length; j++) {
+		        var indicator = selectedIndicators[j];
+		        var values = [];
+
+		        if (indicator === "Capex") {
+		            values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		        } else if (indicator === "Opex") {
+		            values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		        } else if (indicator === "Revenue") {
+		            values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		        } else if (indicator === "LCC") {
+		            values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		        } else if (indicator === "GWP") {
+		            values = [40, 90, 12, 251, 252, 253, 254, 255, 256, 257, 258];
+		        } else if (indicator === "EuP") {
+		            values = [80, 50, 66, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000];
+		        } else if (indicator === "EcoSer") {
+		            values = [80, 50, 66, 1001, 2001, 3001, 4001, 5001, 6001, 7001, 8001];
+		        } else if (indicator === "WasRec") {
+		            values = [80, 50, 66, 101, 201, 301, 401, 501, 601, 701, 801];
+		        } else if (indicator === "EnePot") {
+		            values = [80, 50, 66, 1001, 2001, 3001, 4001, 5001, 6001, 7001, 8001];
+		        } else if (indicator === "ProPot") {
+		            values = [80, 50, 66, 11, 21, 31, 41, 51, 61, 71, 81];
+		        } else if (indicator === "SocUnskill") {
+		            values = [401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411];
+		        } else if (indicator === "SocAccept") {
+		            values = [1401, 1402, 1403, 1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411];
+		        } else if (indicator === "SocPart") {
+		            values = [2401, 2402, 2403, 2404, 2405, 2406, 2407, 2408, 2409, 2410, 2411];
+		        } else if (indicator === "R_reli") {
+		            values = [5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111];
+		        } else if (indicator === "R_dura") {
+		            values = [5201, 5202, 5203, 5204, 5205, 5206, 5207, 5208, 5209, 5210, 5211];
+		        } else if (indicator === "R_flex") {
+		            values = [5301, 5302, 5303, 5304, 5305, 5306, 5307, 5308, 5309, 5310, 5311];
+		        } else if (indicator === "R_repl") {
+		            values = [5401, 5402, 5403, 5404, 5405, 5406, 5407, 5408, 5409, 5410, 5411];
+		        } else if (indicator === "BOD") {
+		            values = [6101, 6102, 6103, 6104, 6105, 6106, 6107, 6108, 6109, 6110, 6111];
+		        } else if (indicator === "COD") {
+		            values = [6201, 6202, 6203, 6204, 6205, 6206, 6207, 6208, 6209, 6210, 6211];
+		        } else if (indicator === "Nitro") {
+		            values = [6301, 6302, 6303, 6304, 6305, 6306, 6307, 6308, 6309, 6310, 6311];
+		        } else if (indicator === "Phosph") {
+		            values = [6401, 6402, 6403, 6404, 6405, 6406, 6407, 6408, 6409, 6410, 6411];
+		        } else if (indicator === "Em_cont") {
+		            values = [6501, 6502, 6503, 6504, 6505, 6506, 6507, 6508, 6509, 6510, 6511];
+		        } else if (indicator === "Lan_suit") {
+		            values = [6601, 6602, 6603, 6604, 6605, 6606, 6607, 6608, 6609, 6610, 6611];
+		        } 
+
+		        matrixValues.ASP.push(values[0]);
+		        matrixValues.RBC.push(values[1]);
+		        matrixValues.MBR.push(values[2]);
+		        matrixValues.MBBR.push(values[3]);
+		        matrixValues.SBR.push(values[4]);
+		        matrixValues.Ext_aeration.push(values[5]);
+		        matrixValues.CW_SFV.push(values[6]);
+		        matrixValues.CW_SSFH.push(values[7]);
+		        matrixValues.CW_DPW.push(values[8]);
+		        matrixValues.WS_ponds.push(values[9]);
+		        matrixValues.D_ponds.push(values[10]);
+		    }
+		    //--------------------------------------------------------------------------------
+		    var wtmat = {
+			    A0B0C0: [],
+				A1B1C1: [],
+				A1B1C2: [],
+				A1B1C3: [],
+				A1B1C4: [],
+				A1B2C1: [],
+				A1B2C2: [],
+				A1B2C3: [],
+				A1B2C4: [],
+				A1B3C1: [],
+				A1B3C2: [],
+				A1B3C3: [],
+				A1B3C4: [],
+				A2B1C1: [],
+				A2B1C2: [],
+				A2B1C3: [],
+				A2B1C4: [],
+				A2B2C1: [],
+				A2B2C2: [],
+				A2B2C3: [],
+				A2B2C4: [],
+				A2B3C1: [],
+				A2B3C2: [],
+				A2B3C3: [],
+				A2B3C4: [],
+				A3B1C1: [],
+				A3B1C2: [],
+				A3B1C3: [],
+				A3B1C4: [],
+				A3B2C1: [],
+				A3B2C2: [],
+				A3B2C3: [],
+				A3B2C4: [],
+				A3B3C1: [],
+				A3B3C2: [],
+				A3B3C3: [],
+				A3B3C4: []
+			};
+
+			for (var j = 0; j < selectedIndicators.length; j++) {
+		        var indicator = selectedIndicators[j];
+		        var values = [];
+
+		        if (indicator === "Capex") {
+		            values = [0, 11101, 11201, 11301, 11401, 12101, 12201, 12301, 12401, 13101, 13201, 13301, 13401, 21101, 21201, 21301, 21401, 22101, 22201, 22301, 22401, 23101, 23201, 23301, 23401, 31101, 31201, 31301, 31401, 32101, 32201, 32301, 32401, 33101, 33201, 33301, 33401];
+		        } else if (indicator === "Opex") {
+		            values = [0, 11102, 11202, 11302, 11402, 12102, 12202, 12302, 12402, 13102, 13202, 13302, 13402, 21102, 21202, 21302, 21402, 22102, 22202, 22302, 22402, 23102, 23202, 23302, 23402, 31102, 31202, 31302, 31402, 32102, 32202, 32302, 32402, 33102, 33202, 33302, 33402];
+		        } else if (indicator === "Revenue") {
+		            values = [0, 11103, 11203, 11303, 11403, 12103, 12203, 12303, 12403, 13103, 13203, 13303, 13403, 21103, 21203, 21303, 21403, 22103, 22203, 22303, 22403, 23103, 23203, 23303, 23403, 31103, 31203, 31303, 31403, 32103, 32203, 32303, 32403, 33103, 33203, 33303, 33403];
+		        } else if (indicator === "LCC") {
+		            values = [0, 11104, 11204, 11304, 11404, 12104, 12204, 12304, 12404, 13104, 13204, 13304, 13404, 21104, 21204, 21304, 21404, 22104, 22204, 22304, 22404, 23104, 23204, 23304, 23404, 31104, 31204, 31304, 31404, 32104, 32204, 32304, 32404, 33104, 33204, 33304, 33404];
+		        } else if (indicator === "GWP") {
+		            values = [0, 11105, 11205, 11305, 11405, 12105, 12205, 12305, 12405, 13105, 13205, 13305, 13405, 21105, 21205, 21305, 21405, 22105, 22205, 22305, 22405, 23105, 23205, 23305, 23405, 31105, 31205, 31305, 31405, 32105, 32205, 32305, 32405, 33105, 33205, 33305, 33405];
+		        } else if (indicator === "EuP") {
+		            values = [0, 11106, 11206, 11306, 11406, 12106, 12206, 12306, 12406, 13106, 13206, 13306, 13406, 21106, 21206, 21306, 21406, 22106, 22206, 22306, 22406, 23106, 23206, 23306, 23406, 31106, 31206, 31306, 31406, 32106, 32206, 32306, 32406, 33106, 33206, 33306, 33406];
+		        } else if (indicator === "EcoSer") {
+		            values = [0, 11107, 11207, 11307, 11407, 12107, 12207, 12307, 12407, 13107, 13207, 13307, 13407, 21107, 21207, 21307, 21407, 22107, 22207, 22307, 22407, 23107, 23207, 23307, 23407, 31107, 31207, 31307, 31407, 32107, 32207, 32307, 32407, 33107, 33207, 33307, 33407];
+		        } else if (indicator === "WasRec") {
+		            values = [0, 11108, 11208, 11308, 11408, 12108, 12208, 12308, 12408, 13108, 13208, 13308, 13408, 21108, 21208, 21308, 21408, 22108, 22208, 22308, 22408, 23108, 23208, 23308, 23408, 31108, 31208, 31308, 31408, 32108, 32208, 32308, 32408, 33108, 33208, 33308, 33408];
+		        } else if (indicator === "EnePot") {
+		            values = [0, 11109, 11209, 11309, 11409, 12109, 12209, 12309, 12409, 13109, 13209, 13309, 13409, 21109, 21209, 21309, 21409, 22109, 22209, 22309, 22409, 23109, 23209, 23309, 23409, 31109, 31209, 31309, 31409, 32109, 32209, 32309, 32409, 33109, 33209, 33309, 33409];
+		        } else if (indicator === "ProPot") {
+		            values = [0, 11110, 11210, 11310, 11410, 12110, 12210, 12310, 12410, 13110, 13210, 13310, 13410, 21110, 21210, 21310, 21410, 22110, 22210, 22310, 22410, 23110, 23210, 23310, 23410, 31110, 31210, 31310, 31410, 32110, 32210, 32310, 32410, 33110, 33210, 33310, 33410];
+		        } else if (indicator === "SocUnskill") {
+		            values = [0, 11111, 11211, 11311, 11411, 12111, 12211, 12311, 12411, 13111, 13211, 13311, 13411, 21111, 21211, 21311, 21411, 22111, 22211, 22311, 22411, 23111, 23211, 23311, 23411, 31111, 31211, 31311, 31411, 32111, 32211, 32311, 32411, 33111, 33211, 33311, 33411];
+		        } else if (indicator === "SocAccept") {
+		            values = [0, 11112, 11212, 11312, 11412, 12112, 12212, 12312, 12412, 13112, 13212, 13312, 13412, 21112, 21212, 21312, 21412, 22112, 22212, 22312, 22412, 23112, 23212, 23312, 23412, 31112, 31212, 31312, 31412, 32112, 32212, 32312, 32412, 33112, 33212, 33312, 33412];
+		        } else if (indicator === "SocPart") {
+		            values = [0, 11113, 11213, 11313, 11413, 12113, 12213, 12313, 12413, 13113, 13213, 13313, 13413, 21113, 21213, 21313, 21413, 22113, 22213, 22313, 22413, 23113, 23213, 23313, 23413, 31113, 31213, 31313, 31413, 32113, 32213, 32313, 32413, 33113, 33213, 33313, 33413];
+		        } else if (indicator === "R_reli") {
+		            values = [0, 11114, 11214, 11314, 11414, 12114, 12214, 12314, 12414, 13114, 13214, 13314, 13414, 21114, 21214, 21314, 21414, 22114, 22214, 22314, 22414, 23114, 23214, 23314, 23414, 31114, 31214, 31314, 31414, 32114, 32214, 32314, 32414, 33114, 33214, 33314, 33414];
+		        } else if (indicator === "R_dura") {
+		            values = [0, 11115, 11215, 11315, 11415, 12115, 12215, 12315, 12415, 13115, 13215, 13315, 13415, 21115, 21215, 21315, 21415, 22115, 22215, 22315, 22415, 23115, 23215, 23315, 23415, 31115, 31215, 31315, 31415, 32115, 32215, 32315, 32415, 33115, 33215, 33315, 33415];
+		        } else if (indicator === "R_flex") {
+		            values = [0, 11116, 11216, 11316, 11416, 12116, 12216, 12316, 12416, 13116, 13216, 13316, 13416, 21116, 21216, 21316, 21416, 22116, 22216, 22316, 22416, 23116, 23216, 23316, 23416, 31116, 31216, 31316, 31416, 32116, 32216, 32316, 32416, 33116, 33216, 33316, 33416];
+		        } else if (indicator === "R_repl") {
+		            values = [0, 11117, 11217, 11317, 11417, 12117, 12217, 12317, 12417, 13117, 13217, 13317, 13417, 21117, 21217, 21317, 21417, 22117, 22217, 22317, 22417, 23117, 23217, 23317, 23417, 31117, 31217, 31317, 31417, 32117, 32217, 32317, 32417, 33117, 33217, 33317, 33417];
+		        } else if (indicator === "BOD") {
+		            values = [0, 11118, 11218, 11318, 11418, 12118, 12218, 12318, 12418, 13118, 13218, 13318, 13418, 21118, 21218, 21318, 21418, 22118, 22218, 22318, 22418, 23118, 23218, 23318, 23418, 31118, 31218, 31318, 31418, 32118, 32218, 32318, 32418, 33118, 33218, 33318, 33418];
+		        } else if (indicator === "COD") {
+		            values = [0, 11119, 11219, 11319, 11419, 12119, 12219, 12319, 12419, 13119, 13219, 13319, 13419, 21119, 21219, 21319, 21419, 22119, 22219, 22319, 22419, 23119, 23219, 23319, 23419, 31119, 31219, 31319, 31419, 32119, 32219, 32319, 32419, 33119, 33219, 33319, 33419];
+		        } else if (indicator === "Nitro") {
+		            values = [0, 11120, 11220, 11320, 11420, 12120, 12220, 12320, 12420, 13120, 13220, 13320, 13420, 21120, 21220, 21320, 21420, 22120, 22220, 22320, 22420, 23120, 23220, 23320, 23420, 31120, 31220, 31320, 31420, 32120, 32220, 32320, 32420, 33120, 33220, 33320, 33420];
+		        } else if (indicator === "Phosph") {
+		            values = [0, 11121, 11221, 11321, 11421, 12121, 12221, 12321, 12421, 13121, 13221, 13321, 13421, 21121, 21221, 21321, 21421, 22121, 22221, 22321, 22421, 23121, 23221, 23321, 23421, 31121, 31221, 31321, 31421, 32121, 32221, 32321, 32421, 33121, 33221, 33321, 33421];
+		        } else if (indicator === "Em_cont") {
+		            values = [0, 11122, 11222, 11322, 11422, 12122, 12222, 12322, 12422, 13122, 13222, 13322, 13422, 21122, 21222, 21322, 21422, 22122, 22222, 22322, 22422, 23122, 23222, 23322, 23422, 31122, 31222, 31322, 31422, 32122, 32222, 32322, 32422, 33122, 33222, 33322, 33422];
+		        } else if (indicator === "Lan_suit") {
+		            values = [0, 11123, 11223, 11323, 11423, 12123, 12223, 12323, 12423, 13123, 13223, 13323, 13423, 21123, 21223, 21323, 21423, 22123, 22223, 22323, 22423, 23123, 23223, 23323, 23423, 31123, 31223, 31323, 31423, 32123, 32223, 32323, 32423, 33123, 33223, 33323, 33423];
+		        } 
+
+		        wtmat.A0B0C0.push(values[0]);
+				wtmat.A1B1C1.push(values[1]);
+				wtmat.A1B1C2.push(values[2]);
+				wtmat.A1B1C3.push(values[3]);
+				wtmat.A1B1C4.push(values[4]);
+				wtmat.A1B2C1.push(values[5]);
+				wtmat.A1B2C2.push(values[6]);
+				wtmat.A1B2C3.push(values[7]);
+				wtmat.A1B2C4.push(values[8]);
+				wtmat.A1B3C1.push(values[9]);
+				wtmat.A1B3C2.push(values[10]);
+				wtmat.A1B3C3.push(values[11]);
+				wtmat.A1B3C4.push(values[12]);
+				wtmat.A2B1C1.push(values[13]);
+				wtmat.A2B1C2.push(values[14]);
+				wtmat.A2B1C3.push(values[15]);
+				wtmat.A2B1C4.push(values[16]);
+				wtmat.A2B2C1.push(values[17]);
+				wtmat.A2B2C2.push(values[18]);
+				wtmat.A2B2C3.push(values[19]);
+				wtmat.A2B2C4.push(values[20]);
+				wtmat.A2B3C1.push(values[21]);
+				wtmat.A2B3C2.push(values[22]);
+				wtmat.A2B3C3.push(values[23]);
+				wtmat.A2B3C4.push(values[24]);
+				wtmat.A3B1C1.push(values[25]);
+				wtmat.A3B1C2.push(values[26]);
+				wtmat.A3B1C3.push(values[27]);
+				wtmat.A3B1C4.push(values[28]);
+				wtmat.A3B2C1.push(values[29]);
+				wtmat.A3B2C2.push(values[30]);
+				wtmat.A3B2C3.push(values[31]);
+				wtmat.A3B2C4.push(values[32]);
+				wtmat.A3B3C1.push(values[33]);
+				wtmat.A3B3C2.push(values[34]);
+				wtmat.A3B3C3.push(values[35]);
+				wtmat.A3B3C4.push(values[36]);
+		    }
+		    //-----------------------------------------------------------------Criteria-------
+		    const noCriteriaRadio = document.getElementById('opt_criteria1');
+			const settingSelect = document.getElementById('settingSelect');
+			const landSelect = document.getElementById('landSelect');
+			const enduseSelect = document.getElementById('enduseSelect');
+
+			if (noCriteriaRadio.checked) {
+				output.textContent = 'A0B0C0';
+			} else {
+			    const settingValue = settingSelect.value;
+			    const landValue = landSelect.value;
+			    const enduseValue = enduseSelect.value;
+			    output.textContent = `${settingValue}${landValue}${enduseValue}`;
+			}
+    		
+			//------------------------------------------------------------------------
+
+
+
+		    var table = document.createElement('table');
+		    var headerRow = document.createElement('tr');
+
+		    var row;
+		    row=0;
+		    // Create header row with indicator names
+		    var indicatorHeaders = document.createElement('th');
+		    var valueInput =document.createElement('input');
+		    valueInput.type = 'textbox';
+		    valueInput.value = 'Indicators';
+		    valueInput.name = 'fmatrix[' + row + '][]';
+		    valueInput.style.width = '100px';
+		    valueInput.disabled=true;
+		    indicatorHeaders.appendChild(valueInput);
+		    headerRow.appendChild(indicatorHeaders);
+
+		    for (var k = 0; k < selectedIndicators.length; k++) {
+		        var indicatorHeader = document.createElement('th');
+		        var valueInput = document.createElement('input');
+		        valueInput.type = 'textbox';
+		        valueInput.value = selectedIndicators[k];
+		        valueInput.name = 'fmatrix[' + row + '][]';
+		        valueInput.style.width = '75px';
+		        valueInput.disabled=true;
+		        indicatorHeader.appendChild(valueInput);
+		        headerRow.appendChild(indicatorHeader);
+		    }
+
+		    // Create header columns for the textboxes
+		    for (var l = 0; l < textboxValues.length; l++) {
+		        var textboxHeader = document.createElement('th');
+		        var valueInput = document.createElement('input');
+		        valueInput.type='textbox';
+		        valueInput.value = textboxValues[l];
+		        valueInput.name = 'fmatrix[' + row + '][]';
+		        valueInput.style.width = '75px';
+		        valueInput.disabled=true;
+		        textboxHeader.appendChild(valueInput);
+		        headerRow.appendChild(textboxHeader);
+		    }
+
+		    table.appendChild(headerRow);
+
+		    // Create rows for each tech and populate values
+		    for (var m = 0; m < selectedTechs.length; m++) {
+		    	row=row+1;
+		        var techRow = document.createElement('tr');
+		        var techCell = document.createElement('td');
+		        var valueInput = document.createElement('input');
+		        valueInput.type='textbox';
+		        valueInput.value = selectedTechs[m];
+		        valueInput.name = 'fmatrix[' + row + '][]';
+		        valueInput.style.width = '100px';
+		        valueInput.disabled=true;
+		        techCell.appendChild(valueInput);
+		        techRow.appendChild(techCell);
+
+		        for (var n = 0; n < selectedIndicators.length; n++) {
+		            var valueCell = document.createElement('td');
+		            var valueInput = document.createElement('input');
+		            valueInput.type = 'number';
+		            valueInput.value = matrixValues[selectedTechs[m]][n];
+		            valueInput.name = 'fmatrix[' + row + '][]';
+		        	valueInput.style.width = '75px';
+		            valueCell.appendChild(valueInput);
+		            techRow.appendChild(valueCell);
+		        }
+
+		        // Add cells for the textboxes
+		        for (var p = 0; p < textboxValues.length; p++) {
+		            var textboxCell = document.createElement('td');
+		            var textboxInput = document.createElement('input');
+		            textboxInput.type = 'number';
+		            textboxInput.value = '0';
+		            textboxInput.name = 'fmatrix[' + row + '][]';
+		            textboxInput.style.width = '75px';
+		            textboxCell.appendChild(textboxInput);
+		            techRow.appendChild(textboxCell);
+		        }
+
+		        table.appendChild(techRow);
+		    }
+
+		    for (var m = 0; m < techboxValues.length; m++) {
+		    	row=row+1;
+		        var techRow = document.createElement('tr');
+		        var techCell = document.createElement('td');
+		        var valueInput = document.createElement('input');
+		        valueInput.type = 'textbox';
+		        valueInput.value = techboxValues[m];
+		        valueInput.name = 'fmatrix[' + row + '][]';
+		        valueInput.style.width = '100px';
+		        valueInput.disabled = true;
+		        techCell.appendChild(valueInput);
+		        techRow.appendChild(techCell);
+
+		        for (var n = 0; n < selectedIndicators.length; n++) {
+		            var valueCell = document.createElement('td');
+		            var valueInput = document.createElement('input');
+		            valueInput.type = 'number';
+		            valueInput.value = '0';
+		            valueInput.name = 'fmatrix[' + row + '][]';
+		        	valueInput.style.width = '75px';
+		            valueCell.appendChild(valueInput);
+		            techRow.appendChild(valueCell);
+		        }
+
+		        // Add cells for the textboxes
+		        for (var p = 0; p < textboxValues.length; p++) {
+		            var textboxCell = document.createElement('td');
+		            var textboxInput = document.createElement('input');
+		            textboxInput.type = 'number';
+		            textboxInput.value = '0';
+		            textboxInput.name = 'fmatrix[' + row + '][]';
+		            textboxInput.style.width = '75px';
+		            textboxCell.appendChild(textboxInput);
+		            techRow.appendChild(textboxCell);
+		        }
+
+		        table.appendChild(techRow);
+		    }
+		    for (var m = 0; m < 1; m++) {
+		    	row=row+1;
+		        var techRow = document.createElement('tr');
+		        var techCell = document.createElement('td');
+		        var valueInput = document.createElement('input');
+		        valueInput.type = 'textbox';
+		        valueInput.value = 'Weights';
+		        valueInput.name = 'fmatrix[' + row + '][]';
+		        valueInput.style.width = '100px';
+		        valueInput.disabled = true;
+		        techCell.appendChild(valueInput);
+		        techRow.appendChild(techCell);
+
+		        for (var n = 0; n < selectedIndicators.length; n++) {
+		            var valueCell = document.createElement('td');
+		            var valueInput = document.createElement('input');
+		            valueInput.type = 'number';
+		            valueInput.value = '0';//wtmat[2][3];
+		            valueInput.name = 'fmatrix[' + row + '][]';
+		        	valueInput.style.width = '75px';
+		            valueCell.appendChild(valueInput);
+		            techRow.appendChild(valueCell);
+		        }
+
+		        // Add cells for the textboxes
+		        for (var p = 0; p < textboxValues.length; p++) {
+		            var textboxCell = document.createElement('td');
+		            var textboxInput = document.createElement('input');
+		            textboxInput.type = 'number';
+		            textboxInput.value = '0';
+		            textboxInput.name = 'fmatrix[' + row + '][]';
+		        	textboxInput.style.width = '75px';
+		            textboxCell.appendChild(textboxInput);
+		            techRow.appendChild(textboxCell);
+		        }
+
+		        table.appendChild(techRow);
+		    }
+		    for (var m = 0; m < 1; m++) {
+		    	row=row+1;
+		        var techRow = document.createElement('tr');
+		        var techCell = document.createElement('td');
+		        var valueInput = document.createElement('input');
+		        valueInput.type = 'textbox';
+		        valueInput.value = '1-Cost 0-Benefit';
+		        valueInput.name = 'fmatrix[' + row + '][]';
+		        valueInput.style.width = '100px';
+		        valueInput.disabled = true;
+		        techCell.appendChild(valueInput);
+		        techRow.appendChild(techCell);
+
+		        for (var n = 0; n < selectedIndicators.length; n++) {
+		            var valueCell = document.createElement('td');
+		            var valueInput = document.createElement('input');
+		            valueInput.type = 'number';
+		            valueInput.min = '0';
+		            valueInput.max = '1'
+		            valueInput.value = '0';
+		            valueInput.name = 'fmatrix[' + row + '][]';
+		        	valueInput.style.width = '75px';
+		            valueCell.appendChild(valueInput);
+		            techRow.appendChild(valueCell);
+		        }
+
+		        // Add cells for the textboxes
+		        for (var p = 0; p < textboxValues.length; p++) {
+		            var textboxCell = document.createElement('td');
+		            var textboxInput = document.createElement('input');
+		            textboxInput.type = 'number';
+		            textboxInput.min = '0';
+		            textboxInput.max='1';
+		            textboxInput.value = '0';
+		            textboxInput.name = 'fmatrix[' + row + '][]';
+		        	textboxInput.style.width = '75px';
+		            textboxCell.appendChild(textboxInput);
+		            techRow.appendChild(textboxCell);
+		        }
+
+		        table.appendChild(techRow);
+		    }
+
+		    gridContainer.appendChild(table);
+		    if(selectedIndicators.length+textboxValues.length >0 && selectedTechs.length+techboxValues.length >1){
+		    	var submitNeoButton = document.getElementById('submitNeoButton');
+            	submitNeoButton.style.display = 'block';
+        	}
+    });
+
+		document.getElementById('submitNeoButton').addEventListener('click', function(event) {
+	    	event.preventDefault();
+	    
+		    // Retrieve the values of textboxji[] inputs
+		    var fmatrixInputs = Array.from(document.querySelectorAll('input[name^="fmatrix"]'));
+		    
+		    var fmatrix = [];
+		    fmatrixInputs.forEach(function(input) {
+		    	var rowId = input.name.match(/\[(\d+)\]/)[1];
+		    	var colValue = input.value;
+		    if (!fmatrix[rowId]) {
+		      fmatrix[rowId] = [];
+		    }
+	    		fmatrix[rowId].push(colValue);
+	  		});
+
+		    var outputElement = document.getElementById("newmat");
+		    outputElement.innerHTML = JSON.stringify(fmatrix, null, 2);
+		});
+		document.getElementById('submitNeoButton').style.display = 'none'; 
+		//----------------------------------------------------------------------------------------------------
+		const criteriaRadio = document.getElementById('opt_criteria2');
+		const noCriteriaRadio = document.getElementById('opt_criteria1');
+		const settingSelect = document.getElementById('settingSelect');
+		const landSelect = document.getElementById('landSelect');
+		const enduseSelect = document.getElementById('enduseSelect');
+
+		criteriaRadio.addEventListener('change', function() {
+		  const isChecked = this.checked;
+		  settingSelect.disabled = !isChecked;
+		  landSelect.disabled = !isChecked;
+		  enduseSelect.disabled = !isChecked;
+		});
+
+		noCriteriaRadio.addEventListener('change', function() {
+		  const isChecked = this.checked;
+		  settingSelect.disabled = isChecked;
+		  landSelect.disabled = isChecked;
+		  enduseSelect.disabled = isChecked;
+		});
+		const form = document.querySelector('form');
+		const output = document.getElementById('output');
+		//----------------------------------------------------------------------------------------------------
+    </script>
+</body>
+</html>
