@@ -142,19 +142,19 @@
 				</td>
 			</tr>
 		</table>
-		<h3><b>Select Criteria</b></h3>
+		<h3><b>Select Scenario</b></h3>
 		<div>
 			<table>
 			    <tr>
 			        <td>
 			            <input type='radio' id='opt_criteria1' name='opt_crit' value='opt_criteria1' checked>
-			            <label for='opt_criteria1'>No Criteria</label>
+			            <label for='opt_criteria1'>No Scenario</label>
 			        </td>
 			    </tr>
 			    <tr>
 			        <td>
 			            <input type='radio' id='opt_criteria2' name='opt_crit' value='opt_criteria2'>
-			            <label for='opt_criteria2'>Criteria</label>
+			            <label for='opt_criteria2'>Scenario Parameters</label>
 			        </td>
 			        <td>
 			            <table>
@@ -162,25 +162,26 @@
 			                    <td>
 			                        <label>Setting</label><br>
 			                        <select id="settingSelect" disabled>
-			                            <option value="A1">Setting 1</option>
-			                            <option value="A2">Setting 2</option>
-			                            <option value="A3">Setting 3</option>
+			                            <option value="A1">Urban Area</option>
+			                            <option value="A2">Suburban Area</option>
+			                            <option value="A3">Rural Area</option>
 			                        </select>
 			                    </td>
 			                    <td>
-			                        <label>Land</label><br>
+			                        <label>Land Availability</label><br>
 			                        <select id="landSelect" disabled>
-			                            <option value="B1">Land 1</option>
-			                            <option value="B2">Land 2</option>
-			                            <option value="B3">Land 3</option>
+			                            <option value="B1">Low</option>
+			                            <option value="B2">Medium</option>
+			                            <option value="B3">High</option>
 			                        </select>
 			                    </td>
 			                    <td>
-			                        <label>Enduse</label><br>
+			                        <label>End use</label><br>
 			                        <select id="enduseSelect" disabled>
-			                            <option value="C1">Enduse 1</option>
-			                            <option value="C2">Enduse 2</option>
-			                            <option value="C3">Enduse 3</option>
+			                            <option value="C1">To surface water body</option>
+			                            <option value="C2">For Irrigation/gardening</option>
+			                            <option value="C3">For Toilet Flushing</option>
+			                            <option value="C4">For High End/Industrial Use</option>
 			                        </select>
 			                    </td>
 			                </tr>
@@ -188,7 +189,6 @@
 			        </td>
 			    </tr>
 			</table>
-<input type="submit" id="selectopt" name="">
 </div>
 <div>
     <pre id="output"></pre>
@@ -524,19 +524,19 @@
 		        var values = [];
 
 		        if (indicator === "Capex") {
-		            values = [0, 11101, 11201, 11301, 11401, 12101, 12201, 12301, 12401, 13101, 13201, 13301, 13401, 21101, 21201, 21301, 21401, 22101, 22201, 22301, 22401, 23101, 23201, 23301, 23401, 31101, 31201, 31301, 31401, 32101, 32201, 32301, 32401, 33101, 33201, 33301, 33401];
+		            values = [10, 30, 60, 80, 40, 40, 40, 20, 90, 40, 30, 60, 60, 30, 50, 50, 90, 50, 60, 50, 10, 80, 30, 50, 40, 10, 80, 40, 20, 70, 90, 60, 90, 30, 30, 70, 60];
 		        } else if (indicator === "Opex") {
-		            values = [0, 11102, 11202, 11302, 11402, 12102, 12202, 12302, 12402, 13102, 13202, 13302, 13402, 21102, 21202, 21302, 21402, 22102, 22202, 22302, 22402, 23102, 23202, 23302, 23402, 31102, 31202, 31302, 31402, 32102, 32202, 32302, 32402, 33102, 33202, 33302, 33402];
+		            values = [10, 70, 30, 50, 40, 40, 90, 90, 10, 80, 20, 30, 90, 40, 40, 50, 90, 30, 10, 80, 50, 90, 70, 30, 60, 30, 60, 80, 10, 20, 50, 20, 90, 60, 80, 70, 70];
 		        } else if (indicator === "Revenue") {
-		            values = [0, 11103, 11203, 11303, 11403, 12103, 12203, 12303, 12403, 13103, 13203, 13303, 13403, 21103, 21203, 21303, 21403, 22103, 22203, 22303, 22403, 23103, 23203, 23303, 23403, 31103, 31203, 31303, 31403, 32103, 32203, 32303, 32403, 33103, 33203, 33303, 33403];
+		            values = [10, 80, 40, 20, 40, 60, 50, 60, 70, 90, 40, 80, 70, 90, 40, 50, 80, 90, 90, 50, 40, 60, 90, 50, 10, 20, 60, 10, 80, 10, 20, 40, 20, 40, 70, 50, 80];
 		        } else if (indicator === "LCC") {
-		            values = [0, 11104, 11204, 11304, 11404, 12104, 12204, 12304, 12404, 13104, 13204, 13304, 13404, 21104, 21204, 21304, 21404, 22104, 22204, 22304, 22404, 23104, 23204, 23304, 23404, 31104, 31204, 31304, 31404, 32104, 32204, 32304, 32404, 33104, 33204, 33304, 33404];
+		            values = [10, 20, 30, 10, 60, 50, 10, 90, 20, 20, 50, 40, 30, 80, 60, 40, 10, 50, 30, 70, 90, 20, 60, 30, 70, 30, 60, 50, 70, 50, 80, 20, 90, 60, 70, 80, 40];
 		        } else if (indicator === "GWP") {
-		            values = [0, 11105, 11205, 11305, 11405, 12105, 12205, 12305, 12405, 13105, 13205, 13305, 13405, 21105, 21205, 21305, 21405, 22105, 22205, 22305, 22405, 23105, 23205, 23305, 23405, 31105, 31205, 31305, 31405, 32105, 32205, 32305, 32405, 33105, 33205, 33305, 33405];
+		            values = [10, 50, 40, 30, 90, 90, 10, 80, 90, 80, 70, 10, 70, 50, 80, 40, 20, 10, 70, 20, 70, 50, 60, 60, 60, 20, 10, 20, 90, 50, 20, 40, 30, 30, 90, 80, 50];
 		        } else if (indicator === "EuP") {
-		            values = [0, 11106, 11206, 11306, 11406, 12106, 12206, 12306, 12406, 13106, 13206, 13306, 13406, 21106, 21206, 21306, 21406, 22106, 22206, 22306, 22406, 23106, 23206, 23306, 23406, 31106, 31206, 31306, 31406, 32106, 32206, 32306, 32406, 33106, 33206, 33306, 33406];
+		            values = [10, 80, 60, 10, 80, 90, 10, 80, 30, 60, 80, 20, 40, 30, 50, 40, 40, 70, 30, 30, 60, 80, 40, 10, 40, 30, 90, 40, 30, 20, 50, 80, 40, 80, 30, 70, 60];
 		        } else if (indicator === "EcoSer") {
-		            values = [0, 11107, 11207, 11307, 11407, 12107, 12207, 12307, 12407, 13107, 13207, 13307, 13407, 21107, 21207, 21307, 21407, 22107, 22207, 22307, 22407, 23107, 23207, 23307, 23407, 31107, 31207, 31307, 31407, 32107, 32207, 32307, 32407, 33107, 33207, 33307, 33407];
+		            values = [10, 80, 80, 50, 90, 60, 40, 90, 60, 60, 50, 60, 80, 70, 10, 40, 10, 50, 70, 10, 60, 70, 50, 60, 50, 90, 40, 60, 50, 90, 80, 50, 30, 20, 40, 10, 70];
 		        } else if (indicator === "WasRec") {
 		            values = [0, 11108, 11208, 11308, 11408, 12108, 12208, 12308, 12408, 13108, 13208, 13308, 13408, 21108, 21208, 21308, 21408, 22108, 22208, 22308, 22408, 23108, 23208, 23308, 23408, 31108, 31208, 31308, 31408, 32108, 32208, 32308, 32408, 33108, 33208, 33308, 33408];
 		        } else if (indicator === "EnePot") {
@@ -609,6 +609,139 @@
 				wtmat.A3B3C3.push(values[35]);
 				wtmat.A3B3C4.push(values[36]);
 		    }
+		    //------------------------------------------------------------------------
+		    var cbmat = {
+			    A0B0C0: [],
+				A1B1C1: [],
+				A1B1C2: [],
+				A1B1C3: [],
+				A1B1C4: [],
+				A1B2C1: [],
+				A1B2C2: [],
+				A1B2C3: [],
+				A1B2C4: [],
+				A1B3C1: [],
+				A1B3C2: [],
+				A1B3C3: [],
+				A1B3C4: [],
+				A2B1C1: [],
+				A2B1C2: [],
+				A2B1C3: [],
+				A2B1C4: [],
+				A2B2C1: [],
+				A2B2C2: [],
+				A2B2C3: [],
+				A2B2C4: [],
+				A2B3C1: [],
+				A2B3C2: [],
+				A2B3C3: [],
+				A2B3C4: [],
+				A3B1C1: [],
+				A3B1C2: [],
+				A3B1C3: [],
+				A3B1C4: [],
+				A3B2C1: [],
+				A3B2C2: [],
+				A3B2C3: [],
+				A3B2C4: [],
+				A3B3C1: [],
+				A3B3C2: [],
+				A3B3C3: [],
+				A3B3C4: []
+			};
+
+			for (var j = 0; j < selectedIndicators.length; j++) {
+		        var indicator = selectedIndicators[j];
+		        var values = [];
+
+		        if (indicator === "Capex") {
+		            values = [0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0];
+		        } else if (indicator === "Opex") {
+		            values = [0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1];
+		        } else if (indicator === "Revenue") {
+		            values = [0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1];
+		        } else if (indicator === "LCC") {
+		            values = [0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0];
+		        } else if (indicator === "GWP") {
+		            values = [0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1];
+		        } else if (indicator === "EuP") {
+		            values = [0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0];
+		        } else if (indicator === "EcoSer") {
+		            values = [0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0];
+		        } else if (indicator === "WasRec") {
+		            values = [0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1];
+		        } else if (indicator === "EnePot") {
+		            values = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0];
+		        } else if (indicator === "ProPot") {
+		            values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0];
+		        } else if (indicator === "SocUnskill") {
+		            values = [0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1];
+		        } else if (indicator === "SocAccept") {
+		            values = [0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0];
+		        } else if (indicator === "SocPart") {
+		            values = [0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0];
+		        } else if (indicator === "R_reli") {
+		            values = [0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0];
+		        } else if (indicator === "R_dura") {
+		            values = [0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0];
+		        } else if (indicator === "R_flex") {
+		            values = [0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0];
+		        } else if (indicator === "R_repl") {
+		            values = [0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0];
+		        } else if (indicator === "BOD") {
+		            values = [0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0];
+		        } else if (indicator === "COD") {
+		            values = [0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0];
+		        } else if (indicator === "Nitro") {
+		            values = [0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0];
+		        } else if (indicator === "Phosph") {
+		            values = [0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1];
+		        } else if (indicator === "Em_cont") {
+		            values = [0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1];
+		        } else if (indicator === "Lan_suit") {
+		            values = [0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1];
+		        } 
+
+		        cbmat.A0B0C0.push(values[0]);
+				cbmat.A1B1C1.push(values[1]);
+				cbmat.A1B1C2.push(values[2]);
+				cbmat.A1B1C3.push(values[3]);
+				cbmat.A1B1C4.push(values[4]);
+				cbmat.A1B2C1.push(values[5]);
+				cbmat.A1B2C2.push(values[6]);
+				cbmat.A1B2C3.push(values[7]);
+				cbmat.A1B2C4.push(values[8]);
+				cbmat.A1B3C1.push(values[9]);
+				cbmat.A1B3C2.push(values[10]);
+				cbmat.A1B3C3.push(values[11]);
+				cbmat.A1B3C4.push(values[12]);
+				cbmat.A2B1C1.push(values[13]);
+				cbmat.A2B1C2.push(values[14]);
+				cbmat.A2B1C3.push(values[15]);
+				cbmat.A2B1C4.push(values[16]);
+				cbmat.A2B2C1.push(values[17]);
+				cbmat.A2B2C2.push(values[18]);
+				cbmat.A2B2C3.push(values[19]);
+				cbmat.A2B2C4.push(values[20]);
+				cbmat.A2B3C1.push(values[21]);
+				cbmat.A2B3C2.push(values[22]);
+				cbmat.A2B3C3.push(values[23]);
+				cbmat.A2B3C4.push(values[24]);
+				cbmat.A3B1C1.push(values[25]);
+				cbmat.A3B1C2.push(values[26]);
+				cbmat.A3B1C3.push(values[27]);
+				cbmat.A3B1C4.push(values[28]);
+				cbmat.A3B2C1.push(values[29]);
+				cbmat.A3B2C2.push(values[30]);
+				cbmat.A3B2C3.push(values[31]);
+				cbmat.A3B2C4.push(values[32]);
+				cbmat.A3B3C1.push(values[33]);
+				cbmat.A3B3C2.push(values[34]);
+				cbmat.A3B3C3.push(values[35]);
+				cbmat.A3B3C4.push(values[36]);
+		    }
+		   	/*var outputElement = document.getElementById("tempmat");
+		    outputElement.innerHTML = JSON.stringify(selectedTechs, null, 2);*/
 		    //-----------------------------------------------------------------Criteria-------
 		    const noCriteriaRadio = document.getElementById('opt_criteria1');
 			const settingSelect = document.getElementById('settingSelect');
@@ -617,11 +750,13 @@
 
 			if (noCriteriaRadio.checked) {
 				output.textContent = 'A0B0C0';
+				var selectedScenario = 'A0B0C0';
 			} else {
 			    const settingValue = settingSelect.value;
 			    const landValue = landSelect.value;
 			    const enduseValue = enduseSelect.value;
 			    output.textContent = `${settingValue}${landValue}${enduseValue}`;
+			    var selectedScenario = `${settingValue}${landValue}${enduseValue}`;
 			}
     		
 			//------------------------------------------------------------------------
@@ -766,7 +901,7 @@
 		            var valueCell = document.createElement('td');
 		            var valueInput = document.createElement('input');
 		            valueInput.type = 'number';
-		            valueInput.value = '0';//wtmat[2][3];
+		            valueInput.value = wtmat[selectedScenario][n];//'0';//wtmat[2][3];
 		            valueInput.name = 'fmatrix[' + row + '][]';
 		        	valueInput.style.width = '75px';
 		            valueCell.appendChild(valueInput);
@@ -806,7 +941,7 @@
 		            valueInput.type = 'number';
 		            valueInput.min = '0';
 		            valueInput.max = '1'
-		            valueInput.value = '0';
+		            valueInput.value = cbmat[selectedScenario][n];//'0';
 		            valueInput.name = 'fmatrix[' + row + '][]';
 		        	valueInput.style.width = '75px';
 		            valueCell.appendChild(valueInput);
