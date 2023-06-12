@@ -429,7 +429,7 @@
 		    var newTextbox = document.createElement('input');
 		    newTextbox.type = 'text';
 		    newTextbox.name = 'techbox[]';
-		    newTextbox.value = 'Tech ' + (parseInt(numTechboxes) + 1);
+		    newTextbox.value = 'Tech ' + (parseInt(numTechboxes) + 1) + ' ';
 		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
 		    newTextbox.style.width = '280px';
 		    newTextbox.style.textAlign = 'left';
@@ -1247,10 +1247,13 @@
 
 			// Display the tech and relativeCloseness side by side
 			var outputElement = document.getElementById("newmat");
-			var outputHTML = "";
+			var outputHTML = "---------------------------------------\n";
+			outputHTML +=  "Scores - Technology\n";
+			outputHTML += "---------------------------------------\n";
 			for (var i = 0; i < sortedTech.length; i++) {
 			  outputHTML += sortedCloseness[i] + ' - ' + sortedTech[i] + '<br>';
 			}
+			outputHTML += "---------------------------------------\n";
 			outputElement.innerHTML = outputHTML;
 
 		    /*var outputElement = document.getElementById("newmat");
