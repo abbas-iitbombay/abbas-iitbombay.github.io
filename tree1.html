@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dynamic Textbox Example</title>
+    <title>Decision Support Tool</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .inhide {
             display: none;
@@ -10,6 +13,53 @@
         .inhide:target {
             display: block;
         }
+
+        .td_text{
+            font-family: sans-serif;
+            font-size: 12px; 
+            text-align: right; 
+            padding-right: 10px;
+        }
+        .inp_box{
+            font-size:12px; 
+            border-radius: 7px; 
+            border-width:thin;  
+            width: 200px; 
+            height: 27px; 
+            text-align: left; 
+            vertical-align: middle; 
+            padding-left: 10px; 
+            padding-top:0px;'
+        }
+        .btn-style{
+            width: 215px; 
+            background-color: dodgerblue;
+            color: white;
+            font-weight: bold;
+            border: none; 
+            height: 30px; 
+            border-radius: 7px; 
+            text-align: center; 
+            vertical-align: middle; 
+            padding-top: 2px;
+        }
+        .card-header{
+            font-family: sans-serif;
+            text-size:18px;
+            position: fixed;
+            top: 0px;
+            text-align: center;
+            padding: 5px;
+            border-bottom: 1px solid black;
+            width: 100%;
+            background-color: lightgreen;
+            font-weight: bold;
+        }
+
+        .centered-button {
+  			display: block;
+  			margin: 0 auto;
+  		}
 
         table {
             border-collapse: collapse;
@@ -28,17 +78,25 @@
             width: 50px;
             text-align: center;
         }
+        body{
+            margin-top: 50px;
+            margin-bottom: 30px;
+            margin-left: 20px;
+        }
     </style>
+    <div class= "card-header text-left">
+        <h4><b>Technology Selection Tool </b></h4>
+    </div>
 </head>
 
 <body>
     <form>
-    	<h3><b>Select Indicators</b></h3>
+    	<h4><b>Select Indicators</b></h4>
     	<table>
-    		<tr style="vertical-align: top; height: 150px;">
-    			<td  style="width: 300px;">
+    		<tr style="vertical-align: top;">
+    			<td  style="width: 235px;">
 				    <div>
-				    	<label>1. Economic Indicators</label><br>
+				    	<h5>1. Economic Indicators</h5>
 				        <input type="checkbox" name="indicate[]" value="Capex">Capital Cost<br/>
 				        <input type="checkbox" name="indicate[]" value="Opex">Operational Cost<br/>
 				        <input type="checkbox" name="indicate[]" value="Revenue">Revenue Cost<br/>
@@ -46,60 +104,58 @@
 				        <input type="hidden" name="num_textboxes" value="0" />
 				    </div>
 				    
-				    <div>
-				        <div id="textboxes-container"></div>
-				        <input type="button" name="add_button" value="+" onclick="addTextbox()" />
+				    <div style="padding-left: 18px;">
+				        <div id="textboxes-container" ></div>
+				        <input type="button" name="add_button" value="Add" onclick="addTextbox()" />
 				    </div>
 				</td>
-				<td style="width: 300px;">
+				<td style="width: 275px;">
 				    <div>
-				    	<label>2. Environmental Indicators</label><br>
+				    	<h5>2. Environmental Indicators</h5>
 				        <input type="checkbox" name="indicate[]" value="GWP">Global Warming Potential<br/>
 				        <input type="checkbox" name="indicate[]" value="EuP">Eutrophication Potential<br/>
 				        <input type="checkbox" name="indicate[]" value="EcoSer">Ecosystem Services<br/>
 				        <input type="hidden" name="num_textboxes1" value="0" />
 				    </div>
 				    
-				    <div>
+				    <div style="padding-left: 18px;">
 				        <div id="textboxes-container1"></div>
-				        <input type="button" name="add_button1" value="+" onclick="addTextbox1()" />
+				        <input type="button" name="add_button1" value="Add" onclick="addTextbox1()" />
 				    </div>
 	    		</td>
-	    		<td style="width: 300px;">
+	    		<td style="width: 325px;">
 				    <div>
-				    	<label>3. Circularity Potential Indicators</label><br>
+				    	<h5>3. Circularity Potential Indicators</h5>
 				        <input type="checkbox" name="indicate[]" value="WasRec">Wastewater recycling<br/>
 				        <input type="checkbox" name="indicate[]" value="EnePot">Energy<br/>
 				        <input type="checkbox" name="indicate[]" value="ProPot">Products (fertilizers, sludge etc)<br/>
 				        <input type="hidden" name="num_textboxes2" value="0" />
 				    </div>
 				    
-				    <div>
+				    <div style="padding-left: 18px;">
 				        <div id="textboxes-container2"></div>
-				        <input type="button" name="add_button1" value="+" onclick="addTextbox2()" />
+				        <input type="button" name="add_button1" value="Add" onclick="addTextbox2()" />
 				    </div>
 				</td>
-			</tr>
-		</table>
-		<table>
-			<tr style="vertical-align: top; height: 200px;">
-				<td style="width: 200px;">
+				<td style="width: 235px;">
 				    <div>
-				    	<label>4. Social Indicators</label><br>
+				    	<h5>4. Social Indicators</h5>
 				        <input type="checkbox" name="indicate[]" value="SocUnskill">Unskilled manpower<br/>
 				        <input type="checkbox" name="indicate[]" value="SocAccept">Acceptability<br/>
 				        <input type="checkbox" name="indicate[]" value="SocPart">Participation<br/>
 				        <input type="hidden" name="num_textboxes3" value="0" />
 				    </div>
 				    
-				    <div>
+				    <div style="padding-left: 18px;">
 				        <div id="textboxes-container3"></div>
-				        <input type="button" name="add_button1" value="+" onclick="addTextbox3()" />
+				        <input type="button" name="add_button1" value="Add" onclick="addTextbox3()" />
 				    </div>
 	    		</td>
-	    		<td style="width: 225px;">
+	    	</tr>
+			<tr style="vertical-align: top;">
+	    		<td>
 				    <div>
-				    	<label>5. Resilience Indicators</label><br>
+				    	<h5>5. Resilience Indicators</h5>
 				        <input type="checkbox" name="indicate[]" value="R_reli">Reliability<br/>
 				        <input type="checkbox" name="indicate[]" value="R_dura">Durability<br/>
 				        <input type="checkbox" name="indicate[]" value="R_flex">Flexibility<br/>
@@ -107,14 +163,14 @@
 				        <input type="hidden" name="num_textboxes4" value="0" />
 				    </div>
 				    
-				    <div>
+				    <div style="padding-left: 18px;">
 				        <div id="textboxes-container4"></div>
-				        <input type="button" name="add_button1" value="+" onclick="addTextbox4()" />
+				        <input type="button" name="add_button1" value="Add" onclick="addTextbox4()" />
 				    </div>
 				</td>
-				<td style="width: 264px;">
+				<td >
 				    <div>
-				    	<label>6. Technical Indicators</label><br>
+				    	<h5>6. Technical Indicators</h5>
 				        <input type="checkbox" name="indicate[]" value="BOD">Biochemical Oxygen Demand<br/>
 				        <input type="checkbox" name="indicate[]" value="COD">Chemical Oxygen Demand<br/>
 				        <input type="checkbox" name="indicate[]" value="Nitro">Total Kjeldahl Nitrogen<br/>
@@ -124,82 +180,75 @@
 				        <input type="hidden" name="num_textboxes5" value="0" />
 				    </div>
 				    
-				    <div>
+				    <div style="padding-left: 18px;">
 				        <div id="textboxes-container5"></div>
-				        <input type="button" name="add_button1" value="+" onclick="addTextbox5()" />
+				        <input type="button" name="add_button1" value="Add" onclick="addTextbox5()" />
 				    </div>
 				</td>
-				<td style="width: 200px;">
+				<td colspan="2">
 				    <div>
-				    	<label>Additional Indicators</label><br>
+				    	<h5>Additional Indicators</h5>
 				    	<input type="hidden" name="num_textboxes6" value="0" />
 				    </div>
 				    
-				    <div>
+				    <div style="padding-left: 18px;">
 				        <div id="textboxes-container6"></div>
-				        <input type="button" name="add_button1" value="+" onclick="addTextbox6()" />
+				        <input type="button" name="add_button1" value="Add" onclick="addTextbox6()" />
 				    </div>
 				</td>
 			</tr>
 		</table>
-		<h3><b>Select Scenario</b></h3>
+		<br>
+		<h4><b>Select Scenario</b></h4>
 		<div>
 			<table>
 			    <tr>
-			        <td>
+			        <td colspan="4">
 			            <input type='radio' id='opt_criteria1' name='opt_crit' value='opt_criteria1' checked>
-			            <label for='opt_criteria1'>No Scenario</label>
+			            <label for='opt_criteria1'><b>No Scenario</b></label>
 			        </td>
 			    </tr>
 			    <tr>
-			        <td>
+			        <td style="width: 235px; ">
 			            <input type='radio' id='opt_criteria2' name='opt_crit' value='opt_criteria2'>
-			            <label for='opt_criteria2'>Scenario Parameters</label>
+			            <label for='opt_criteria2'><b>Scenario Parameters</b></label>
 			        </td>
-			        <td>
-			            <table>
-			                <tr>
-			                    <td>
-			                        <label>Setting</label><br>
-			                        <select id="settingSelect" disabled>
-			                            <option value="A1">Urban Area</option>
-			                            <option value="A2">Suburban Area</option>
-			                            <option value="A3">Rural Area</option>
-			                        </select>
-			                    </td>
-			                    <td>
-			                        <label>Land Availability</label><br>
-			                        <select id="landSelect" disabled>
-			                            <option value="B1">Low</option>
-			                            <option value="B2">Medium</option>
-			                            <option value="B3">High</option>
-			                        </select>
-			                    </td>
-			                    <td>
-			                        <label>End use</label><br>
-			                        <select id="enduseSelect" disabled>
-			                            <option value="C1">To surface water body</option>
-			                            <option value="C2">For Irrigation/gardening</option>
-			                            <option value="C3">For Toilet Flushing</option>
-			                            <option value="C4">For High End/Industrial Use</option>
-			                        </select>
-			                    </td>
-			                </tr>
-			            </table>
+			        <td style="width: 275px; padding-left: 18px;">
+                        <label><b>Setting: </b></label><br>
+                        <select id="settingSelect" disabled style="width:230px;">
+                            <option value="A1">Urban Area</option>
+                            <option value="A2">Suburban Area</option>
+                            <option value="A3">Rural Area</option>
+                        </select>
+                    </td>
+                    <td style="width: 235px; padding-left: 18px;">
+                        <label><b>Land Availability: </b></label><br>
+                        <select id="landSelect" disabled style="width:190px;">
+                            <option value="B1">Low</option>
+                            <option value="B2">Medium</option>
+                            <option value="B3">High</option>
+                        </select>
+                    </td>
+                    <td style="width: 325px; padding-left: 18px;">
+                        <label><b>End use: </b></label><br>
+                        <select id="enduseSelect" disabled style="width:280px;">
+                            <option value="C1">To surface water body</option>
+                            <option value="C2">For Irrigation/gardening</option>
+                            <option value="C3">For Toilet Flushing</option>
+                            <option value="C4">For High End/Industrial Use</option>
+                        </select>
+                    
 			        </td>
 			    </tr>
 			</table>
-</div>
-<div>
-    <pre id="output"></pre>
-</div>
-
-		<h3><b>Select Technologies</b></h3>
+		</div>
+		<br>
+		<h4><b>Select Technologies</b></h4>
 		<table>
 			<tr style="vertical-align: top">
-				<td style="width: 455px;">
+				<td style="width: 300px;">
 				    <div>
-				    	<label>Mechanized Treatment</label><br>
+				    	<h5>Mechanized Treatment</h5>
 				        <input type="checkbox" name="tech[]" value="ASP">Activated Sludge Process<br/>
 				        <input type="checkbox" name="tech[]" value="RBC">Rotating Biological Contactors<br/>
 				        <input type="checkbox" name="tech[]" value="MBR">Membrane Bio-Reactor<br/>
@@ -208,9 +257,9 @@
 				        <input type="checkbox" name="tech[]" value="Ext_aeration">Extended Aeration<br/>
 				    </div>
 				</td>
-				<td style="width: 456px;">
+				<td style="width: 445px;">
 				    <div>
-				    	<label>Natural Treatment</label><br>
+				    	<h5>Natural Treatment</h5>
 				        <input type="checkbox" name="tech[]" value="CW_SFV">Constructed Wetlands (Surface flow vertical)<br/>
 				        <input type="checkbox" name="tech[]" value="CW_SSFH">Constructed Wetlands (Subsurface flow horizontal)<br/>
 				        <input type="checkbox" name="tech[]" value="CW_DPW">Constructed Wetlands (Deep bed wetlands)<br/>
@@ -218,24 +267,35 @@
 				        <input type="checkbox" name="tech[]" value="D_ponds">Duckweed ponds<br/>
 				        <input type="hidden" name="num_technologies" value="0" />
 				    </div>
-				    <div>
+				</td>
+				<td style="width: 325px;">
+					<h5>Add Technology</h5>
+				    <div style="padding-left: 18px;">
 				    	<div id="technology-container"></div>
-				        <input type="button" name="add_tech_button" value="+" onclick="addTechnology()" />
+				        <input type="button" name="add_tech_button" value="Add" onclick="addTechnology()" />
 				    </div>
 				</td>
 			</tr>
 		</table>
 	    <br>
-	    <div>
-	        <input type="submit" name="submit_xx" value="Submit"/>
-	    </div>
-	    
+	    <table>
+	    	<td style="border:none; width:1070px;">
+	    		<center>
+				    <div>
+				        <input type="submit" name="submit_xx" value="Submit" style="width:200px;"/>
+				    </div>
+			    </center>
+			</td>
+		</table>
+		<br>
+		<p>Note: Please read the instructions before proceeding with the use of this tool.</p>
 	    <div>
 	    	<pre id="grid-container"></pre>
 	    </div>
 	    <div>
-            <input type="submit" id="submitNeoButton" name="submit_neo" value="Submit_neo" />
+            <input type="submit" id="submitNeoButton" name="submit_neo" value="Generate Life Cycle Costing Report" />
         </div>
+        <br>
         <pre id="newmat"></pre>
     </form>
 
@@ -252,7 +312,7 @@
 		    newTextbox.name = 'textbox[]';
 		    newTextbox.value = '1.' + (parseInt(numTextboxes) + 1) +' ';
 		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
-		    newTextbox.style.width = '150px';
+		    newTextbox.style.width = '190px';
 		    newTextbox.style.textAlign = 'left';
 		    textboxesContainer.appendChild(newTextbox);
 		    form.elements['num_textboxes'].value = parseInt(numTextboxes) + 1;
@@ -269,7 +329,7 @@
 		    newTextbox.name = 'textbox[]';
 		    newTextbox.value = '2.' + (parseInt(numTextboxes) + 1) + ' ';
 		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
-		    newTextbox.style.width = '150px';
+		    newTextbox.style.width = '230px';
 		    newTextbox.style.textAlign = 'left';
 		    textboxesContainer.appendChild(newTextbox);
 		    form.elements['num_textboxes1'].value = parseInt(numTextboxes) + 1;
@@ -286,7 +346,7 @@
 		    newTextbox.name = 'textbox[]';
 		    newTextbox.value = '3.' + (parseInt(numTextboxes) + 1) + ' ';
 		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
-		    newTextbox.style.width = '150px';
+		    newTextbox.style.width = '280px';
 		    newTextbox.style.textAlign = 'left';
 		    textboxesContainer.appendChild(newTextbox);
 		    form.elements['num_textboxes2'].value = parseInt(numTextboxes) + 1;
@@ -303,7 +363,7 @@
 		    newTextbox.name = 'textbox[]';
 		    newTextbox.value = '4.' + (parseInt(numTextboxes) + 1) + ' ';
 		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
-		    newTextbox.style.width = '150px';
+		    newTextbox.style.width = '190px';
 		    newTextbox.style.textAlign = 'left';
 		    textboxesContainer.appendChild(newTextbox);
 		    form.elements['num_textboxes3'].value = parseInt(numTextboxes) + 1;
@@ -320,7 +380,7 @@
 		    newTextbox.name = 'textbox[]';
 		    newTextbox.value = '5.' + (parseInt(numTextboxes) + 1) + ' ';
 		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
-		    newTextbox.style.width = '150px';
+		    newTextbox.style.width = '190px';
 		    newTextbox.style.textAlign = 'left';
 		    textboxesContainer.appendChild(newTextbox);
 		    form.elements['num_textboxes4'].value = parseInt(numTextboxes) + 1;
@@ -337,7 +397,7 @@
 		    newTextbox.name = 'textbox[]';
 		    newTextbox.value = '6.' + (parseInt(numTextboxes) + 1) + ' ';
 		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
-		    newTextbox.style.width = '150px';
+		    newTextbox.style.width = '230px';
 		    newTextbox.style.textAlign = 'left';
 		    textboxesContainer.appendChild(newTextbox);
 		    form.elements['num_textboxes5'].value = parseInt(numTextboxes) + 1;
@@ -354,7 +414,7 @@
 		    newTextbox.name = 'textbox[]';
 		    newTextbox.value = '7.' + (parseInt(numTextboxes) + 1) + ' ';
 		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
-		    newTextbox.style.width = '150px';
+		    newTextbox.style.width = '300px';
 		    newTextbox.style.textAlign = 'left';
 		    textboxesContainer.appendChild(newTextbox);
 		    form.elements['num_textboxes6'].value = parseInt(numTextboxes) + 1;
@@ -369,9 +429,9 @@
 		    var newTextbox = document.createElement('input');
 		    newTextbox.type = 'text';
 		    newTextbox.name = 'techbox[]';
-		    newTextbox.value = 'Technology ' + (parseInt(numTechboxes) + 1);
+		    newTextbox.value = 'Tech ' + (parseInt(numTechboxes) + 1);
 		    newTextbox.style.display = 'block'; // Display the new textbox on a new line
-		    newTextbox.style.width = '200px';
+		    newTextbox.style.width = '280px';
 		    newTextbox.style.textAlign = 'left';
 		    techboxesContainer.appendChild(newTextbox);
 		    form.elements['num_technologies'].value = parseInt(numTechboxes) + 1;
@@ -399,7 +459,45 @@
 		    var selectedTechs = Array.from(document.querySelectorAll('input[name="tech[]"]:checked')).map(function(tech) {
 		        return tech.value;
 		    });
-		
+			
+			var list_indicators = {
+				Capex: ['Capital Cost'],
+				Opex: ['Operational Cost'],
+				Revenue: ['Revenue Cost'],
+				LCC: ['Life Cycle Cost'],
+				GWP: ['Global Warming Potential'],
+				EuP: ['Eutrophication Potential'],
+				EcoSer: ['Ecosystem Services'],
+				WasRec: ['Wastewater recycling'],
+				EnePot: ['Energy'],
+				ProPot: ['Products (fertilizers, sludge etc)'],
+				SocUnskill: ['Unskilled manpower'],
+				SocAccept: ['Acceptability'],
+				SocPart: ['Participation'],
+				R_reli: ['Reliability'],
+				R_dura: ['Durability'],
+				R_flex: ['Flexibility'],
+				R_repl: ['Replicability'],
+				BOD: ['Biochemical Oxygen Demand'],
+				COD: ['Chemical Oxygen Demand'],
+				Nitro: ['Total Kjeldahl Nitrogen'],
+				Phosph: ['Phosphorus'],
+				Em_cont: ['Emerging Contaminants'],
+				Lan_suit: ['Land Suitability']
+			}
+			var list_technology = {
+				ASP: ['Activated Sludge Process'],
+				RBC: ['Rotating Biological Contactors'],
+				MBR: ['Membrane Bio-Reactor'],
+				MBBR: ['Moving Bed Bio-Reactor'],
+				SBR: ['Sequencing Batch Reactor'],
+				Ext_aeration: ['Extended Aeration'],
+				CW_SFV: ['Constructed Wetlands (Surface flow vertical)'],
+				CW_SSFH: ['Constructed Wetlands (Subsurface flow horizontal)'],
+				CW_DPW: ['Constructed Wetlands (Deep bed wetlands)'],
+				WS_ponds: ['Waste Stabilization ponds'],
+				D_ponds: ['Duckweed ponds']
+			}
 		    var matrixValues = {
 		        ASP: [],
 		        RBC: [],
@@ -749,13 +847,13 @@
 			const enduseSelect = document.getElementById('enduseSelect');
 
 			if (noCriteriaRadio.checked) {
-				output.textContent = 'A0B0C0';
+				//output.textContent = 'A0B0C0';
 				var selectedScenario = 'A0B0C0';
 			} else {
 			    const settingValue = settingSelect.value;
 			    const landValue = landSelect.value;
 			    const enduseValue = enduseSelect.value;
-			    output.textContent = `${settingValue}${landValue}${enduseValue}`;
+			    //output.textContent = `${settingValue}${landValue}${enduseValue}`;
 			    var selectedScenario = `${settingValue}${landValue}${enduseValue}`;
 			}
     		
@@ -783,7 +881,7 @@
 		        var indicatorHeader = document.createElement('th');
 		        var valueInput = document.createElement('input');
 		        valueInput.type = 'textbox';
-		        valueInput.value = selectedIndicators[k];
+		        valueInput.value = list_indicators[selectedIndicators[k]][0];
 		        valueInput.name = 'fmatrix[' + row + '][]';
 		        valueInput.style.width = '75px';
 		        valueInput.disabled=true;
@@ -813,7 +911,7 @@
 		        var techCell = document.createElement('td');
 		        var valueInput = document.createElement('input');
 		        valueInput.type='textbox';
-		        valueInput.value = selectedTechs[m];
+		        valueInput.value = list_technology[selectedTechs[m]][0];
 		        valueInput.name = 'fmatrix[' + row + '][]';
 		        valueInput.style.width = '100px';
 		        valueInput.disabled=true;
@@ -1128,56 +1226,37 @@
       			relativeCloseness[i] = similarityDistance[i][1] / (similarityDistance[i][1] + similarityDistance[i][0]);
       		}
 
-      		var tech = ['ASP', 'tech2', 'MBR', 'tech4'];
+      		// Create an array of objects with tech, value, and index
+			var rankedArray = t_techname.map(function(value, index) {
+			  return { t_techname: value, value: relativeCloseness[index], index: index };
+			});
 
-      		// Create an array of objects with tech and its respective value and index
-var rankedArray = tech.map(function(value, index) {
-  return { tech: value, value: relativeCloseness[index], index: index };
-});
+			// Sort the array in descending order based on the values
+			rankedArray.sort(function(a, b) {
+			  return b.value - a.value;
+			});
 
-// Sort the array in descending order based on the values
-rankedArray.sort(function(a, b) {
-  return b.value - a.value;
-});
+			// Arrange the tech and relativeCloseness arrays based on the sorted ranks
+			var sortedTech = rankedArray.map(function(item) {
+			  return item.t_techname;
+			});
 
-// Arrange the tech array based on the sorted ranks
-var sortedTech = rankedArray.map(function(item) {
-  return item.tech;
-});
+			var sortedCloseness = rankedArray.map(function(item) {
+			  return item.value.toFixed(4);
+			});
 
+			// Display the tech and relativeCloseness side by side
+			var outputElement = document.getElementById("newmat");
+			var outputHTML = "";
+			for (var i = 0; i < sortedTech.length; i++) {
+			  outputHTML += sortedCloseness[i] + ' - ' + sortedTech[i] + '<br>';
+			}
+			outputElement.innerHTML = outputHTML;
 
-      		/*// Create an array of ranks
-var ranks = relativeCloseness.map(function(value, index) {
-  return { value: value, index: index };
-});
-
-// Sort the array in descending order based on the values
-ranks.sort(function(a, b) {
-  return b.value - a.value;
-});
-
-// Assign the ranks based on the sorted order
-ranks.forEach(function(item, index) {
-  item.rank = index + 1; // Adding 1 to make it 1-based index
-});
-
-// Sort the array back to the original order
-ranks.sort(function(a, b) {
-  return a.index - b.index;
-});
-
-// Extract the ranks
-var result = ranks.map(function(item) {
-  return item.rank;
-});*/
-
-
-
-
-
-		    var outputElement = document.getElementById("newmat");
-		    outputElement.innerHTML = JSON.stringify(relativeCloseness, null, 2);
-		    outputElement.innerHTML += JSON.stringify(sortedTech, null, 2);
+		    /*var outputElement = document.getElementById("newmat");
+		    outputElement.innerHTML += JSON.stringify(relativeCloseness, null, 2);
+		    outputElement.innerHTML += JSON.stringify(sortedTech, null, 2);*/
+		    //outputElement.innerHTML +=console.log;
 		});
 		
 		document.getElementById('submitNeoButton').style.display = 'none'; 
