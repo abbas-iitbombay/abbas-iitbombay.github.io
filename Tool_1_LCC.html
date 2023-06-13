@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .td_text{
-            font-family: sans-serif;
+            
             font-size: 12px; 
             text-align: right; 
             padding-right: 10px;
@@ -17,7 +17,7 @@
             border-radius: 7px; 
             border-width:thin;  
             width: 200px; 
-            height: 27px; 
+            height: 32px; 
             text-align: left; 
             vertical-align: middle; 
             padding-left: 10px; 
@@ -29,7 +29,7 @@
             color: white;
             font-weight: bold;
             border: none; 
-            height: 30px; 
+            height: 32px; 
             border-radius: 7px; 
             text-align: center; 
             vertical-align: middle; 
@@ -168,40 +168,43 @@
     <form>
         <table>
             <tr>
+                <td class='td_text' style="width: 200px;" rowspan="2">
+                    <h5>Project Details </h5>
+                </td>
+
                 <td class='td_text' style="width: 200px;">
-                    <label><b>Life of Project (years): </b></label>
+                    <label><b>Life of the Project:<br></b>( years )</label>
                 </td>
                 <td style='height: 40px'>
                     <input type='number' class='inp_box' name='lop' id='lop' min='1' value='30'>
                 </td>
-            </tr>
-            <tr>
                 <td class='td_text' style="width: 200px;">
-                    <label><b>Rate of interest (%): </b></label>
+                    <label><b>Rate of interest:<br></b>( Percentage )</label>
                 </td>
                 <td style='height: 40px'>
                     <input type='number' class='inp_box' name='form1_interest' id='form1_interest' step='0.01' min='0' value='9.2'>
                 </td>
             </tr>
-            <tr>
+            <tr style='border-bottom: 1px solid black;'>
                 <td class='td_text' style="width: 200px;">
-                    <label><b>Land Price (INR/sq.m.): </b></label>
-                    </td>
+                    <label><b>Land Price:<br></b>( INR/sq.m)</label>
+                </td>
                 <td style='height: 40px'>
                     <input type='number' class='inp_box' name='form1_land_price' id='form1_land_price' step='0.01' min='0' value='0'>
                 </td>
-            </tr>
-            <tr>
                 <td class='td_text' style="width: 200px;">
-                    <label><b>Energy Price (INR/kWh): </b></label>
+                    <label><b>Energy Price:<br></b>( INR/kWh )</label>
                 </td>
                 <td style='height: 40px'>
                 <input type='number' class='inp_box' name='form1_energy_price' id='form1_energy_price' step='0.01' min='0' value='0'>
                 </td>
             </tr>
-            <tr>
+            <tr style='border-bottom: 1px solid black; height:60px; background-color: lightyellow;'>
+                <td class='td_text' style="width: 200px;">
+                    <h5>Technology </h5>
+                </td>
                 <td>
-                    <select id="option" style='width: 200px; height: 30px; border-radius: 8px; text-align: left;font-weight:bold;font-size: 14px; padding-left:20px;' name="technology">
+                    <select id="option" style='width: 200px; height: 32px; border-radius: 8px; text-align: left;font-weight:bold;font-size: 14px; padding-left:20px;' name="technology">
                         <option value="" disabled selected>Select Technology</option>
                         <option value="" disabled style="background-color:brown; color:white; ">Mechanized Treatments</option>
                         <option value="ASP" >Activated Sludge Process</option>
@@ -221,53 +224,54 @@
                     </select>
                 </td style='height: 40px'>
                 <td>
-                    <input type="button" value="Click here!" onclick="selectOption()" class="btn-style" style="width: 200px;">
+                    <input type="button" value="Click here!" onclick="selectOption()" onchange="if (!this.options[this.selectedIndex].disabled) selectOption()"class="btn-style" style="width: 200px; height: 32px;">
                 </td>
-            </tr>
-            <tr>
                 <td class='td_text'>
-                    <label><b>Technology: </b></label>
+                    <label><b>Name of Technology: </b></label>
                 </td>
                 <td style='height: 40px'>
                     <input type='text' class='inp_box' name='value1' >
                 </td>
             </tr>
+        </table>
+        <table>
             <tr>
+                <td class='td_text' style="width: 200px; border-bottom: 1px solid black;" rowspan="2">
+                    <h5>Parameters for Capital Cost</h5>
+                </td>
                 <td class='td_text'>
-                    <label><b>Land Area Required (sq.m.):</b></label>
+                    <label><b>Land Area Required:<br></b>( sq.m )</label>
                 </td>
                 <td style='height: 40px'>
                     <input type='number' class='inp_box' name='value2' min='0' step="0.1">
                 </td>
             </tr>
             <tr>
-                <td class='td_text'>
-                    <label><b>Civil Works (INR Lakh/MLD/Year):</b></label>
+                <td class='td_text' style='border-bottom: 1px solid black;'>
+                    <label><b>Civil/Construction Works:<br></b>( INR Lakh/MLD/Year )</label>
                 </td>
-                <td style='height: 40px'>
+                <td style='height: 40px; border-bottom: 1px solid black;'>
                     <input type='number' class='inp_box' name='value3' min='0' step="0.1">
                 </td>
             </tr>
             <tr>
-                <td class='td_text'>
-                    <label><b>Parameters for Replacement Cost</b></label>
+                <td class='td_text' style="width: 200px; border-bottom: 1px solid black; background-color: lightyellow;" rowspan="2">
+                    <h5>Parameters for Replacement Cost</h5>
                 </td>
-            </tr>
-            <tr>
-                <td class='td_text'>
+                <td class='td_text' style="width: 200px; background-color: lightyellow; padding-top:15px;">
                     <label for='optionrc1'>Percent of Construction Cost 
                     <input type='radio' id='optionrc1' name='optionrc' value='optionrc1' checked></label>
                 </td>
-                <td>
+                <td style="background-color: lightyellow; padding-top:10px;">
                     <input class='inp_box' type='number' step='0.01' name='percent_repl' id='percent_repl' min = '0'>
                 </td>
             </tr>
             <tr>
-                <td class='td_text' style='border-bottom: 1px solid black;'>
+                <td class='td_text' style='border-bottom: 1px solid black; padding-top: 10px; padding-bottom: 10px; background-color: lightyellow;'>
                     <label for='optionrc2'> Part-wise Replacement 
                     <input type='radio' id='optionrc2' name='optionrc' value='optionrc2'></label>
                 </td>
-                <td style='border-bottom: 1px solid black;'>
+                <td style='border-bottom: 1px solid black; background-color: lightyellow;'>
                     <div id="hidblock" style="display: none;">
                     <table>
                         <tr>
@@ -325,14 +329,14 @@
                                 <input class='inp_box' type='number' id='rep_yr4' name='rep_yr4' step='0.5' min='0.5' value ='0.5'>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
+                        <tr >
+                            <td style="padding-bottom: 10px;">
                                 <input class='inp_box' type='text' id='part5' name='part5' value='Part 5'>
                             </td>
-                            <td>
+                            <td style="padding-bottom: 10px;">
                                 <input class='inp_box' type='number' id='rate5' name='rate5' step='0.01'  min = '0' value='0'>
                             </td>
-                            <td>
+                            <td style="padding-bottom: 10px;">
                                 <input class='inp_box' type='number' id='rep_yr5' name='rep_yr5' step='0.5' min='0.5' value ='0.5'>
                             </td>
                         </tr>
@@ -341,8 +345,11 @@
                 </td>
             </tr>
             <tr>
+                <td class='td_text' rowspan="4" style='border-bottom: 1px solid black;'>
+                    <h5>Parameters for Operation and Maintenance Cost</h5>
+                </td>
                 <td class='td_text'>
-                    <label><b>Energy Consumed (kWh/KL/day):</b></label>
+                    <label><b>Energy Consumed:<br></b>( kWh/KL/day )</label>
                 </td>
                 <td style='height: 40px'>
                     <input type='number' class='inp_box' name='value4' min='0' step="0.1">
@@ -350,7 +357,7 @@
             </tr>
             <tr>
                 <td class='td_text'>
-                    <label><b>Labour/Manpower (INR Lakh/MLD/Year):</b></label>
+                    <label><b>Labour/Manpower:<br></b>( INR Lakh/MLD/Year )</label>
                 </td>
                 <td style='height: 40px'>
                     <input type='number' class='inp_box' name='value5' min='0' step="0.1">
@@ -358,32 +365,43 @@
             </tr>
             <tr>
                 <td class='td_text'>
-                    <label><b>Chemicals (INR Lakh/MLD/Year):</b></label>
+                    <label><b>Chemicals:<br></b>( INR Lakh/MLD/Year )</label>
                 </td>
                 <td style='height: 40px'>
                     <input type='number' class='inp_box' name='value6' min='0' step="0.1">
                 </td>
             </tr>
             <tr>
-                <td class='td_text'>
-                    <label><b>Routine Maintenance (INR Lakh/MLD/Year):</b></label>
+                <td class='td_text' style='border-bottom: 1px solid black;'>
+                    <label><b>Routine Maintenance:<br></b>( INR Lakh/MLD/Year )</label>
                 </td>
-                <td style='height: 40px'>
+                <td style='height: 40px; border-bottom: 1px solid black;'>
                     <input type='number' class='inp_box' name='value7' min='0' step="0.1">
                 </td>
             </tr>
-            <tr>
-                <td class='td_text'>
-                    <label><b>Revenue Genearation (INR Lakh/MLD/Year):</b></label>
+            <tr style="background-color: lightyellow;">
+                <td class='td_text' style='border-bottom: 1px solid black;'>
+                    <h5>Parameters for Revenue Generation</h5>
                 </td>
-                <td style='height: 40px'>
+                <td class='td_text' style='border-bottom: 1px solid black;'>
+                    <label><b>Revenue Generation:<br></b>( INR Lakh/MLD/Year )</label>
+                </td>
+                <td style='height: 40px; border-bottom: 1px solid black;'>
                     <input type='number' class='inp_box' name='value8' min='0' step="0.1">
                 </td>
             </tr>
         </table>
     </form>
-    
-    <input type="button" value="Generate Life Cycle Costing Report" onclick="generatePDF()" class="btn-style" style="width: 430px; display: none;">
+    <br>
+    <table>
+        <td style="width: 200px;">
+        </td>
+        <td style="width: 200px;">
+        </td>
+        <td style="width: 200px;">
+            <input type="button" id="LccButton" value="Generate Life Cycle&#13;&#10;Costing Report" onclick="generatePDF()" class="btn-style" style="width: 200px; height: 64px; display: none;">
+        </td>
+    </table>
     <input type="hidden" id="hidopt" value="1">
 
     <script>
@@ -430,7 +448,7 @@
                 }
             }
             // Show the "Generate 2PDF" buttons
-            var pdfButton = document.querySelector('input[value="Generate Life Cycle Costing Report"]');
+            var pdfButton = document.getElementById("LccButton");// querySelector('input[value="Generate Life Cycle Costing Report"]');
             pdfButton.style.display = 'inline-block';
         }
 
@@ -536,7 +554,12 @@
             var pw_routinemain = parseFloat(factor3 * value7).toFixed(2);
             var pw_revenue = parseFloat(factor3 * value8).toFixed(2);
 
-            
+            var CCT = parseFloat(landcost) + parseFloat(value3);
+            var OMT = parseFloat(pw_energycost) + parseFloat(pw_labour) + parseFloat(pw_chemicals) + parseFloat(pw_routinemain);
+
+            CCT = parseFloat(CCT).toFixed(2);
+            OMT = parseFloat(OMT).toFixed(2);
+
             if(hidopt==='1'){
                 var pw_totalcost= parseFloat(landcost) + parseFloat(value3) + parseFloat(pw_rep_cost) + parseFloat(pw_energycost) + parseFloat(pw_labour) + parseFloat(pw_chemicals) + parseFloat(pw_routinemain);
             } else if(hidopt==='2'){
@@ -550,7 +573,7 @@
 
             // Create an empty PDF document
             var opt = {
-                margin: 20,
+                margin: [5, 20, 20, 20],//top, left, bottom, right
                 filename: 'output.pdf',
                 image: { type: 'jpeg', quality: 1 },
                 html2canvas: { scale: 2 },
@@ -560,53 +583,121 @@
             // Create a container element for the PDF content
             var container = document.createElement('div');
 
+            var tableElement = document.createElement('table');
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+                
+            var image = document.createElement('img');
+            image.src = 'images/iitb.png';
+            image.style.width ='100px';
+            //container.appendChild(image);
+            value1LabelCell.appendChild(image);
+            value1Row.appendChild(value1LabelCell);
+            tableElement.appendChild(value1Row);
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.style.width = '650px';
+            value1LabelCell.style.textAlign = 'center';
+            var image = document.createElement('img');
+            image.src = 'images/CUSE_Txt_JPG-01.jpg';
+            image.style.width ='300px';
+            //container.appendChild(image);
+            value1LabelCell.appendChild(image);
+            value1Row.appendChild(value1LabelCell);
+            tableElement.appendChild(value1Row);
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.style.width = '92px';
+            value1LabelCell.style.textAlign = 'center';
+            var image = document.createElement('img');
+            image.src = 'images/IC-EcoWS_Logo_4pdf.jpg';
+            image.style.width ='92px';
+            //container.appendChild(image);
+            value1LabelCell.appendChild(image);
+            value1Row.appendChild(value1LabelCell);
+            tableElement.appendChild(value1Row);
+
+            container.appendChild(tableElement);
+
+            var lineElement = document.createElement('hr');
+            lineElement.style.borderColor = 'red';
+            lineElement.style.borderWidth = '1px';
+            lineElement.style.borderStyle = 'solid';
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
+            container.appendChild(lineElement);
+
+            var copyrightTextElement = document.createElement('p');
+            copyrightTextElement.textContent = 'Copyright \u00A9 Indian Institute of Technology Bombay, Powai, Mumbai - 400 076';
+            copyrightTextElement.style.fontWeight = 'bold';
+            copyrightTextElement.style.fontSize = '12px';
+            copyrightTextElement.style.marginBottom = "4px";
+            container.appendChild(copyrightTextElement);
+
+            var lineElement = document.createElement('hr');
+            lineElement.style.borderColor = 'red';
+            lineElement.style.borderWidth = '1px';
+            lineElement.style.borderStyle = 'solid';
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
+            container.appendChild(lineElement);
+
+
+            var currentDate = new Date();
+            var formattedDate = currentDate.toLocaleDateString();
             // Create elements to display the header
             var headerElement = document.createElement('header');
-            var spaces = Array(35).join('\u00A0');
-            headerElement.textContent = 'Decision Support Tool | Report: Life Cycle Costing' + spaces + 'IIT Bombay';
+            var spaces = Array(32).join('\u00A0');
+            headerElement.textContent = 'Life Cycle Costing Report' + spaces + 'Page 1 of 2' + spaces + formattedDate;// + spaces + 'IIT Bombay';
+            headerElement.style.marginTop = '4px';
+           // headerElement.style.textAlign = 'center';
             headerElement.style.color='blue';
             headerElement.style.fontWeight='bold';
             container.appendChild(headerElement);
 
             // Create a line element below the header
-            var lineElement = document.createElement('hr');
-            container.appendChild(lineElement);
+            
 
             var resultTextElement = document.createElement('p');
-            resultTextElement.textContent = 'Life Cycle Costing tool is a submodule developed as a part of "Decision Support Tool for Appropriate Technology selection" under a "ICecoWS" project sponsored by Department of Science & Technology.';
+            resultTextElement.textContent = 'Life Cycle Costing tool is a submodule developed as a part of "Decision Support Tool for Appropriate Technology selection" under a "IC-EcoWS" project sponsored by Department of Science & Technology.';
+            resultTextElement.style.fontSize = '14px';
             resultTextElement.style.textAlign='justify';
             container.appendChild(resultTextElement);
 
             var resultTextElement = document.createElement('p');
             resultTextElement.textContent = 'INPUTS';
             resultTextElement.style.fontWeight = 'bold';
+            resultTextElement.style.marginBottom = '6px';
             container.appendChild(resultTextElement);
 
             var lineElement = document.createElement('hr');
+            lineElement.style.borderColor = 'black';
+            lineElement.style.borderWidth = '1px';
+            lineElement.style.borderStyle = 'solid';
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
             container.appendChild(lineElement);
 
             //-------------------------------------------------------------------------------------------------------
             var tableElement = document.createElement('table');
-
             var value1Row = document.createElement('tr');
 
             //---------------------------------------------------------tech-
             var value1LabelCell = document.createElement('td');
-            value1LabelCell.textContent = 'Technology:';
+            value1LabelCell.textContent = 'Project Details';
             value1LabelCell.style.width='300px';
+            value1LabelCell.style.fontWeight = 'bold';
             value1Row.appendChild(value1LabelCell);
-
-            var value1Cell = document.createElement('td');
-            value1Cell.textContent = value1;
-            value1Row.appendChild(value1Cell);
-
-            // Append the value1 row to the table
             tableElement.appendChild(value1Row);
+            
+            var value1Row = document.createElement('tr');
+            
             //---------------------------------------------------------lop-
             var value1Row = document.createElement('tr');
 
             var value1LabelCell = document.createElement('td');
-            value1LabelCell.textContent = 'Life of project (Years):';
+            value1LabelCell.textContent = 'Life of project ( Years ):';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
@@ -619,7 +710,7 @@
             var value1Row = document.createElement('tr');
 
             var value1LabelCell = document.createElement('td');
-            value1LabelCell.textContent = 'Rate of interest (%):';
+            value1LabelCell.textContent = 'Rate of interest ( Percentage ):';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
@@ -632,7 +723,7 @@
             var value1Row = document.createElement('tr');
 
             var value1LabelCell = document.createElement('td');
-            value1LabelCell.textContent = 'Land Price (INR/sq.m):';
+            value1LabelCell.textContent = 'Land Price ( INR/sq.m ):';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
@@ -645,18 +736,59 @@
             var value1Row = document.createElement('tr');
 
             var value1LabelCell = document.createElement('td');
-            value1LabelCell.textContent = 'Energy Price (INR/kWh): ';
+            value1LabelCell.textContent = 'Energy Price ( INR/kWh ): ';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
             value1Cell.textContent = energy_price;
             value1Row.appendChild(value1Cell);
             tableElement.appendChild(value1Row);
+
+            container.appendChild(tableElement);
+
+            var lineElement = document.createElement('hr');
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
+            container.appendChild(lineElement);
+
+            var tableElement = document.createElement('table');
+            //---------------------------------------------------------tech-
+            var value1Row = document.createElement('tr');
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Technology:';
+            value1LabelCell.style.fontWeight = 'bold';
+            value1LabelCell.style.width='300px';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = value1;
+            value1Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value1Cell);
+
+            // Append the value1 row to the table
+            tableElement.appendChild(value1Row);
+            container.appendChild(tableElement);
+
+            var lineElement = document.createElement('hr');
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
+            container.appendChild(lineElement);
+
+            var tableElement = document.createElement('table');
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Parameters for Capital Cost';
+            value1LabelCell.style.width='300px';
+            value1LabelCell.style.fontWeight = 'bold';
+            value1Row.appendChild(value1LabelCell);
+
+            tableElement.appendChild(value1Row);
             //---------------------------------------------------------landarea-
             var value1Row = document.createElement('tr');
 
             var value1LabelCell = document.createElement('td');
-            value1LabelCell.textContent = 'Land Area Required (sq.m.): ';
+            value1LabelCell.textContent = 'Land Area Required ( sq.m ): ';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
@@ -667,7 +799,7 @@
             var value1Row = document.createElement('tr');
 
             var value1LabelCell = document.createElement('td');
-            value1LabelCell.textContent = 'Civil Works (INR Lakh/MLD/Year): ';
+            value1LabelCell.textContent = 'Civil Works ( INR Lakh/MLD/Year ): ';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
@@ -678,6 +810,8 @@
             container.appendChild(tableElement);
 
             var lineElement = document.createElement('hr');
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
             container.appendChild(lineElement);
 
             var tableElement = document.createElement('table');
@@ -687,7 +821,7 @@
             var value1Row = document.createElement('tr');
 
             var value1LabelCell = document.createElement('td');
-            value1LabelCell.textContent = 'Parameter for Replacament Cost:';
+            value1LabelCell.textContent = 'Parameter for Replacament Cost';
             value1LabelCell.style.width='300px';
             value1LabelCell.style.fontWeight='bold';
             value1Row.appendChild(value1LabelCell);
@@ -701,7 +835,7 @@
                 var value1Row = document.createElement('tr');
 
                 var value1LabelCell = document.createElement('td');
-                value1LabelCell.textContent = 'Percentage of Cost of Civilworks:';
+                value1LabelCell.textContent = 'Percent of Construction Cost:';
                 value1Row.appendChild(value1LabelCell);
 
                 var value1Cell = document.createElement('td');
@@ -723,7 +857,7 @@
                 value1Row.appendChild(value1Cell);
 
                 var value2Cell = document.createElement('td');
-                value2Cell.textContent = 'Rate (INR)';
+                value2Cell.textContent = 'Rate ( INR )';
                 value2Cell.style.width='100px';
                 value2Cell.style.borderBottom = '1px solid black';
                 value1Row.appendChild(value2Cell);
@@ -838,14 +972,26 @@
             container.appendChild(tableElement);
 
             var lineElement = document.createElement('hr');
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
             container.appendChild(lineElement);
 
             var tableElement = document.createElement('table');
+            //----------------------------------------------------------
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Parameters for O & M Cost';
+            value1LabelCell.style.width='350px';
+            value1LabelCell.style.fontWeight = 'bold';
+            value1Row.appendChild(value1LabelCell);
+
+            tableElement.appendChild(value1Row);
             //---------------------------------------------------------Energycons-
             var value1Row = document.createElement('tr');
 
             var value1LabelCell = document.createElement('td');
-            value1LabelCell.textContent = 'Energy Consumed (kWh/KL/day): ';
+            value1LabelCell.textContent = 'Energy Consumed ( kWh/KL/day ): ';
             value1LabelCell.style.width='300px';
             value1Row.appendChild(value1LabelCell);
 
@@ -857,7 +1003,7 @@
             var value1Row = document.createElement('tr');
 
             var value1LabelCell = document.createElement('td');
-            value1LabelCell.textContent = 'Labour/Manpower (INR Lakh/MLD/Year): ';
+            value1LabelCell.textContent = 'Labour/Manpower ( INR Lakh/MLD/Year ): ';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
@@ -868,7 +1014,7 @@
             var value1Row = document.createElement('tr');
 
             var value1LabelCell = document.createElement('td');
-            value1LabelCell.textContent = 'Chemicals (INR Lakh/MLD/Year): ';
+            value1LabelCell.textContent = 'Chemicals ( INR Lakh/MLD/Year ): ';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
@@ -879,18 +1025,37 @@
             var value1Row = document.createElement('tr');
 
             var value1LabelCell = document.createElement('td');
-            value1LabelCell.textContent = 'Routine Maintenance (INR Lakh/MLD/Year): ';
+            value1LabelCell.textContent = 'Routine Maintenance ( INR Lakh/MLD/Year ): ';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
             value1Cell.textContent = value7;
             value1Row.appendChild(value1Cell);
             tableElement.appendChild(value1Row);
+
+            container.appendChild(tableElement);
+
+            var lineElement = document.createElement('hr');
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
+            container.appendChild(lineElement);
+
+            var tableElement = document.createElement('table');
+
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Parameters for Revenue Genearation';
+            value1LabelCell.style.fontWeight = 'bold';
+            value1LabelCell.style.width = '350px';
+            value1Row.appendChild(value1LabelCell);
+
+            tableElement.appendChild(value1Row);
             //---------------------------------------------------------routinemain-
             var value1Row = document.createElement('tr');
 
             var value1LabelCell = document.createElement('td');
-            value1LabelCell.textContent = 'Revenue Genearation (INR Lakh/MLD/Year): ';
+            value1LabelCell.textContent = 'Revenue Generation ( INR Lakh/MLD/Year ): ';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
@@ -902,8 +1067,12 @@
             container.appendChild(tableElement);
 
             var lineElement = document.createElement('hr');
+            lineElement.style.borderColor = 'black';
+            lineElement.style.borderWidth = '1px';
+            lineElement.style.borderStyle = 'solid';
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
             container.appendChild(lineElement);
-
 
             //-------------------------------------------------------------------------------------------------------------------------------
 
@@ -911,29 +1080,100 @@
             pageBreakElement.style.pageBreakAfter = 'always';
             container.appendChild(pageBreakElement);
 
-            // Create elements to display the header
+            var tableElement = document.createElement('table');
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+                
+            var image = document.createElement('img');
+            image.src = 'images/iitb.png';
+            image.style.width ='100px';
+            //container.appendChild(image);
+            value1LabelCell.appendChild(image);
+            value1Row.appendChild(value1LabelCell);
+            tableElement.appendChild(value1Row);
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.style.width = '650px';
+            value1LabelCell.style.textAlign = 'center';
+            var image = document.createElement('img');
+            image.src = 'images/CUSE_Txt_JPG-01.jpg';
+            image.style.width ='300px';
+            //container.appendChild(image);
+            value1LabelCell.appendChild(image);
+            value1Row.appendChild(value1LabelCell);
+            tableElement.appendChild(value1Row);
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.style.width = '92px';
+            value1LabelCell.style.textAlign = 'center';
+            var image = document.createElement('img');
+            image.src = 'images/IC-EcoWS_Logo_4pdf.jpg';
+            image.style.width ='92px';
+            //container.appendChild(image);
+            value1LabelCell.appendChild(image);
+            value1Row.appendChild(value1LabelCell);
+            tableElement.appendChild(value1Row);
+
+            container.appendChild(tableElement);
+
+            var lineElement = document.createElement('hr');
+            lineElement.style.borderColor = 'red';
+            lineElement.style.borderWidth = '1px';
+            lineElement.style.borderStyle = 'solid';
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
+            container.appendChild(lineElement);
+
+            var copyrightTextElement = document.createElement('p');
+            copyrightTextElement.textContent = 'Copyright \u00A9 Indian Institute of Technology Bombay, Powai, Mumbai - 400 076';
+            copyrightTextElement.style.fontWeight = 'bold';
+            copyrightTextElement.style.fontSize = '12px';
+            copyrightTextElement.style.marginBottom = "4px";
+            container.appendChild(copyrightTextElement);
+
+            var lineElement = document.createElement('hr');
+            lineElement.style.borderColor = 'red';
+            lineElement.style.borderWidth = '1px';
+            lineElement.style.borderStyle = 'solid';
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
+            container.appendChild(lineElement);
+
             var headerElement = document.createElement('header');
-            var spaces = Array(35).join('\u00A0');
-            headerElement.textContent = 'Decision Support Tool | Report: Life Cycle Costing' + spaces + 'IIT Bombay';
+            var spaces = Array(32).join('\u00A0');
+            headerElement.textContent = 'Life Cycle Costing Report' + spaces + 'Page 2 of 2' + spaces + formattedDate;// + spaces + 'IIT Bombay';
+            headerElement.style.marginTop = '4px';
+           // headerElement.style.textAlign = 'center';
             headerElement.style.color='blue';
             headerElement.style.fontWeight='bold';
             container.appendChild(headerElement);
 
-            // Create a line element below the header
-            var lineElement = document.createElement('hr');
-            container.appendChild(lineElement);
-
             var resultTextElement = document.createElement('p');
             resultTextElement.textContent = 'OUTPUTS';
             resultTextElement.style.fontWeight = 'bold';
-            container.appendChild(resultTextElement);
-
-            var resultTextElement = document.createElement('p');
-            resultTextElement.textContent = 'CAPITAL COST:';
-            resultTextElement.style.fontWeight = 'bold';
+            resultTextElement.style.marginTop = '12px';
+            resultTextElement.style.marginBottom = '0';
             container.appendChild(resultTextElement);
 
             var lineElement = document.createElement('hr');
+            lineElement.style.borderColor = 'black';
+            lineElement.style.borderWidth = '1px';
+            lineElement.style.borderStyle = 'solid';
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
+            container.appendChild(lineElement);
+
+            var resultTextElement = document.createElement('p');
+            resultTextElement.textContent = 'Capital Cost';
+            resultTextElement.style.fontWeight = 'bold';
+            resultTextElement.style.marginBottom = '0';
+            resultTextElement.style.color = 'red';
+            container.appendChild(resultTextElement);
+
+            var lineElement = document.createElement('hr');
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
             container.appendChild(lineElement);
 
             
@@ -1043,6 +1283,105 @@
 
             // Append the value1 row to the table
             tableElement.appendChild(value1Row);
+            //-----
+            //------------------------------------------------
+            var value1Row = document.createElement('tr');
+            
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = '';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = '';
+            value1Row.appendChild(value1Cell);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = '';
+            value1Row.appendChild(value2Cell);
+
+            var value3Cell = document.createElement('td');
+            value3Cell.textContent = '';
+            value1Row.appendChild(value3Cell);
+
+            var value4Cell = document.createElement('td');
+            value4Cell.textContent = 'Total';
+            value4Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value4Cell);
+
+            var value5Cell = document.createElement('td');
+            value5Cell.textContent = CCT;
+            value5Cell.style.fontWeight ='bold';
+            value1Row.appendChild(value5Cell);
+
+            // Append the value1 row to the table
+            tableElement.appendChild(value1Row);
+
+            container.appendChild(tableElement);
+
+            var lineElement = document.createElement('hr');
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
+            container.appendChild(lineElement);
+
+            var resultTextElement = document.createElement('p');
+            resultTextElement.textContent = 'Replacement Cost';
+            resultTextElement.style.fontWeight = 'bold';
+            resultTextElement.style.marginBottom = '0';
+            resultTextElement.style.color = 'red';
+            container.appendChild(resultTextElement);
+
+            var lineElement = document.createElement('hr');
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
+            container.appendChild(lineElement);
+
+            
+            var tableElement = document.createElement('table');
+            var value1Row = document.createElement('tr');
+            
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Description';
+            value1LabelCell.style.fontWeight='bold';
+            value1LabelCell.style.width = '195px';
+            value1LabelCell.style.borderBottom='1px solid black';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = 'Symbol';
+            value1Cell.style.width = '70px';
+            value1Cell.style.fontWeight = 'bold';
+            value1Cell.style.borderBottom = '1px solid black';
+            value1Row.appendChild(value1Cell);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = 'Rate';
+            value2Cell.style.width = '70px';
+            value2Cell.style.fontWeight = 'bold';
+            value2Cell.style.borderBottom = '1px solid black';
+            value1Row.appendChild(value2Cell);
+
+            var value3Cell = document.createElement('td');
+            value3Cell.textContent = 'Ni';
+            value3Cell.style.width = '50px';
+            value3Cell.style.fontWeight = 'bold';
+            value3Cell.style.borderBottom = '1px solid black';
+            value1Row.appendChild(value3Cell);
+
+            var value4Cell = document.createElement('td');
+            value4Cell.textContent = 'Factor';
+            value4Cell.style.width = '80px';
+            value4Cell.style.fontWeight = 'bold';
+            value4Cell.style.borderBottom = '1px solid black';
+            value1Row.appendChild(value4Cell);
+
+            var value5Cell = document.createElement('td');
+            value5Cell.textContent = 'Present Worth (Lakh)';
+            value5Cell.style.width = '180px';
+            value5Cell.style.fontWeight = 'bold';
+            value5Cell.style.borderBottom = '1px solid black';
+            value1Row.appendChild(value5Cell);
+            
+            tableElement.appendChild(value1Row);
             //------------------------------------------------
             if(hidopt==='1'){
                 var value1Row = document.createElement('tr');
@@ -1073,6 +1412,38 @@
     
                 // Append the value1 row to the table
                 tableElement.appendChild(value1Row);
+
+                //------------------------------------------------
+                var value1Row = document.createElement('tr');
+                
+                var value1LabelCell = document.createElement('td');
+                value1LabelCell.textContent = '';
+                value1Row.appendChild(value1LabelCell);
+
+                var value1Cell = document.createElement('td');
+                value1Cell.textContent = '';
+                value1Row.appendChild(value1Cell);
+
+                var value2Cell = document.createElement('td');
+                value2Cell.textContent = '';
+                value1Row.appendChild(value2Cell);
+
+                var value3Cell = document.createElement('td');
+                value3Cell.textContent = '';
+                value1Row.appendChild(value3Cell);
+
+                var value4Cell = document.createElement('td');
+                value4Cell.textContent = 'Total';
+                value4Cell.style.fontWeight = 'bold';
+                value1Row.appendChild(value4Cell);
+
+                var value5Cell = document.createElement('td');
+                value5Cell.textContent = pw_rep_cost;
+                value5Cell.style.fontWeight ='bold';
+                value1Row.appendChild(value5Cell);
+
+                // Append the value1 row to the table
+                tableElement.appendChild(value1Row);
             } else if(hidopt==='2'){
                 var value1Row = document.createElement('tr');
                         
@@ -1085,15 +1456,15 @@
                 value1Row.appendChild(value1Cell);
     
                 var value2Cell = document.createElement('td');
-                value2Cell.textContent = 'variable';
+                value2Cell.textContent = 'VAR';
                 value1Row.appendChild(value2Cell);
     
                 var value3Cell = document.createElement('td');
-                value3Cell.textContent = 'variable';
+                value3Cell.textContent = 'VAR';
                 value1Row.appendChild(value3Cell);
     
                 var value4Cell = document.createElement('td');
-                value4Cell.textContent = 'variable';
+                value4Cell.textContent = 'VAR';
                 value1Row.appendChild(value4Cell);
     
                 var value5Cell = document.createElement('td');
@@ -1102,19 +1473,56 @@
     
                 // Append the value1 row to the table
                 tableElement.appendChild(value1Row);
+
+                var value1Row = document.createElement('tr');
+            
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = '';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = '';
+            value1Row.appendChild(value1Cell);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = '';
+            value1Row.appendChild(value2Cell);
+
+            var value3Cell = document.createElement('td');
+            value3Cell.textContent = '';
+            value1Row.appendChild(value3Cell);
+
+            var value4Cell = document.createElement('td');
+            value4Cell.textContent = 'Total';
+            value4Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value4Cell);
+
+            var value5Cell = document.createElement('td');
+            value5Cell.textContent = pw_sumparts;
+            value5Cell.style.fontWeight ='bold';
+            value1Row.appendChild(value5Cell);
+
+            // Append the value1 row to the table
+            tableElement.appendChild(value1Row);
             }
 
             container.appendChild(tableElement);
 
             var lineElement = document.createElement('hr');
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
             container.appendChild(lineElement);
             
             var resultTextElement = document.createElement('p');
-            resultTextElement.textContent = 'OPERATION AND MAINTENANCE COST:';
+            resultTextElement.textContent = 'Operation and Maintenance Cost';
             resultTextElement.style.fontWeight = 'bold';
+            resultTextElement.style.color = 'red';
+            resultTextElement.style.marginBottom = '0';
             container.appendChild(resultTextElement);
 
             var lineElement = document.createElement('hr');
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
             container.appendChild(lineElement);
 
             
@@ -1278,23 +1686,58 @@
             
             tableElement.appendChild(value1Row);
 
+            //------------------------------------------------
+            var value1Row = document.createElement('tr');
+            
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = '';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = '';
+            value1Row.appendChild(value1Cell);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = '';
+            value1Row.appendChild(value2Cell);
+
+            var value3Cell = document.createElement('td');
+            value3Cell.textContent = '';
+            value1Row.appendChild(value3Cell);
+
+            var value4Cell = document.createElement('td');
+            value4Cell.textContent = 'Total';
+            value4Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value4Cell);
+
+            var value5Cell = document.createElement('td');
+            value5Cell.textContent = OMT;
+            value5Cell.style.fontWeight ='bold';
+            value1Row.appendChild(value5Cell);
+
+            // Append the value1 row to the table
+            tableElement.appendChild(value1Row);
+
             container.appendChild(tableElement);
 
             var lineElement = document.createElement('hr');
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
             container.appendChild(lineElement);
 
-            var resultTextElement = document.createElement('p');
-            resultTextElement.textContent = 'Present Worth Cost per MLD of sewage for ' + value1 + ': INR ' + ro_pw_totalcost;
             
-            container.appendChild(resultTextElement);
 
 
             var resultTextElement = document.createElement('p');
-            resultTextElement.textContent = 'REVENUE GENERATION:';
+            resultTextElement.textContent = 'Revenue Generation';
             resultTextElement.style.fontWeight = 'bold';
+            resultTextElement.style.color = 'green';
+            resultTextElement.style.marginBottom = '0';
             container.appendChild(resultTextElement);
 
             var lineElement = document.createElement('hr');
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
             container.appendChild(lineElement);
 
             var tableElement = document.createElement('table');
@@ -1348,7 +1791,7 @@
             var value1Row = document.createElement('tr');
             
             var value1LabelCell = document.createElement('td');
-            value1LabelCell.textContent = 'Revenue (INR Lakh/MLD/Year)';
+            value1LabelCell.textContent = 'Revenue Generated';
             value1Row.appendChild(value1LabelCell);
 
             var value1Cell = document.createElement('td');
@@ -1372,17 +1815,80 @@
             value1Row.appendChild(value5Cell);
             
             tableElement.appendChild(value1Row);
+            //------------------------------------------------
+            var value1Row = document.createElement('tr');
+            
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = '';
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = '';
+            value1Row.appendChild(value1Cell);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = '';
+            value1Row.appendChild(value2Cell);
+
+            var value3Cell = document.createElement('td');
+            value3Cell.textContent = '';
+            value1Row.appendChild(value3Cell);
+
+            var value4Cell = document.createElement('td');
+            value4Cell.textContent = 'Total';
+            value4Cell.style.fontWeight = 'bold';
+            value1Row.appendChild(value4Cell);
+
+            var value5Cell = document.createElement('td');
+            value5Cell.textContent = pw_revenue;
+            value5Cell.style.fontWeight ='bold';
+            value1Row.appendChild(value5Cell);
+
+            // Append the value1 row to the table
+            tableElement.appendChild(value1Row);
 
             container.appendChild(tableElement);
 
             var lineElement = document.createElement('hr');
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "20px";
             container.appendChild(lineElement);
 
              //----------------------------------------------------
+            var resultTextElement = document.createElement('p');
+            resultTextElement.textContent = 'Summary';
+            resultTextElement.style.fontWeight = 'bold';
+            resultTextElement.style.color = 'grey';
+            resultTextElement.style.marginBottom = '0';
+            container.appendChild(resultTextElement);
+
             // Create an element to display the result
             var resultTextElement = document.createElement('p');
-            resultTextElement.textContent = 'Net Present Worth Cost per MLD of sewage for ' + value1 + ': INR ' + ro_net_present_worth;
+            resultTextElement.textContent = 'Technology: ';
+            resultTextElement.style.marginBottom = '0';
             container.appendChild(resultTextElement);
+            resultTextElement.innerHTML += '<b>' + value1 + '</b>';
+
+            // Create an element to display the result
+            var resultTextElement = document.createElement('p');
+            resultTextElement.textContent = 'Net Present Worth (without revenue): ';
+            resultTextElement.style.marginBottom = '0';
+            container.appendChild(resultTextElement);
+            resultTextElement.innerHTML += '<b>' + 'INR ' + ro_pw_totalcost + ' Lakhs' + '</b>';
+            
+            var resultTextElement = document.createElement('p');
+            resultTextElement.textContent = 'Net Present Worth (with revenue): ';
+            resultTextElement.style.marginBottom = '0';
+            container.appendChild(resultTextElement);
+            resultTextElement.innerHTML += '<b>' + 'INR ' + ro_net_present_worth + ' Lakhs' + '</b>';
+
+            var lineElement = document.createElement('hr');
+            lineElement.style.borderColor = 'black';
+            lineElement.style.borderWidth = '1px';
+            lineElement.style.borderStyle = 'solid';
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
+            container.appendChild(lineElement);
 
             // Convert the container element to PDF using html2pdf library
             html2pdf().set(opt).from(container).toPdf().get('pdf').then(function(pdf) {
