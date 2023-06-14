@@ -43,6 +43,18 @@
             vertical-align: middle; 
             padding-top: 2px;
         }
+        .btn-style1{
+            width: 70px; 
+            background-color: green;
+            color: white;
+            font-weight: bold;
+            border: none; 
+            height: 30px; 
+            border-radius: 7px; 
+            text-align: center; 
+            vertical-align: middle; 
+            padding-top: 2px;
+        }
         .card-header{
             font-family: sans-serif;
             text-size:18px;
@@ -106,7 +118,7 @@
 				    
 				    <div style="padding-left: 18px;">
 				        <div id="textboxes-container" ></div>
-				        <input type="button" name="add_button" value="Add" onclick="addTextbox()" />
+				        <input type="button" name="add_button" value="Add" class="btn-style1" onclick="addTextbox()" />
 				    </div>
 				</td>
 				<td style="width: 275px;">
@@ -120,7 +132,7 @@
 				    
 				    <div style="padding-left: 18px;">
 				        <div id="textboxes-container1"></div>
-				        <input type="button" name="add_button1" value="Add" onclick="addTextbox1()" />
+				        <input type="button" name="add_button1" value="Add" class="btn-style1" onclick="addTextbox1()" />
 				    </div>
 	    		</td>
 	    		<td style="width: 325px;">
@@ -134,7 +146,7 @@
 				    
 				    <div style="padding-left: 18px;">
 				        <div id="textboxes-container2"></div>
-				        <input type="button" name="add_button1" value="Add" onclick="addTextbox2()" />
+				        <input type="button" name="add_button1" value="Add" class="btn-style1" onclick="addTextbox2()" />
 				    </div>
 				</td>
 				<td style="width: 235px;">
@@ -148,7 +160,7 @@
 				    
 				    <div style="padding-left: 18px;">
 				        <div id="textboxes-container3"></div>
-				        <input type="button" name="add_button1" value="Add" onclick="addTextbox3()" />
+				        <input type="button" name="add_button1" value="Add" class="btn-style1" onclick="addTextbox3()" />
 				    </div>
 	    		</td>
 	    	</tr>
@@ -165,7 +177,7 @@
 				    
 				    <div style="padding-left: 18px;">
 				        <div id="textboxes-container4"></div>
-				        <input type="button" name="add_button1" value="Add" onclick="addTextbox4()" />
+				        <input type="button" name="add_button1" value="Add" class="btn-style1" onclick="addTextbox4()" />
 				    </div>
 				</td>
 				<td >
@@ -182,7 +194,7 @@
 				    
 				    <div style="padding-left: 18px;">
 				        <div id="textboxes-container5"></div>
-				        <input type="button" name="add_button1" value="Add" onclick="addTextbox5()" />
+				        <input type="button" name="add_button1" value="Add" class="btn-style1" onclick="addTextbox5()" />
 				    </div>
 				</td>
 				<td colspan="2">
@@ -193,7 +205,7 @@
 				    
 				    <div style="padding-left: 18px;">
 				        <div id="textboxes-container6"></div>
-				        <input type="button" name="add_button1" value="Add" onclick="addTextbox6()" />
+				        <input type="button" name="add_button1" value="Add" class="btn-style1" onclick="addTextbox6()" />
 				    </div>
 				</td>
 			</tr>
@@ -272,7 +284,7 @@
 					<h5>Add Technology</h5>
 				    <div style="padding-left: 18px;">
 				    	<div id="technology-container"></div>
-				        <input type="button" name="add_tech_button" value="Add" onclick="addTechnology()" />
+				        <input type="button" name="add_tech_button" class="btn-style1" value="Add" onclick="addTechnology()" />
 				    </div>
 				</td>
 			</tr>
@@ -282,7 +294,7 @@
 	    	<td style="border:none; width:1070px;">
 	    		<center>
 				    <div>
-				        <input type="submit" name="submit_xx" value="Submit" style="width:200px;"/>
+				        <input type="submit" name="submit_xx" class="btn-style" value="Submit" style="width:200px;"/>
 				    </div>
 			    </center>
 			</td>
@@ -293,10 +305,10 @@
 	    	<pre id="grid-container"></pre>
 	    </div>
 	    <div>
-            <input type="submit" id="submitNeoButton" name="submit_neo" value="Generate Technology Assessment Report" />
+            <input type="submit" id="submitNeoButton" name="submit_neo" class="btn-style" value="Generate Technology&#13;&#10;Assessment Report" style="height: 64px;" />
         </div>
         <br>
-        <pre id="newmat" style="font-size: 24px;"></pre>
+        <pre id="newmat" style="font-size: 20px;"></pre>
     </form>
 
     <script>
@@ -525,43 +537,43 @@
 		        } else if (indicator === "LCC") {
 		            values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 		        } else if (indicator === "GWP") {
-		            values = [1, 2, 3, 4, 252, 253, 254, 255, 256, 257, 258];
+		            values = [18.2, 10, 20, 12, 31.97, 25, -3.86, -3, -2, 3, 4];
 		        } else if (indicator === "EuP") {
-		            values = [40, 50, 60, 90, 2000, 3000, 4000, 5000, 6000, 7000, 8000];
+		            values = [3.76, 3, 4, 4, 1.38, 3, 3.4, 3, 3, 2, 2];
 		        } else if (indicator === "EcoSer") {
-		            values = [80, 50, 70, 20, 2001, 3001, 4001, 5001, 6001, 7001, 8001];
+		            values = [5, 5, 3, 3, 3, 4, 10, 10, 9, 8, 9];
 		        } else if (indicator === "WasRec") {
-		            values = [80, 50, 66, 101, 201, 301, 401, 501, 601, 701, 801];
+		            values = [5, 4, 5, 5, 6, 5, 8, 8, 7, 9, 7];
 		        } else if (indicator === "EnePot") {
-		            values = [80, 50, 66, 1001, 2001, 3001, 4001, 5001, 6001, 7001, 8001];
+		            values = [2, 2, 2, 2, 2, 2, 6, 6, 5, 8, 7];
 		        } else if (indicator === "ProPot") {
-		            values = [80, 50, 66, 11, 21, 31, 41, 51, 61, 71, 81];
+		            values = [2, 1, 1, 2, 2, 1, 9, 9, 8, 7, 10];
 		        } else if (indicator === "SocUnskill") {
-		            values = [401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411];
+		            values = [40, 50, 20, 40, 20, 30, 90, 90, 90, 90, 90];
 		        } else if (indicator === "SocAccept") {
-		            values = [1401, 1402, 1403, 1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411];
+		            values = [7, 7, 5, 6, 4, 4, 8, 8, 7, 4, 5];
 		        } else if (indicator === "SocPart") {
-		            values = [2401, 2402, 2403, 2404, 2405, 2406, 2407, 2408, 2409, 2410, 2411];
+		            values = [4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6];
 		        } else if (indicator === "R_reli") {
-		            values = [5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111];
+		            values = [9, 9, 7, 7, 5, 4, 8, 8, 8, 7, 7];
 		        } else if (indicator === "R_dura") {
-		            values = [5201, 5202, 5203, 5204, 5205, 5206, 5207, 5208, 5209, 5210, 5211];
+		            values = [9, 9, 7, 7, 5, 4, 8, 8, 8, 6, 7];
 		        } else if (indicator === "R_flex") {
-		            values = [5301, 5302, 5303, 5304, 5305, 5306, 5307, 5308, 5309, 5310, 5311];
+		            values = [9, 6, 7, 6, 5, 4, 8, 8, 8, 7, 5];
 		        } else if (indicator === "R_repl") {
-		            values = [5401, 5402, 5403, 5404, 5405, 5406, 5407, 5408, 5409, 5410, 5411];
+		            values = [9, 9, 7, 7, 5, 4, 8, 8, 8, 7, 7];
 		        } else if (indicator === "BOD") {
-		            values = [6101, 6102, 6103, 6104, 6105, 6106, 6107, 6108, 6109, 6110, 6111];
+		            values = [70, 60, 75, 60, 80, 60, 60, 65, 60, 60, 60];
 		        } else if (indicator === "COD") {
-		            values = [6201, 6202, 6203, 6204, 6205, 6206, 6207, 6208, 6209, 6210, 6211];
+		            values = [75, 60, 75, 70, 80, 60, 55, 65, 65, 60, 60];
 		        } else if (indicator === "Nitro") {
-		            values = [6301, 6302, 6303, 6304, 6305, 6306, 6307, 6308, 6309, 6310, 6311];
+		            values = [40, 40, 40, 50, 60, 40, 80, 85, 85, 70, 90];
 		        } else if (indicator === "Phosph") {
-		            values = [6401, 6402, 6403, 6404, 6405, 6406, 6407, 6408, 6409, 6410, 6411];
+		            values = [40, 40, 40, 50, 60, 40, 80, 85, 85, 70, 90];
 		        } else if (indicator === "Em_cont") {
-		            values = [6501, 6502, 6503, 6504, 6505, 6506, 6507, 6508, 6509, 6510, 6511];
+		            values = [30, 30, 30, 30, 30, 30, 50, 50, 50, 40, 50];
 		        } else if (indicator === "Lan_suit") {
-		            values = [6601, 6602, 6603, 6604, 6605, 6606, 6607, 6608, 6609, 6610, 6611];
+		            values = [1, 1, 1, 1, 1, 1, 0.7, 0.7, 0.7, 0.6, 0.6];
 		        } 
 
 		        matrixValues.ASP.push(values[0]);
@@ -1246,7 +1258,7 @@
 			});
 
 			// Display the tech and relativeCloseness side by side
-			var outputElement = document.getElementById("newmat");
+			/*var outputElement = document.getElementById("newmat");
 			var outputHTML = "---------------------------------------\n";
 			outputHTML +=  "Scores - Technology\n";
 			outputHTML += "---------------------------------------\n";
@@ -1254,7 +1266,267 @@
 			  outputHTML += sortedCloseness[i] + ' - ' + sortedTech[i] + '<br>';
 			}
 			outputHTML += "---------------------------------------\n";
-			outputElement.innerHTML = outputHTML;
+			outputElement.innerHTML = outputHTML;*/
+
+			var opt = {
+                margin: [5, 20, 20, 20],//top, left, bottom, right
+                filename: 'output.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Create a container element for the PDF content
+            var container = document.createElement('div');
+
+            var tableElement = document.createElement('table');
+            var value1Row = document.createElement('tr');
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.style.border = 'none';    
+            var image = document.createElement('img');
+            image.src = 'images/iitb.png';
+            image.style.width ='100px';
+            //container.appendChild(image);
+            value1LabelCell.appendChild(image);
+            value1Row.appendChild(value1LabelCell);
+            tableElement.appendChild(value1Row);
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.style.width = '400px';
+            value1LabelCell.style.textAlign = 'center';
+            value1LabelCell.style.border = 'none'; 
+            var image = document.createElement('img');
+            image.src = 'images/CUSE_Txt_JPG-01.jpg';
+            image.style.width ='300px';
+            //container.appendChild(image);
+            value1LabelCell.appendChild(image);
+            value1Row.appendChild(value1LabelCell);
+            tableElement.appendChild(value1Row);
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.style.width = '92px';
+            value1LabelCell.style.textAlign = 'center';
+            value1LabelCell.style.border = 'none'; 
+            var image = document.createElement('img');
+            image.src = 'images/IC-EcoWS_Logo_4pdf.jpg';
+            image.style.width ='92px';
+            //container.appendChild(image);
+            value1LabelCell.appendChild(image);
+            value1Row.appendChild(value1LabelCell);
+            tableElement.appendChild(value1Row);
+
+            container.appendChild(tableElement);
+
+            var lineElement = document.createElement('hr');
+            lineElement.style.borderColor = 'red';
+            lineElement.style.borderWidth = '1px';
+            lineElement.style.borderStyle = 'solid';
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
+            container.appendChild(lineElement);
+
+            var copyrightTextElement = document.createElement('p');
+            copyrightTextElement.textContent = 'Copyright \u00A9 Indian Institute of Technology Bombay, Powai, Mumbai - 400 076';
+            copyrightTextElement.style.fontWeight = 'bold';
+            copyrightTextElement.style.fontSize = '12px';
+            copyrightTextElement.style.marginBottom = "4px";
+            container.appendChild(copyrightTextElement);
+
+            var lineElement = document.createElement('hr');
+            lineElement.style.borderColor = 'red';
+            lineElement.style.borderWidth = '1px';
+            lineElement.style.borderStyle = 'solid';
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
+            container.appendChild(lineElement);
+
+
+            var currentDate = new Date();
+            var formattedDate = currentDate.toLocaleDateString();
+            // Create elements to display the header
+            var headerElement = document.createElement('header');
+            var spaces = Array(25).join('\u00A0');
+            headerElement.textContent = 'Technology Assessment Report' + spaces + 'Page 1 of 1' + spaces + formattedDate;// + spaces + 'IIT Bombay';
+            headerElement.style.marginTop = '4px';
+           // headerElement.style.textAlign = 'center';
+            headerElement.style.color='blue';
+            headerElement.style.fontWeight='bold';
+            container.appendChild(headerElement);
+
+            // Create a line element below the header
+            
+
+            var resultTextElement = document.createElement('p');
+            resultTextElement.textContent = 'Tchnology Selection Tool is a module developed as a part of "Decision Support Tool for Appropriate Technology selection" under a "IC-EcoWS" project sponsored by Department of Science & Technology.';
+            resultTextElement.style.fontSize = '14px';
+            resultTextElement.style.textAlign='justify';
+            container.appendChild(resultTextElement);
+
+            var resultTextElement = document.createElement('p');
+            resultTextElement.textContent = 'OUTPUT';
+            resultTextElement.style.fontWeight = 'bold';
+            resultTextElement.style.marginBottom = '6px';
+            container.appendChild(resultTextElement);
+
+            var lineElement = document.createElement('hr');
+            lineElement.style.borderColor = 'black';
+            lineElement.style.borderWidth = '1px';
+            lineElement.style.borderStyle = 'solid';
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
+            container.appendChild(lineElement);
+
+            //-------------------------------------------------------------------------------------------------------
+            var tableElement = document.createElement('table');
+            
+            //---------------------------------------------------------lop-
+            var value1Row = document.createElement('tr');
+
+            var value1LabelCell = document.createElement('td');
+            value1LabelCell.textContent = 'Technology';
+            value1LabelCell.style.width='300px';
+            value1LabelCell.style.fontWeight = 'bold';
+            value1LabelCell.style.border = 'none';
+            value1LabelCell.style.borderBottom = '1px solid black'; 
+            value1Row.appendChild(value1LabelCell);
+
+            var value1Cell = document.createElement('td');
+            value1Cell.textContent = 'Overall Scores';
+            value1Cell.style.width = '150px';
+            value1Cell.style.fontWeight = 'bold';
+            value1Cell.style.border = 'none';
+            value1Cell.style.borderBottom = '1px solid black' ;
+            value1Row.appendChild(value1Cell);
+            tableElement.appendChild(value1Row);
+
+            var value2Cell = document.createElement('td');
+            value2Cell.textContent = 'Level of Preference';
+            value2Cell.style.width = '200px';
+            value2Cell.style.fontWeight = 'bold';
+            value2Cell.style.border = 'none';
+            value2Cell.style.borderBottom = '1px solid black'; 
+            value1Row.appendChild(value2Cell);
+            tableElement.appendChild(value1Row);
+
+            var sc_row = sortedCloseness.length;
+            var sc_max = 0;
+            var sc_min = Infinity;
+
+            for (var i = 0; i < sc_row; i++) {
+            	if(i==0){
+            		sc_max = sortedCloseness[i];
+            		sc_min = sortedCloseness[i];
+            	} else {
+            		if (sortedCloseness[i] > sc_max){
+            			sc_max = sortedCloseness[i];
+            		}
+            		if (sortedCloseness[i] < sc_min){
+            			sc_min =sortedCloseness[i];
+            		}
+            	}
+            	
+            }
+
+            if (sc_min != sc_max){
+            	var sc_diff = (sc_max - sc_min)/3;
+            }
+
+            var sc_range1 = parseFloat(sc_min) + parseFloat(sc_diff);
+            var sc_range2 = parseFloat(sc_min) + parseFloat(sc_diff) * 2;
+
+            for (var i = 0; i < sc_row; i++){
+            	if (sortedCloseness[i] >= sc_min && sortedCloseness[i] < sc_range1){
+            		//---------------------------------------------------------lop-
+		            var value1Row = document.createElement('tr');
+
+		            var value1LabelCell = document.createElement('td');
+		            value1LabelCell.textContent = sortedTech[i];
+		            value1LabelCell.style.border = 'none';
+		            value1LabelCell.style.backgroundColor = '#ffcdcd';
+		            value1Row.appendChild(value1LabelCell);
+
+		            var value1Cell = document.createElement('td');
+		            value1Cell.textContent = sortedCloseness[i];
+		            value1Cell.style.border = 'none';
+		            value1Cell.style.backgroundColor = '#ffcdcd';
+		            value1Row.appendChild(value1Cell);
+		            tableElement.appendChild(value1Row);
+
+		            var value2Cell = document.createElement('td');
+		            value2Cell.textContent = 'Not Preferred';
+		            value2Cell.style.border = 'none';
+		            value2Cell.style.backgroundColor = '#ffcdcd';
+		            value1Row.appendChild(value2Cell);
+		            tableElement.appendChild(value1Row);
+
+            	} else if (sortedCloseness[i] >= sc_range1 && sortedCloseness[i] < sc_range2){
+            		var value1Row = document.createElement('tr');
+
+		            var value1LabelCell = document.createElement('td');
+		            value1LabelCell.textContent = sortedTech[i];
+		            value1LabelCell.style.border = 'none';
+		            value1LabelCell.style.backgroundColor = '#f7f4c9';
+		            value1Row.appendChild(value1LabelCell);
+
+		            var value1Cell = document.createElement('td');
+		            value1Cell.textContent = sortedCloseness[i];
+		            value1Cell.style.border = 'none';
+		            value1Cell.style.backgroundColor = '#f7f4c9';
+		            value1Row.appendChild(value1Cell);
+		            tableElement.appendChild(value1Row);
+
+		            var value2Cell = document.createElement('td');
+		            value2Cell.textContent = 'Preferred';
+		            value2Cell.style.border = 'none';
+		            value2Cell.style.backgroundColor = '#f7f4c9';
+		            value1Row.appendChild(value2Cell);
+		            tableElement.appendChild(value1Row);
+            		
+
+            	} else if (sortedCloseness[i] >= sc_range2 && sortedCloseness[i] <= sc_max){
+            		var value1Row = document.createElement('tr');
+
+		            var value1LabelCell = document.createElement('td');
+		            value1LabelCell.textContent = sortedTech[i];
+		            value1LabelCell.style.border = 'none';
+		            value1LabelCell.style.backgroundColor = '#bcf5bc';
+		            value1Row.appendChild(value1LabelCell);
+
+		            var value1Cell = document.createElement('td');
+		            value1Cell.textContent = sortedCloseness[i];
+		            value1Cell.style.border = 'none';
+		            value1Cell.style.backgroundColor = '#bcf5bc';
+		            value1Row.appendChild(value1Cell);
+		            tableElement.appendChild(value1Row);
+
+		            var value2Cell = document.createElement('td');
+		            value2Cell.textContent = 'Most Preferred';
+		            value2Cell.style.border = 'none';
+		            value2Cell.style.backgroundColor = '#bcf5bc';
+		            value1Row.appendChild(value2Cell);
+		            tableElement.appendChild(value1Row);
+
+            	}
+
+            }
+
+            container.appendChild(tableElement);
+
+            var lineElement = document.createElement('hr');
+            lineElement.style.borderColor = 'black';
+            lineElement.style.borderWidth = '1px';
+            lineElement.style.borderStyle = 'solid';
+            lineElement.style.marginTop = "0";
+            lineElement.style.marginBottom = "0";
+            container.appendChild(lineElement);
+
+            html2pdf().set(opt).from(container).toPdf().get('pdf').then(function(pdf) {
+                // Display the PDF in the browser
+                var pdfData = pdf.output('blob');
+                var pdfURL = URL.createObjectURL(pdfData);
+                window.open(pdfURL);
+            });
+
 
 		    /*var outputElement = document.getElementById("newmat");
 		    outputElement.innerHTML += JSON.stringify(relativeCloseness, null, 2);
