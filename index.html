@@ -17,7 +17,8 @@
       align-content: center;
       text-align: center;
       font-weight: bold;
-      background-color: #f7f5c3;
+      color: white;
+      background-color: #2F4F4F; /*#f7f5c3;*/
       position: fixed;
       border-bottom: 1px black solid;
       top: 0;
@@ -107,10 +108,20 @@
 <body>
   <div id="header" class="container">
     <!-- Header content goes here -->
-    
-    <label style="font-size: 30px;">
-      Decision Support Tool for Selection of Appropriate Wastewater Treatment Technology
-    </label>  
+    <table>
+      <td style="padding-top:6px; width: 200px;">
+        <img src='images/dst-logo1.jpg' style="width: 190px;">
+      </td>
+      <td>
+        <label style="font-size: 24px; color: lightgreen">Decision Support Tool for Selection of Appropriate Wastewater Treatment Technology</label>
+      </td>
+      <td style="padding-top:6px; width: 150px;">
+        <img src='images/CUSE_Txt_JPG-01.jpg' style="width: 140px;">
+      </td>
+      <td style="padding-top:6px; width: 70px;">
+        <img src='images/IITB.jpg' style="width: 58px;">
+      </td>
+    </table>
   </div>
 
   <div id="content">
@@ -118,11 +129,11 @@
       <div id="left" style="border-right: 1px black solid;">
         <!-- Content for the left section goes here -->
         <center>
-          <img src='images/IITB.png' style="padding-top: 20px; width: 100px;">
+          <!--img src='images/IITB.jpg' style="padding-top: 20px; width: 100px;">
           <br><br>
           <img src='images/CUSE_Txt_JPG-01.jpg' style="width: 100px;">
-          <br><br>
-          <img src='images/IC-EcoWS_Logo.jpg' style="width: 100px;">    
+          <br><br-->
+          <img src='images/IC-EcoWS_Logo.jpg' style="padding-top: 20px; width: 100px;">    
           <br><br>
           <a href="http:\\abbas-iitbombay.github.io"><button id="buttonhome" class="tab-button button" style="width:80%;"><b>Home</b></button></a>
           <br><br>
@@ -131,6 +142,8 @@
           <button id="button1" class="tab-button button" onclick="changeContent(1)" style="width:80%;"><b>Life Cycle Costing Tool</b></button>
           <br><br>
           <button id="button2" class="tab-button button" onclick="changeContent(2)" style="width:80%;"><b>Technology Selection Tool</b></button>
+          <br><br><br>
+          <button id="button3" class="tab-button button" onclick="changeContent(3)" style="width:80%;"><b>Contact Info</b></button>
           </center>
       </div>
       
@@ -153,6 +166,7 @@
     adjustIFrameHeight();
     const button1 = document.getElementById('button1');
     const button2 = document.getElementById('button2');
+    const button3 = document.getElementById('button3');
     const iframe = document.getElementById('phpFrame');
 
     button1.addEventListener('click', function() {
@@ -160,6 +174,7 @@
       iframe.src = 'Tool_1_LCC.html';
       button1.classList.add('active');
       button2.classList.remove('active');
+      button3.classList.remove('active');
     });
 
     button2.addEventListener('click', function() {
@@ -167,6 +182,15 @@
       iframe.src = 'Tool_2_DST.html';
       button1.classList.remove('active');
       button2.classList.add('active');
+      button3.classList.remove('active');
+    });
+
+    button3.addEventListener('click', function() {
+      // Change the iframe source to the desired content for button 2
+      iframe.src = 'contactinfo.html';
+      button1.classList.remove('active');
+      button2.classList.remove('active');
+      button3.classList.add('active');
     });
 
     // Listen for the popstate event (navigating back)
@@ -174,6 +198,7 @@
       // Reset button styles to default when navigating back
       button1.classList.remove('active');
       button2.classList.remove('active');
+      button3.classList.remove('active');
     };
   </script>
 </body>
