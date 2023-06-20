@@ -64,7 +64,7 @@
             padding: 5px;
             border-bottom: 1px solid black;
             width: 100%;
-            background-color: lightgreen;
+            background-color: #f7f5c3;
             font-weight: bold;
         }
 
@@ -78,12 +78,12 @@
         }
 
         th, td {
-            border: 1px solid black;
+            
             padding: 5px;
         }
 
         th {
-            background-color: lightgray;
+            background-color: grey;
         }
 
         td input {
@@ -103,10 +103,11 @@
 
 <body>
     <form>
-    	<h4><b>Select Indicators</b></h4>
-    	<table>
-    		<tr style="vertical-align: top;">
-    			<td  style="width: 235px;">
+    	<h5><b>Select Indicators</b></h5>
+    	<table >
+    		<tr style="vertical-align: top; background-color: lightyellow; border-bottom: 1px solid black;
+            border-top: 1px solid black;">
+    			<td  style="width: 235px; ">
 				    <div>
 				    	<h5>1. Economic Indicators</h5>
 				        <input type="checkbox" name="indicate[]" value="Capex">Capital Cost<br/>
@@ -164,7 +165,8 @@
 				    </div>
 	    		</td>
 	    	</tr>
-			<tr style="vertical-align: top;">
+			<tr style="vertical-align: top; border-bottom: 1px solid black;
+            border-top: 1px solid black;">
 	    		<td>
 				    <div>
 				    	<h5>5. Resilience Indicators</h5>
@@ -211,16 +213,16 @@
 			</tr>
 		</table>
 		<br>
-		<h4><b>Select Scenario</b></h4>
+		<h5><b>Select Scenario</b></h5>
 		<div>
 			<table>
-			    <tr>
-			        <td colspan="4">
+			    <tr style="border-bottom: 1px solid black; border-top: 1px solid black;">
+			        <td colspan="4" style="background-color: lightyellow;">
 			            <input type='radio' id='opt_criteria1' name='opt_crit' value='opt_criteria1' checked>
 			            <label for='opt_criteria1'><b>No Scenario</b></label>
 			        </td>
 			    </tr>
-			    <tr>
+			    <tr style="border-bottom: 1px solid black; border-top: 1px solid black;">
 			        <td style="width: 235px; ">
 			            <input type='radio' id='opt_criteria2' name='opt_crit' value='opt_criteria2'>
 			            <label for='opt_criteria2'><b>Scenario Parameters</b></label>
@@ -255,9 +257,9 @@
 			</table>
 		</div>
 		<br>
-		<h4><b>Select Technologies</b></h4>
+		<h5><b>Select Technologies</b></h5>
 		<table>
-			<tr style="vertical-align: top">
+			<tr style="vertical-align: top; background-color: lightyellow; border-bottom: 1px solid black; border-top: 1px solid black;">
 				<td style="width: 300px;">
 				    <div>
 				    	<h5>Mechanized Treatment</h5>
@@ -884,7 +886,7 @@
 		    valueInput.type = 'textbox';
 		    valueInput.value = 'Indicators';
 		    valueInput.name = 'fmatrix[' + row + '][]';
-		    valueInput.style.width = '100px';
+		    valueInput.style.width = '200px';
 		    valueInput.disabled=true;
 		    indicatorHeaders.appendChild(valueInput);
 		    headerRow.appendChild(indicatorHeaders);
@@ -921,11 +923,13 @@
 		    	row=row+1;
 		        var techRow = document.createElement('tr');
 		        var techCell = document.createElement('td');
+		        techCell.style.backgroundColor = 'grey';
 		        var valueInput = document.createElement('input');
 		        valueInput.type='textbox';
 		        valueInput.value = list_technology[selectedTechs[m]][0];
 		        valueInput.name = 'fmatrix[' + row + '][]';
-		        valueInput.style.width = '100px';
+		        valueInput.style.width = '200px';
+
 		        valueInput.disabled=true;
 		        techCell.appendChild(valueInput);
 		        techRow.appendChild(techCell);
@@ -936,6 +940,7 @@
 		            valueInput.type = 'number';
 		            valueInput.value = matrixValues[selectedTechs[m]][n];
 		            valueInput.name = 'fmatrix[' + row + '][]';
+		            valueInput.step = '0.01';
 		        	valueInput.style.width = '75px';
 		            valueCell.appendChild(valueInput);
 		            techRow.appendChild(valueCell);
@@ -949,6 +954,7 @@
 		            textboxInput.value = '0';
 		            textboxInput.name = 'fmatrix[' + row + '][]';
 		            textboxInput.style.width = '75px';
+		            textboxInput.step = '0.01';
 		            textboxCell.appendChild(textboxInput);
 		            techRow.appendChild(textboxCell);
 		        }
@@ -960,11 +966,12 @@
 		    	row=row+1;
 		        var techRow = document.createElement('tr');
 		        var techCell = document.createElement('td');
+		        techCell.style.backgroundColor = 'grey';
 		        var valueInput = document.createElement('input');
 		        valueInput.type = 'textbox';
 		        valueInput.value = techboxValues[m];
 		        valueInput.name = 'fmatrix[' + row + '][]';
-		        valueInput.style.width = '100px';
+		        valueInput.style.width = '200px';
 		        valueInput.disabled = true;
 		        techCell.appendChild(valueInput);
 		        techRow.appendChild(techCell);
@@ -976,6 +983,7 @@
 		            valueInput.value = '0';
 		            valueInput.name = 'fmatrix[' + row + '][]';
 		        	valueInput.style.width = '75px';
+		        	valueInput.step = '0.01';
 		            valueCell.appendChild(valueInput);
 		            techRow.appendChild(valueCell);
 		        }
@@ -988,6 +996,7 @@
 		            textboxInput.value = '0';
 		            textboxInput.name = 'fmatrix[' + row + '][]';
 		            textboxInput.style.width = '75px';
+		            textboxInput.step = '0.01';
 		            textboxCell.appendChild(textboxInput);
 		            techRow.appendChild(textboxCell);
 		        }
@@ -998,17 +1007,19 @@
 		    	row=row+1;
 		        var techRow = document.createElement('tr');
 		        var techCell = document.createElement('td');
+		        techCell.style.backgroundColor = 'pink';
 		        var valueInput = document.createElement('input');
 		        valueInput.type = 'textbox';
 		        valueInput.value = 'Weights';
 		        valueInput.name = 'fmatrix[' + row + '][]';
-		        valueInput.style.width = '100px';
+		        valueInput.style.width = '200px';
 		        valueInput.disabled = true;
 		        techCell.appendChild(valueInput);
 		        techRow.appendChild(techCell);
 
 		        for (var n = 0; n < selectedIndicators.length; n++) {
 		            var valueCell = document.createElement('td');
+		            valueCell.style.backgroundColor = 'pink';
 		            var valueInput = document.createElement('input');
 		            valueInput.type = 'number';
 		            valueInput.value = wtmat[selectedScenario][n];
@@ -1022,6 +1033,7 @@
 		        // Add cells for the textboxes
 		        for (var p = 0; p < textboxValues.length; p++) {
 		            var textboxCell = document.createElement('td');
+		            textboxCell.style.backgroundColor = 'pink';
 		            var textboxInput = document.createElement('input');
 		            textboxInput.type = 'number';
 		            textboxInput.value = '0';
@@ -1038,17 +1050,19 @@
 		    	row=row+1;
 		        var techRow = document.createElement('tr');
 		        var techCell = document.createElement('td');
+		        techCell.style.backgroundColor = 'lightgreen';
 		        var valueInput = document.createElement('input');
 		        valueInput.type = 'textbox';
 		        valueInput.value = '1-Cost 0-Benefit';
 		        valueInput.name = 'fmatrix[' + row + '][]';
-		        valueInput.style.width = '100px';
+		        valueInput.style.width = '200px';
 		        valueInput.disabled = true;
 		        techCell.appendChild(valueInput);
 		        techRow.appendChild(techCell);
 
 		        for (var n = 0; n < selectedIndicators.length; n++) {
 		            var valueCell = document.createElement('td');
+		            valueCell.style.backgroundColor = 'lightgreen';
 		            var valueInput = document.createElement('input');
 		            valueInput.type = 'number';
 		            valueInput.min = '0';
@@ -1063,6 +1077,7 @@
 		        // Add cells for the textboxes
 		        for (var p = 0; p < textboxValues.length; p++) {
 		            var textboxCell = document.createElement('td');
+		            textboxCell.style.backgroundColor = 'lightgreen';
 		            var textboxInput = document.createElement('input');
 		            textboxInput.type = 'number';
 		            textboxInput.min = '0';
@@ -1282,11 +1297,9 @@
             var tableElement = document.createElement('table');
             var value1Row = document.createElement('tr');
             var value1LabelCell = document.createElement('td');
-	    value1LabelCell.style.width = '110px';
-            value1LabelCell.style.textAlign = 'center';
             value1LabelCell.style.border = 'none';    
             var image = document.createElement('img');
-            image.src = 'images/IITB.jpg';
+            image.src = 'images/iitb.png';
             image.style.width ='100px';
             //container.appendChild(image);
             value1LabelCell.appendChild(image);
@@ -1359,7 +1372,7 @@
             
 
             var resultTextElement = document.createElement('p');
-            resultTextElement.textContent = 'Tchnology Selection Tool is a module developed as a part of "Decision Support Tool for Appropriate Technology selection" under a "IC-EcoWS" project sponsored by Department of Science & Technology.';
+            resultTextElement.textContent = 'Tchnology Selection Tool is a module developed as a part of "Decision Support Tool for Appropriate Technology selection" under a "IC-EcoWS" project sponsored by Department of Science & Technology, Govt. of India.';
             resultTextElement.style.fontSize = '14px';
             resultTextElement.style.textAlign='justify';
             container.appendChild(resultTextElement);
