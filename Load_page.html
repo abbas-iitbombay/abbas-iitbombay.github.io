@@ -9,6 +9,7 @@
     .tab-content {
       display: none;
       margin: 40px;
+      margin-top:60px;
     }
     .button 
     {
@@ -24,16 +25,18 @@
       color: white;
     }
     #header {
-      height: 67px;
+      height: 80px;
       font-family: sans-serif;
       align-items: center;
       align-content: center;
       text-align: center;
       font-weight: bold;
-      background-color: lightgreen;
+      background-color: #f7f5c3;
       position: fixed;
-      /*border-bottom: 1px black solid;*/
+      border-bottom: 1px black solid;
       padding: 0px;
+      vertical-align: middle;
+      padding-top: 8px;
       top: 0;
       left: 0;
       right: 0;
@@ -99,9 +102,9 @@
     <!-- Header content goes here -->
     <button id="tab1-button" class="tab-button button" onclick="changeTab('tab1')">Introduction</button>
   <button id="tab2-button" class="tab-button button" onclick="changeTab('tab2')">Overview of Wastewater Treatment Technologies</button>
-  <button id="tab3-button" class="tab-button button" onclick="changeTab('tab3')">Multi-Criteria Decision-Making</button>
   <br>
-  <button id="tab4-button" class="tab-button button" onclick="changeTab('tab4')">Land Suitability Analysis</button>
+  <button id="tab3-button" class="tab-button button" onclick="changeTab('tab3')">Multi-Criteria Decision-Making</button>
+  <button id="tab4-button" class="tab-button button" onclick="changeTab('tab4')" style="display: none;">Land Suitability Analysis</button>
   <button id="tab5-button" class="tab-button button" onclick="changeTab('tab5')">Life Cycle Costing Framework</button>
   <button id="tab6-button" class="tab-button button" onclick="changeTab('tab6')">Decision Making Framework</button>
   </div>
