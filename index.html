@@ -11,14 +11,14 @@
     }
     
     #header {
-      height: 60px;
+      height: 80px;
       font-family: sans-serif;
       align-items: center;
       align-content: center;
       text-align: center;
       font-weight: bold;
       color: white;
-      background-color: #2F4F4F; /*#f7f5c3;*/
+      background-color: #D3D3D3;/*grey;/*white;/*#2F4F4F; /*#f7f5c3;*/
       position: fixed;
       border-bottom: 1px black solid;
       top: 0;
@@ -41,8 +41,8 @@
     }
     
     #content {
-      padding-top: 60px; /* Adjust padding top to accommodate header height */
-      padding-bottom: 60px; /* Adjust padding bottom to accommodate footer height */
+      padding-top: 80px; /* Adjust padding top to accommodate header height */
+      padding-bottom: 40px; /* Adjust padding bottom to accommodate footer height */
     }
     
     #middle {
@@ -109,18 +109,23 @@
   <div id="header" class="container">
     <!-- Header content goes here -->
     <table>
-      <td style="padding-top:6px; width: 200px;">
-        <img src='images/dst-logo1.jpg' style="width: 190px;">
+      <tr style="height: 70px;">
+      <td style="padding-top:6px; width: 240px;">
+        <img src='images/dst-logo1.jpg' style="width: 240px; line-height: 1; border: 1px solid black; border-radius:  0 10px 0 10px ;">
+      </td>
+      <td style="vertical-align: top;">
+        <p style="font-size: 24px; padding-right:20px; background-color: white;padding-left:20px; padding-bottom: 0px; line-height: 1.2; color: black; padding-top: 0px; border: 1px solid black; border-radius:  0 10px 0 10px ;">Sponsored project<b><br>IC-EcoWS</b></p>
       </td>
       <td>
-        <label style="font-size: 24px; color: lightgreen">Decision Support Tool for Selection of Appropriate Wastewater Treatment Technology</label>
+        <p style="font-size: 24px; color: #134C97; line-height: 1.2; padding-right:40px; padding-left:40px;">Decision Support Tool for Selection <br>of Appropriate Wastewater Treatment Technology</p>
       </td>
-      <td style="padding-top:6px; width: 150px;">
-        <img src='images/CUSE_Txt_JPG-01.jpg' style="width: 140px;">
+      <td style="padding-top:6px; width: 190px; ">
+        <img src='images/CUSE_Txt_JPG-01.jpg' style="width: 180px; line-height: 1; border: 1px solid black;">
       </td>
-      <td style="padding-top:6px; width: 70px;">
-        <img src='images/IITB.jpg' style="width: 58px;">
+      <td style="padding-top:6px; width: 90px;">
+        <img src='images/IITB.jpg' style="width: 75px; line-height: 1; border: 1px solid black;">
       </td>
+    </tr>
     </table>
   </div>
 
@@ -129,13 +134,10 @@
       <div id="left" style="border-right: 1px black solid;">
         <!-- Content for the left section goes here -->
         <center>
-          <!--img src='images/IITB.jpg' style="padding-top: 20px; width: 100px;">
+          <br>
+          <img src='images/IC-EcoWS_Logo.jpg' style="width: 100px; border: 1px solid black;">    
           <br><br>
-          <img src='images/CUSE_Txt_JPG-01.jpg' style="width: 100px;">
-          <br><br-->
-          <img src='images/IC-EcoWS_Logo.jpg' style="padding-top: 20px; width: 100px;">    
-          <br><br>
-          <a href="http:\\abbas-iitbombay.github.io"><button id="buttonhome" class="tab-button button" style="width:80%;"><b>Home</b></button></a>
+          <a href="http:\\abbas-iitbombay.github.io"><button id="buttonhome" class="tab-button button" style="width:80%; "><b>Home</b></button></a>
           <br><br>
           <a href="http://117.252.14.242/RMOD_DST/Default.aspx"><button type="submit" class="tab-button button" style="width:80%"><b>About Project</b></button></a>
           <br><br><br>
