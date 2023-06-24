@@ -108,16 +108,14 @@
 <body>
   <div id="header" class="container">
     <!-- Header content goes here -->
-    <table>
+    <table style="overflow-x: auto; width: 100%; table-layout: fixed;">
       <tr style="height: 70px;">
-      <td style="padding-top:6px; width: 240px;">
-        <img src='images/dst-logo1.jpg' style="width: 240px; line-height: 1; border: 1px solid black; border-radius:  0 10px 0 10px ;">
-      </td>
-      <td style="vertical-align: top;">
-        <p style="font-size: 24px; padding-right:20px; background-color: white;padding-left:20px; padding-bottom: 0px; line-height: 1.2; color: black; padding-top: 0px; border: 1px solid black; border-radius:  0 10px 0 10px ;">Sponsored project<b><br>IC-EcoWS</b></p>
+      <td style="padding-top:0px; width: 240px;">
+        <img src='images/dst-logo1.jpg' style="width: 180px; line-height: 1; border: 1px solid black; border-radius:  0 10px 0 10px ;" >
+        <figcaption style="color: black; background-color: lightgreen;">Sponsored project IC-EcoWS</figcaption>
       </td>
       <td>
-        <p style="font-size: 24px; color: #134C97; line-height: 1.2; padding-right:40px; padding-left:40px;">Decision Support Tool for Selection <br>of Appropriate Wastewater Treatment Technology</p>
+        <figcaption style="font-size: 30px; color: #134C97; line-height: 1.2; padding-right:40px; padding-left:40px;">Decision Support Tool for Selection <br>of Appropriate Wastewater Treatment Technology</figcaption>
       </td>
       <td style="padding-top:6px; width: 190px; ">
         <img src='images/CUSE_Txt_JPG-01.jpg' style="width: 180px; line-height: 1; border: 1px solid black;">
@@ -134,18 +132,29 @@
       <div id="left" style="border-right: 1px black solid;">
         <!-- Content for the left section goes here -->
         <center>
-          <br>
-          <img src='images/IC-EcoWS_Logo.jpg' style="width: 100px; border: 1px solid black;">    
-          <br><br>
-          <a href="http:\\abbas-iitbombay.github.io"><button id="buttonhome" class="tab-button button" style="width:80%; "><b>Home</b></button></a>
-          <br><br>
-          <a href="http://117.252.14.242/RMOD_DST/Default.aspx"><button type="submit" class="tab-button button" style="width:80%"><b>About Project</b></button></a>
-          <br><br><br>
-          <button id="button1" class="tab-button button" onclick="changeContent(1)" style="width:80%;"><b>Life Cycle Costing Tool</b></button>
-          <br><br>
-          <button id="button2" class="tab-button button" onclick="changeContent(2)" style="width:80%;"><b>Technology Selection Tool</b></button>
-          <br><br><br>
-          <button id="button3" class="tab-button button" onclick="changeContent(3)" style="width:80%;"><b>Contact Info</b></button>
+          <table style="text-align: center;">
+            <tr>
+              <br>
+              <img src='images/IC-EcoWS_Logo.jpg' style="width: 100px; border: 1px solid black;">
+              <br>
+            </tr>
+            <tr>
+              <br>
+              <a href="http:\\abbas-iitbombay.github.io"><button id="buttonhome" class="tab-button button" style="width:80%; height: 30px;"><b>Home</b></button></a>
+              <a href="http://117.252.14.242/RMOD_DST/Default.aspx"><button type="submit" class="tab-button button" style="width:80%; height: 30px;"><b>About Project</b></button></a>
+              <br><br><br>
+            </tr>
+            <tr>
+              <br>
+              <button id="button1" class="tab-button button" onclick="changeContent(1)" style="width:80%;"><b>Life Cycle Costing Tool</b></button>
+              <button id="button2" class="tab-button button" onclick="changeContent(2)" style="width:80%;"><b>Technology Selection Tool</b></button>
+              <br><br><br><br><br><br>
+            </tr>
+            <tr>
+              <button id="button3" class="tab-button button" onclick="changeContent(3)" style="width:80%; height: 30px;"><b>Contact Info</b></button>
+            </tr>
+        </td>
+      </table>
           </center>
       </div>
       
