@@ -146,15 +146,16 @@
               <br>
               <a href="http:\\abbas-iitbombay.github.io"><button id="buttonhome" class="tab-button button" style="width:80%; height: 30px;"><b>Home</b></button></a>
               <a href="http://117.252.14.242/RMOD_DST/Default.aspx"><button type="submit" class="tab-button button" style="width:80%; height: 30px;"><b>About Project</b></button></a>
-              <br><br><br>
+              <br>
             </tr>
             <tr>
               <br>
               <button id="button1" class="tab-button button" onclick="changeContent(1)" style="width:80%;"><b>Life Cycle Costing Tool</b></button>
               <button id="button2" class="tab-button button" onclick="changeContent(2)" style="width:80%;"><b>Technology Selection Tool</b></button>
-              <br><br><br><br><br><br>
+              <br><br>
             </tr>
             <tr>
+              <button id="button4" class="tab-button button" onclick="changeContent(4)" style="width:80%; height: 30px;"><b>Tutorials</b></button>
               <button id="button3" class="tab-button button" onclick="changeContent(3)" style="width:80%; height: 30px;"><b>Contact Info</b></button>
             </tr>
         </td>
@@ -182,6 +183,7 @@
     const button1 = document.getElementById('button1');
     const button2 = document.getElementById('button2');
     const button3 = document.getElementById('button3');
+    const button4 = document.getElementById('button4');
     const iframe = document.getElementById('phpFrame');
 
     button1.addEventListener('click', function() {
@@ -190,6 +192,7 @@
       button1.classList.add('active');
       button2.classList.remove('active');
       button3.classList.remove('active');
+      button4.classList.remove('active');
     });
 
     button2.addEventListener('click', function() {
@@ -198,6 +201,7 @@
       button1.classList.remove('active');
       button2.classList.add('active');
       button3.classList.remove('active');
+      button4.classList.remove('active');
     });
 
     button3.addEventListener('click', function() {
@@ -206,14 +210,24 @@
       button1.classList.remove('active');
       button2.classList.remove('active');
       button3.classList.add('active');
+      button4.classList.remove('active');
     });
 
+    button4.addEventListener('click', function() {
+      // Change the iframe source to the desired content for button 2
+      iframe.src = 'tutorial.html';
+      button1.classList.remove('active');
+      button2.classList.remove('active');
+      button3.classList.remove('active');
+      button4.classList.add('active');
+    });
     // Listen for the popstate event (navigating back)
     window.onpopstate = function(event) {
       // Reset button styles to default when navigating back
       button1.classList.remove('active');
       button2.classList.remove('active');
       button3.classList.remove('active');
+      button4.classList.remove('active');
     };
   </script>
 </body>
