@@ -17,8 +17,7 @@
       align-content: center;
       text-align: center;
       font-weight: bold;
-      /*color: white;*/
-      background-color: #dbbb85;/*#134C97;/*#D3D3D3;/*grey;/*white;/*#2F4F4F; /*#f7f5c3;*/
+      background-color: #dbbb85;
       position: fixed;
       border-bottom: 1px black solid;
       top: 0;
@@ -106,7 +105,15 @@
       iframe.style.height = contentHeight + 'px';
     }
 
+    function receiveMessage(event) {
+      if (event.data.type === 'changeColor') {
+        var buttonId = event.data.buttonId;
+        var button = document.getElementById(buttonId);
+        button.classList.toggle('active');
+      }
+    }
 
+    window.addEventListener('message', receiveMessage, false);
   </script>
 </head>
 <body>
@@ -229,6 +236,8 @@
       button3.classList.remove('active');
       button4.classList.remove('active');
     };
+
+    
   </script>
 </body>
 </html>
