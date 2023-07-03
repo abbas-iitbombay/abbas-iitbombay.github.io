@@ -97,6 +97,12 @@
     window.addEventListener('DOMContentLoaded', function() {
       changeTab('tab1');
     });
+
+    // Function to send a message to the parent window
+    function sendMessage(buttonId) {
+      // Send a message to the parent window with the button ID
+      window.parent.postMessage({ type: 'changeColor', buttonId }, '*');
+    }
   </script>
   
 </head>
@@ -307,7 +313,7 @@
     <img src='images/LCC_fig1.png' alt='Image'>
     </center>
     <br>                                                                  
-    <a href="Tool_1_LCC.html"><button class="btn-style centered">Life Cycle Costing Tool</button></a>
+    <a href="Tool_1_LCC.html"><button class="btn-style centered" onclick="sendMessage('button1')">Life Cycle Costing Tool</button></a>
   </div>
 
   <div id="tab6" class="tab-content">
@@ -361,7 +367,7 @@
     </p>
     <br>
     
-    <a href="Tool_2_DST.html"><button class="btn-style centered">Technology Selection Tool</button></a>
+    <a href="Tool_2_DST.html"><button class="btn-style centered" onclick="sendMessage('button2')">Technology Selection Tool</button></a>
                                                                       
   </div>
 </body>
